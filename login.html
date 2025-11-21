@@ -1,68 +1,131 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="dark">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Login / Cadastro - E-Commerce</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-50 text-gray-900 flex items-center justify-center min-h-screen px-4">
+  <title>Login - BeyShop Arena</title>
 
-  <div class="w-full max-w-4xl bg-white shadow rounded-lg grid md:grid-cols-2">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            beyRed: "#ff0033",
+            beyBlue: "#00aaff",
+            beyYellow: "#ffe600",
+            beyPurple: "#7f00ff",
+            beyDark: "#0b0f14",
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    .metal-card {
+      background: linear-gradient(145deg, #ffffff08, #00000040);
+      border: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(6px);
+    }
+  </style>
+</head>
+
+<body class="bg-gradient-to-br from-beyDark via-black to-beyPurple text-white min-h-screen">
+
+<!-- HEADER -->
+<header class="bg-gradient-to-r from-beyRed via-beyYellow to-beyBlue p-4 shadow-xl">
+  <div class="max-w-6xl mx-auto flex justify-between items-center">
+    <a href="home.html" class="font-bold text-xl drop-shadow">🔥 BeyShop Arena</a>
+
+    <nav class="flex gap-4 items-center">
+      <a href="category.html" class="hover:underline">Categorias</a>
+      <a href="login.html" class="underline font-bold">Login</a>
+      <button id="themeToggle" class="ml-4 text-2xl">🌙</button>
+    </nav>
+  </div>
+</header>
+
+<!-- MAIN -->
+<main class="max-w-lg mx-auto p-6">
+
+  <div class="metal-card p-8 rounded-2xl shadow-xl">
+
+    <h1 class="text-3xl font-extrabold text-center mb-6">⚡ Entrar na Arena</h1>
+
+    <!-- TROCA DE ABAS -->
+    <div class="flex mb-6 border-b border-white/20">
+      <button id="loginTab" class="flex-1 py-3 text-center font-bold border-b-4 border-beyBlue">
+        Login
+      </button>
+
+      <button id="registerTab" class="flex-1 py-3 text-center font-bold opacity-60 hover:opacity-100">
+        Criar Conta
+      </button>
+    </div>
 
     <!-- LOGIN -->
-    <div class="p-8 border-r">
-      <h2 class="text-2xl font-bold mb-6">Login</h2>
+    <form id="loginForm" class="space-y-4">
+      <input class="w-full rounded-lg p-3 bg-white/10" placeholder="Email" required>
+      <input type="password" class="w-full rounded-lg p-3 bg-white/10" placeholder="Senha" required>
 
-      <form id="loginForm" class="flex flex-col gap-4">
-        <div>
-          <label class="font-semibold">Email</label>
-          <input type="email" required class="w-full border px-3 py-2 rounded mt-1" />
-        </div>
+      <button 
+        class="w-full py-3 bg-beyBlue text-black font-bold rounded-lg hover:scale-105 transition">
+        Entrar
+      </button>
+    </form>
 
-        <div>
-          <label class="font-semibold">Senha</label>
-          <input type="password" required class="w-full border px-3 py-2 rounded mt-1" />
-        </div>
+    <!-- CADASTRO -->
+    <form id="registerForm" class="space-y-4 hidden">
+      <input class="w-full rounded-lg p-3 bg-white/10" placeholder="Nome completo" required>
+      <input class="w-full rounded-lg p-3 bg-white/10" placeholder="Email" required>
+      <input type="password" class="w-full rounded-lg p-3 bg-white/10" placeholder="Criar senha" required>
+      <input type="password" class="w-full rounded-lg p-3 bg-white/10" placeholder="Confirmar senha" required>
 
-        <button class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">Entrar</button>
-      </form>
-    </div>
-
-    <!-- SIGNUP -->
-    <div class="p-8">
-      <h2 class="text-2xl font-bold mb-6">Criar Conta</h2>
-
-      <form id="signupForm" class="flex flex-col gap-4">
-        <div>
-          <label class="font-semibold">Email</label>
-          <input type="email" required class="w-full border px-3 py-2 rounded mt-1" />
-        </div>
-
-        <div>
-          <label class="font-semibold">Senha</label>
-          <input type="password" required class="w-full border px-3 py-2 rounded mt-1" />
-        </div>
-
-        <button class="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700">Cadastrar</button>
-      </form>
-    </div>
+      <button 
+        class="w-full py-3 bg-beyYellow text-black font-bold rounded-lg hover:scale-105 transition">
+        Criar Conta
+      </button>
+    </form>
 
   </div>
 
-  <script>
-    document.getElementById("loginForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      alert("Login realizado (exemplo)");
-      window.location.href = "home.html";
-    });
+</main>
 
-    document.getElementById("signupForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      alert("Conta criada (exemplo)");
-      window.location.href = "login.html";
-    });
-  </script>
+<script>
+// Tema
+const btn = document.getElementById("themeToggle");
+btn.onclick = () => {
+  document.documentElement.classList.toggle("dark");
+  btn.textContent = document.documentElement.classList.contains("dark") ? "☀️" : "🌙";
+};
+
+// Tabs
+const loginTab = document.getElementById("loginTab");
+const registerTab = document.getElementById("registerTab");
+const loginForm = document.getElementById("loginForm");
+const registerForm = document.getElementById("registerForm");
+
+loginTab.onclick = () => {
+  loginForm.classList.remove("hidden");
+  registerForm.classList.add("hidden");
+  loginTab.classList.add("border-b-4", "border-beyBlue");
+  registerTab.classList.remove("border-b-4", "border-beyBlue");
+  registerTab.classList.add("opacity-60");
+  loginTab.classList.remove("opacity-60");
+};
+
+registerTab.onclick = () => {
+  loginForm.classList.add("hidden");
+  registerForm.classList.remove("hidden");
+  registerTab.classList.add("border-b-4", "border-beyBlue");
+  loginTab.classList.remove("border-b-4", "border-beyBlue");
+  loginTab.classList.add("opacity-60");
+  registerTab.classList.remove("opacity-60");
+};
+</script>
 
 </body>
 </html>

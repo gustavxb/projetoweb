@@ -1,129 +1,147 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="dark">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Checkout - E-Commerce</title>
+  <title>Checkout - BeyShop Arena</title>
+
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            beyRed: "#ff0033",
+            beyBlue: "#00aaff",
+            beyYellow: "#ffe600",
+            beyPurple: "#7f00ff",
+            beyDark: "#0b0f14",
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    .metal-card {
+      background: linear-gradient(145deg, #ffffff08, #00000040);
+      border: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(6px);
+    }
+  </style>
 </head>
-<body class="bg-gray-50 text-gray-900">
 
-  <!-- HEADER -->
-  <header class="bg-white shadow">
-    <div class="max-w-7xl mx-auto px-4 py-4 flex items-center gap-4">
-      <a href="home.html" class="text-2xl font-bold">YourCompany</a>
-      <input class="flex-1 border px-3 py-2 rounded" placeholder="Buscar produtos..." />
-      <a href="login.html" class="text-sm">Login</a>
-      <a href="cart.html" class="text-sm">Carrinho</a>
-    </div>
-  </header>
+<body class="bg-gradient-to-br from-beyDark via-black to-beyPurple text-white min-h-screen">
 
-  <!-- MAIN -->
-  <main class="max-w-7xl mx-auto px-4 py-10">
-    <h1 class="text-3xl font-semibold mb-8">Finalizar Compra</h1>
+<!-- HEADER -->
+<header class="bg-gradient-to-r from-beyRed via-beyYellow to-beyBlue p-4 shadow-xl">
+  <div class="max-w-6xl mx-auto flex justify-between items-center">
+    <a href="home.html" class="font-bold text-xl drop-shadow">🔥 BeyShop Arena</a>
 
-    <form id="checkoutForm" class="grid lg:grid-cols-3 gap-8">
+    <nav class="flex gap-4 items-center">
+      <a href="category.html" class="hover:underline">Categorias</a>
+      <a href="cart.html" class="hover:underline">Carrinho</a>
+      <button id="themeToggle" class="ml-4 text-2xl">🌙</button>
+    </nav>
+  </div>
+</header>
 
-      <!-- SHIPPING -->
-      <div class="lg:col-span-2 bg-white p-6 rounded shadow">
-        <h2 class="text-xl font-semibold mb-4">Dados de Envio</h2>
+<!-- MAIN -->
+<main class="max-w-6xl mx-auto p-6">
 
-        <div class="grid sm:grid-cols-2 gap-4">
-          <div>
-            <label class="block font-semibold mb-1">Nome completo</label>
-            <input name="name" required class="border w-full px-3 py-2 rounded" />
-          </div>
-          <div>
-            <label class="block font-semibold mb-1">Email</label>
-            <input name="email" type="email" required class="border w-full px-3 py-2 rounded" />
-          </div>
-          <div>
-            <label class="block font-semibold mb-1">Endereço</label>
-            <input name="address" required class="border w-full px-3 py-2 rounded" />
-          </div>
-          <div>
-            <label class="block font-semibold mb-1">Cidade</label>
-            <input name="city" required class="border w-full px-3 py-2 rounded" />
-          </div>
-        </div>
-      </div>
+  <h1 class="text-3xl font-extrabold mb-6">📦 Finalizar Compra</h1>
 
-      <!-- PAYMENT SUMMARY -->
-      <aside class="bg-white p-6 rounded shadow h-fit">
-        <h2 class="text-xl font-semibold mb-4">Pagamento</h2>
+  <div class="grid md:grid-cols-2 gap-10">
 
-        <label class="block font-semibold mb-1">Número do cartão</label>
-        <input class="border w-full px-3 py-2 rounded mb-4" placeholder="0000 0000 0000 0000" />
+    <!-- FORM -->
+    <form id="checkoutForm" class="metal-card p-6 rounded-xl space-y-4">
 
-        <div class="grid grid-cols-2 gap-4 mb-4">
-          <div>
-            <label class="block font-semibold mb-1">Validade</label>
-            <input class="border w-full px-3 py-2 rounded" placeholder="MM/AA" />
-          </div>
-          <div>
-            <label class="block font-semibold mb-1">CVC</label>
-            <input class="border w-full px-3 py-2 rounded" placeholder="000" />
-          </div>
-        </div>
+      <h2 class="text-xl font-bold mb-4">Dados do Cliente</h2>
 
-        <!-- SUMMARY INFO -->
-        <div class="border-t pt-4 mt-4 text-sm text-gray-700">
-          <p>Itens: <span id="itemsCount">0</span></p>
-          <p>Total: <span id="total" class="font-semibold">R$ 0,00</span></p>
-        </div>
+      <input class="w-full rounded-lg p-3 bg-white/10" placeholder="Nome completo" required>
+      <input class="w-full rounded-lg p-3 bg-white/10" placeholder="Email" required>
+      <input class="w-full rounded-lg p-3 bg-white/10" placeholder="Telefone" required>
 
-        <button type="submit" class="w-full mt-6 bg-blue-600 text-white py-3 rounded hover:bg-blue-700">Concluir Compra</button>
-      </aside>
+      <h2 class="text-xl font-bold mt-6 mb-4">Endereço</h2>
+
+      <input class="w-full rounded-lg p-3 bg-white/10" placeholder="Rua" required>
+      <input class="w-full rounded-lg p-3 bg-white/10" placeholder="Número" required>
+      <input class="w-full rounded-lg p-3 bg-white/10" placeholder="Bairro" required>
+      <input class="w-full rounded-lg p-3 bg-white/10" placeholder="Cidade" required>
+      <input class="w-full rounded-lg p-3 bg-white/10" placeholder="CEP" required>
+
+      <h2 class="text-xl font-bold mt-6 mb-4">Pagamento</h2>
+
+      <select class="w-full rounded-lg p-3 bg-white/10" required>
+        <option>Cartão de Crédito</option>
+        <option>Pix</option>
+        <option>Boleto</option>
+      </select>
 
     </form>
-  </main>
 
-  <!-- FOOTER -->
-  <footer class="bg-gray-100 py-10 mt-10">
-    <div class="max-w-7xl mx-auto px-4 grid sm:grid-cols-3 gap-6 text-sm">
-      <div>
-        <h4 class="font-semibold mb-2">Suporte</h4>
-        <p class="text-gray-600">Envio • Pagamentos • Trocas</p>
-      </div>
-      <div>
-        <h4 class="font-semibold mb-2">Empresa</h4>
-        <p class="text-gray-600">Sobre Nós • Marcas</p>
-      </div>
-      <div>
-        <h4 class="font-semibold mb-2">Novidades</h4>
-        <input placeholder="Seu email" class="border px-3 py-2 rounded w-full mb-2" />
-        <button class="w-full bg-blue-600 text-white py-2 rounded">Inscrever</button>
-      </div>
+    <!-- RESUMO -->
+    <div class="metal-card p-6 rounded-xl">
+
+      <h2 class="text-2xl font-bold mb-6">Resumo da Compra</h2>
+
+      <div id="summaryList" class="space-y-3"></div>
+
+      <p class="text-2xl mt-5">
+        Total: 
+        <span id="totalPrice" class="text-beyYellow font-bold">R$ 0,00</span>
+      </p>
+
+      <button id="finish" 
+              class="w-full py-4 mt-6 rounded-xl bg-beyBlue text-black font-bold text-lg hover:scale-110 transition">
+        Finalizar Pedido
+      </button>
+
     </div>
-  </footer>
+  </div>
 
-  <script>
-    function loadSummary() {
-      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-      let total = 0;
-      let items = 0;
+</main>
 
-      cart.forEach(it => {
-        total += it.price * it.qty;
-        items += it.qty;
-      });
+<script>
+// Tema
+const btn = document.getElementById("themeToggle");
+btn.onclick = () => {
+  document.documentElement.classList.toggle("dark");
+  btn.textContent = document.documentElement.classList.contains("dark") ? "☀️" : "🌙";
+};
 
-      document.getElementById('itemsCount').textContent = items;
-      document.getElementById('total').textContent = `R$ ${total.toFixed(2)}`;
-    }
+// Carregar resumo do carrinho
+function loadSummary() {
+  const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+  const summaryList = document.getElementById("summaryList");
 
-    loadSummary();
+  summaryList.innerHTML = "";
 
-    document.getElementById('checkoutForm').addEventListener('submit', function(event) {
-      event.preventDefault();
+  let total = 0;
 
-      // Limpa o carrinho
-      localStorage.removeItem('cart');
+  cart.forEach(item => {
+    total += item.price * item.qty;
 
-      // Redireciona para a página de confirmação
-      window.location.href = 'thankyou.html';
-    });
-  </script>
+    summaryList.innerHTML += `
+      <div class="flex justify-between opacity-80">
+        <span>${item.name} (x${item.qty})</span>
+        <span>R$ ${item.price * item.qty},00</span>
+      </div>
+    `;
+  });
+
+  document.getElementById("totalPrice").textContent = "R$ " + total + ",00";
+}
+
+loadSummary();
+
+// Finalizar pedido
+document.getElementById("finish").onclick = () => {
+  localStorage.removeItem("cart");
+  window.location.href = "thankyou.html";
+};
+</script>
 
 </body>
 </html>

@@ -1,105 +1,178 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="dark">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Produto - E-Commerce</title>
+  <title>Produto - BeyShop Arena</title>
   <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-50 text-gray-900">
-  <!-- HEADER -->
-  <header class="bg-white shadow">
-    <div class="max-w-7xl mx-auto px-4 py-4 flex items-center gap-4">
-      <a href="home.html" class="text-2xl font-bold">YourCompany</a>
-      <input class="flex-1 border px-3 py-2 rounded" placeholder="Buscar produtos..." />
-      <a href="login.html" class="text-sm">Login</a>
-      <a href="cart.html" class="text-sm">Carrinho</a>
-    </div>
-  </header>
-
-  <!-- PRODUCT DETAILS -->
-  <main class="max-w-7xl mx-auto px-4 py-10 grid lg:grid-cols-2 gap-10">
-
-    <!-- IMAGE -->
-    <div class="bg-white p-4 rounded shadow">
-      <img src="https://via.placeholder.com/600x400" class="rounded w-full" />
-    </div>
-
-    <!-- INFO -->
-    <div>
-      <h1 class="text-3xl font-semibold mb-2">Nome do Produto</h1>
-      <p class="text-gray-600 mb-4">Descrição curta do produto com detalhes básicos.</p>
-
-      <p class="text-2xl font-bold mb-1">R$ 95,00</p>
-      <p class="line-through text-gray-400 mb-4">R$ 119,00</p>
-
-      <!-- VARIANTS -->
-      <div class="mb-4">
-        <label class="block font-semibold mb-1">Cor</label>
-        <select class="border px-3 py-2 rounded w-full max-w-xs">
-          <option>Preto</option>
-          <option>Azul</option>
-          <option>Branco</option>
-        </select>
-      </div>
-
-      <div class="mb-6">
-        <label class="block font-semibold mb-1">Tamanho</label>
-        <select class="border px-3 py-2 rounded w-full max-w-xs">
-          <option>P</option>
-          <option>M</option>
-          <option>G</option>
-        </select>
-      </div>
-
-      <!-- ADD TO CART -->
-      <button id="addToCart" class="px-6 py-3 bg-blue-600 text-white rounded shadow hover:bg-blue-700">
-        Adicionar ao Carrinho
-      </button>
-
-      <p id="successMsg" class="text-green-600 font-semibold mt-3 hidden">Produto adicionado ao carrinho!</p>
-    </div>
-  </main>
-
-  <!-- DETAILS -->
-  <section class="max-w-7xl mx-auto px-4 pb-12">
-    <h2 class="text-2xl font-semibold mb-3">Detalhes do Produto</h2>
-    <p class="text-gray-700 mb-6">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque.</p>
-
-    <h3 class="text-xl font-semibold mb-2">Avaliações (12)</h3>
-    <p class="text-gray-700">Avaliações dos clientes aparecerão aqui.</p>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="bg-gray-100 py-10 mt-10">
-    <div class="max-w-7xl mx-auto px-4 grid sm:grid-cols-3 gap-6 text-sm">
-      <div>
-        <h4 class="font-semibold mb-2">Suporte</h4>
-        <p class="text-gray-600">Envio • Pagamentos • Trocas</p>
-      </div>
-      <div>
-        <h4 class="font-semibold mb-2">Empresa</h4>
-        <p class="text-gray-600">Sobre Nós • Marcas</p>
-      </div>
-      <div>
-        <h4 class="font-semibold mb-2">Novidades</h4>
-        <input placeholder="Seu email" class="border px-3 py-2 rounded w-full mb-2" />
-        <button class="w-full bg-blue-600 text-white py-2 rounded">Inscrever</button>
-      </div>
-    </div>
-  </footer>
 
   <script>
-    document.getElementById("addToCart").addEventListener("click", () => {
-      const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-      cart.push({ id: 1, name: "Nome do Produto", price: 95, qty: 1 });
-      localStorage.setItem("cart", JSON.stringify(cart));
-
-      const msg = document.getElementById("successMsg");
-      msg.classList.remove("hidden");
-      setTimeout(() => msg.classList.add("hidden"), 2000);
-    });
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            beyRed: "#ff0033",
+            beyBlue: "#00aaff",
+            beyYellow: "#ffe600",
+            beyPurple: "#7f00ff",
+            beyDark: "#0b0f14",
+          }
+        }
+      }
+    };
   </script>
+
+  <style>
+    .metal-card {
+      background: linear-gradient(145deg, #ffffff08, #00000040);
+      border: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(6px);
+    }
+  </style>
+</head>
+
+<body class="bg-gradient-to-br from-beyDark via-black to-beyPurple text-white min-h-screen">
+
+<!-- HEADER -->
+<header class="bg-gradient-to-r from-beyRed via-beyYellow to-beyBlue p-4 shadow-xl">
+  <div class="max-w-6xl mx-auto flex justify-between items-center">
+    <a href="home.html" class="font-bold text-xl drop-shadow">🔥 BeyShop Arena</a>
+
+    <nav class="flex gap-4 items-center">
+      <a href="category.html" class="hover:underline">Categorias</a>
+      <a href="cart.html" class="hover:underline">Carrinho</a>
+      <button id="themeToggle" class="ml-4 text-2xl">🌙</button>
+    </nav>
+  </div>
+</header>
+
+<!-- MAIN -->
+<main class="max-w-6xl mx-auto p-6 grid md:grid-cols-2 gap-10">
+
+  <!-- IMAGEM -->
+  <div class="flex items-center justify-center metal-card p-6 rounded-xl shadow-xl">
+    <img id="productImg" 
+         src="https://via.placeholder.com/450" 
+         class="w-80 h-80 object-cover rounded-xl shadow-xl animate-[spin_12s_linear_infinite]">
+  </div>
+
+  <!-- INFO DO PRODUTO -->
+  <div class="metal-card p-6 rounded-xl">
+
+    <h1 id="productName" class="text-4xl font-extrabold mb-3">
+      Storm Valkyrie
+    </h1>
+
+    <span id="productElement" class="px-3 py-1 bg-beyBlue text-black rounded-full text-sm font-bold">
+      Elemento: Vento
+    </span>
+
+    <span id="productType" class="ml-2 px-3 py-1 bg-beyYellow text-black rounded-full text-sm font-bold">
+      Tipo: Balance
+    </span>
+
+    <p id="productPrice" class="text-4xl font-bold text-beyYellow mt-6">
+      R$ 150,00
+    </p>
+
+    <p class="opacity-60 mt-2">
+      Modelo oficial da linha Beyblade Burst de alta performance.
+    </p>
+
+    <!-- Stats -->
+    <div class="mt-8 space-y-4">
+
+      <div>
+        <p>Força</p>
+        <div class="w-full bg-white/10 h-2 rounded">
+          <div id="s_force" class="h-2 bg-red-500 rounded"></div>
+        </div>
+      </div>
+
+      <div>
+        <p>Defesa</p>
+        <div class="w-full bg-white/10 h-2 rounded">
+          <div id="s_defense" class="h-2 bg-blue-500 rounded"></div>
+        </div>
+      </div>
+
+      <div>
+        <p>Velocidade</p>
+        <div class="w-full bg-white/10 h-2 rounded">
+          <div id="s_speed" class="h-2 bg-yellow-400 rounded"></div>
+        </div>
+      </div>
+
+      <div>
+        <p>Stamina</p>
+        <div class="w-full bg-white/10 h-2 rounded">
+          <div id="s_stamina" class="h-2 bg-green-400 rounded"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- BOTÃO -->
+    <button id="addToCart"
+            class="w-full py-4 mt-8 rounded-xl bg-beyBlue text-black font-bold text-lg 
+                   hover:scale-110 transition-all shadow-lg">
+      Adicionar ao Carrinho
+    </button>
+
+  </div>
+</main>
+
+<!-- SCRIPT -->
+<script>
+// Tema
+const btn = document.getElementById("themeToggle");
+btn.onclick = () => {
+  document.documentElement.classList.toggle("dark");
+  btn.textContent = document.documentElement.classList.contains("dark") ? "☀️" : "🌙";
+};
+
+// Dados (mock)
+const product = {
+  id: 1,
+  name: "Storm Valkyrie",
+  price: 150,
+  element: "Vento",
+  type: "Balance",
+  img: "https://via.placeholder.com/450",
+  stats: {
+    force: 60,
+    defense: 50,
+    speed: 85,
+    stamina: 70
+  }
+};
+
+// Renderizar
+document.getElementById("productName").textContent = product.name;
+document.getElementById("productPrice").textContent = "R$ " + product.price + ",00";
+document.getElementById("productElement").textContent = "Elemento: " + product.element;
+document.getElementById("productType").textContent = "Tipo: " + product.type;
+document.getElementById("productImg").src = product.img;
+
+// Stats
+s_force.style.width = product.stats.force + "%";
+s_defense.style.width = product.stats.defense + "%";
+s_speed.style.width = product.stats.speed + "%";
+s_stamina.style.width = product.stats.stamina + "%";
+
+// Adicionar ao carrinho
+document.getElementById("addToCart").onclick = () => {
+  let cart = JSON.parse(localStorage.getItem("cart") || "[]");
+
+  let exists = cart.find(item => item.id === product.id);
+  if (exists) exists.qty += 1;
+  else cart.push({ id: product.id, name: product.name, price: product.price, qty: 1 });
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+  alert("🔥 Adicionado ao carrinho!");
+};
+</script>
 
 </body>
 </html>
