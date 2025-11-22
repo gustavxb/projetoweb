@@ -1,130 +1,164 @@
-<!doctype html>
-<html lang="pt-BR" class="dark">
+<!DOCTYPE html>
+<html lang="pt-BR" class="antialiased">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login - BeyShop Arena</title>
 
+  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
-
   <script>
     tailwind.config = {
-      darkMode: "class",
       theme: {
         extend: {
           colors: {
-            beyRed: "#ff0033",
-            beyBlue: "#00aaff",
-            beyYellow: "#ffe600",
-            beyPurple: "#7f00ff",
-            beyDark: "#0b0f14",
+            beyRed:   "#ff2e2e",
+            beyBlue:  "#00b4ff",
+            beyYellow:"#ffd400",
+            beyDark:  "#0a0d12",
           }
         }
       }
-    };
+    }
   </script>
 
   <style>
+    :root {
+      --header-height: 72px;
+    }
+
+    header.site-header {
+      height: var(--header-height);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(90deg, rgba(10,10,20,.95), rgba(40,10,60,.95));
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      backdrop-filter: blur(6px);
+    }
+
+    main.site-main {
+      padding-top: calc(var(--header-height) + 12px);
+    }
+
+    @media (max-width: 640px) {
+      :root { --header-height: 64px; }
+      main.site-main {
+        padding-top: calc(var(--header-height) + 10px);
+      }
+    }
+
+    /* Background borrado */
+    .bg-hero {
+      position: relative;
+      overflow: hidden;
+    }
+    .bg-hero::before {
+      content:"";
+      position:absolute;
+      inset:0;
+      background-image: url("/mnt/data/Gemini_Generated_Image_cnjizscnjizscnji.png");
+      background-size: cover;
+      background-position:center;
+      filter: blur(7px) brightness(0.45);
+      transform: scale(1.05);
+      z-index:0;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
     .metal-card {
-      background: linear-gradient(145deg, #ffffff08, #00000040);
-      border: 1px solid rgba(255,255,255,0.1);
+      background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(0,0,0,0.35));
+      border: 1px solid rgba(255,255,255,0.07);
       backdrop-filter: blur(6px);
     }
   </style>
 </head>
 
-<body class="bg-gradient-to-br from-beyDark via-black to-beyPurple text-white min-h-screen">
+<body class="bg-beyDark text-white">
 
 <!-- HEADER -->
-<header class="bg-gradient-to-r from-beyRed via-beyYellow to-beyBlue p-4 shadow-xl">
-  <div class="max-w-6xl mx-auto flex justify-between items-center">
-    <a href="home.html" class="font-bold text-xl drop-shadow">🔥 BeyShop Arena</a>
+<header class="site-header shadow-xl">
+  <div class="max-w-6xl mx-auto px-4 flex items-center justify-between h-full">
 
-    <nav class="flex gap-4 items-center">
-      <a href="category.html" class="hover:underline">Categorias</a>
-      <a href="login.html" class="underline font-bold">Login</a>
-      <button id="themeToggle" class="ml-4 text-2xl">🌙</button>
+    <a href="home.html" class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-full bg-gradient-to-br from-beyBlue to-beyRed flex items-center justify-center text-white text-xl">
+        🌀
+      </div>
+      <span class="font-extrabold text-lg">BeyShop Arena</span>
+    </a>
+
+    <nav class="flex items-center gap-3">
+      <a href="category.html" class="px-3 py-2 rounded-full bg-beyYellow text-black font-semibold">Categorias</a>
+      <a href="cart.html" class="px-3 py-2 rounded-full bg-beyBlue text-black font-semibold">Carrinho</a>
     </nav>
+
   </div>
 </header>
 
-<!-- MAIN -->
-<main class="max-w-lg mx-auto p-6">
+
+<!-- HERO -->
+<section class="bg-hero py-14">
+  <div class="hero-content max-w-6xl mx-auto px-4 text-center">
+    <h1 class="text-4xl md:text-5xl font-extrabold drop-shadow">
+      Fazer <span class="text-beyYellow">Login</span>
+    </h1>
+    <p class="opacity-80 mt-2">Entre para acessar sua conta e suas compras</p>
+  </div>
+</section>
+
+
+<!-- LOGIN CARD -->
+<main class="site-main max-w-md mx-auto px-4 py-12">
 
   <div class="metal-card p-8 rounded-2xl shadow-xl">
 
-    <h1 class="text-3xl font-extrabold text-center mb-6">⚡ Entrar na Arena</h1>
+    <h2 class="text-2xl font-bold mb-6 text-center">Bem-vindo de volta!</h2>
 
-    <!-- TROCA DE ABAS -->
-    <div class="flex mb-6 border-b border-white/20">
-      <button id="loginTab" class="flex-1 py-3 text-center font-bold border-b-4 border-beyBlue">
-        Login
-      </button>
+    <div class="space-y-4">
 
-      <button id="registerTab" class="flex-1 py-3 text-center font-bold opacity-60 hover:opacity-100">
-        Criar Conta
-      </button>
-    </div>
+      <div>
+        <label class="font-semibold">Email</label>
+        <input id="email"
+               class="w-full mt-1 px-4 py-3 rounded-xl text-black"
+               type="email"
+               placeholder="seuemail@email.com">
+      </div>
 
-    <!-- LOGIN -->
-    <form id="loginForm" class="space-y-4">
-      <input class="w-full rounded-lg p-3 bg-white/10" placeholder="Email" required>
-      <input type="password" class="w-full rounded-lg p-3 bg-white/10" placeholder="Senha" required>
+      <div>
+        <label class="font-semibold">Senha</label>
+        <input id="senha"
+               class="w-full mt-1 px-4 py-3 rounded-xl text-black"
+               type="password"
+               placeholder="********">
+      </div>
 
-      <button 
-        class="w-full py-3 bg-beyBlue text-black font-bold rounded-lg hover:scale-105 transition">
+      <button onclick="login()"
+              class="w-full bg-beyYellow text-black font-bold py-3 rounded-full text-lg hover:scale-105 transition">
         Entrar
       </button>
-    </form>
 
-    <!-- CADASTRO -->
-    <form id="registerForm" class="space-y-4 hidden">
-      <input class="w-full rounded-lg p-3 bg-white/10" placeholder="Nome completo" required>
-      <input class="w-full rounded-lg p-3 bg-white/10" placeholder="Email" required>
-      <input type="password" class="w-full rounded-lg p-3 bg-white/10" placeholder="Criar senha" required>
-      <input type="password" class="w-full rounded-lg p-3 bg-white/10" placeholder="Confirmar senha" required>
+      <p class="text-center text-gray-300">
+        Não tem uma conta?
+        <a href="register.html" class="text-beyBlue font-bold">Criar conta</a>
+      </p>
 
-      <button 
-        class="w-full py-3 bg-beyYellow text-black font-bold rounded-lg hover:scale-105 transition">
-        Criar Conta
-      </button>
-    </form>
+    </div>
 
   </div>
 
 </main>
 
+
 <script>
-// Tema
-const btn = document.getElementById("themeToggle");
-btn.onclick = () => {
-  document.documentElement.classList.toggle("dark");
-  btn.textContent = document.documentElement.classList.contains("dark") ? "☀️" : "🌙";
-};
-
-// Tabs
-const loginTab = document.getElementById("loginTab");
-const registerTab = document.getElementById("registerTab");
-const loginForm = document.getElementById("loginForm");
-const registerForm = document.getElementById("registerForm");
-
-loginTab.onclick = () => {
-  loginForm.classList.remove("hidden");
-  registerForm.classList.add("hidden");
-  loginTab.classList.add("border-b-4", "border-beyBlue");
-  registerTab.classList.remove("border-b-4", "border-beyBlue");
-  registerTab.classList.add("opacity-60");
-  loginTab.classList.remove("opacity-60");
-};
-
-registerTab.onclick = () => {
-  loginForm.classList.add("hidden");
-  registerForm.classList.remove("hidden");
-  registerTab.classList.add("border-b-4", "border-beyBlue");
-  loginTab.classList.remove("border-b-4", "border-beyBlue");
-  loginTab.classList.add("opacity-60");
-  registerTab.classList.remove("opacity-60");
-};
+function login() {
+  // Simples redirecionamento (simula um login real)
+  window.location.href = "home.html";
+}
 </script>
 
 </body>
