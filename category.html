@@ -1,512 +1,162 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR" class="antialiased">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>BeyShop Arena — Categoria</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Categorias - BeyShop Arena</title>
 
-  <!-- Tailwind CDN + theme extension (keeps same palette as home) -->
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
-      darkMode: 'class',
       theme: {
         extend: {
           colors: {
-            beyRed: '#ff2e2e',
-            beyBlue: '#00b4ff',
-            beyYellow: '#ffd400',
-            beyPurple: '#8b3cff',
-            beyMetal: '#9aa4a8',
-            beyBg: '#0b0f14'
-          },
-          boxShadow: {
-            'neon-red': '0 6px 20px rgba(255,46,46,0.18), 0 0 18px rgba(255,46,46,0.08)',
-            'neon-blue': '0 6px 20px rgba(0,180,255,0.18), 0 0 18px rgba(0,180,255,0.08)'
-          },
-          keyframes: {
-            floaty: { '0%': { transform: 'translateY(0px)' }, '50%': { transform: 'translateY(-6px)' }, '100%': { transform: 'translateY(0px)' } }
-          },
-          animation: {
-            floaty: 'floaty 3s ease-in-out infinite'
+            beyRed:   "#ff2e2e",
+            beyBlue:  "#00b4ff",
+            beyYellow:"#ffd400",
+            beyDark:  "#0a0d12",
           }
         }
       }
     }
   </script>
-  <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
-    .speed-lines {
-      background-image:
-       radial-gradient(closest-side, rgba(255,255,255,0.02), rgba(0,0,0,0)),
-       linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-      background-size: 100% 100%, 60px 100%;
-    }
-    .metal-border {
-      border: 1px solid rgba(255,255,255,0.06);
-      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.01));
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+    :root {
+      --header-height: 72px;
     }
 
-    /* Tooltip anime-style */
-    .tooltip {
-      position: relative;
-      display: inline-block;
-    }
-
-    .tooltip .tooltip-content {
-      visibility: hidden;
-      opacity: 0;
-      width: 220px;
-      background: rgba(0,0,0,0.85);
-      color: #fff;
-      text-align: left;
-      padding: 10px;
-      border-radius: 6px;
-      position: absolute;
+    header.site-header {
+      height: var(--header-height);
+      position: sticky;
+      top: 0;
       z-index: 50;
-      bottom: 120%;
-      left: 50%;
-      transform: translateX(-50%) scale(0.9);
-      transition: opacity 0.18s, transform 0.18s;
-      border: 1px solid rgba(255,255,255,0.08);
-      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      background: linear-gradient(90deg, rgba(10,10,20,.95), rgba(40,10,60,.95));
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      backdrop-filter: blur(6px);
     }
 
-    .tooltip:hover .tooltip-content {
-      visibility: visible;
-      opacity: 1;
-      transform: translateX(-50%) scale(1);
+    main.site-main {
+      padding-top: calc(var(--header-height) + 12px);
     }
 
-    .stat-bar {
-      height: 8px;
-      border-radius: 6px;
-      background: rgba(255,255,255,0.06);
+    @media (max-width: 640px) {
+      :root { --header-height: 64px; }
+      main.site-main {
+        padding-top: calc(var(--header-height) + 10px);
+      }
+    }
+
+    /* Background borrado */
+    .bg-hero {
+      position: relative;
       overflow: hidden;
     }
-
-    .stat-fill {
-      height: 8px;
-      border-radius: 6px;
-      background: linear-gradient(to right, #00b4ff, #ff2e2e);
-      box-shadow: 0 0 10px rgba(255,46,46,0.18);
-      width: 40%;
+    .bg-hero::before {
+      content:"";
+      position:absolute;
+      inset:0;
+      background-image: url("/mnt/data/Gemini_Generated_Image_cnjizscnjizscnji.png");
+      background-size: cover;
+      background-position:center;
+      filter: blur(7px) brightness(0.5);
+      transform: scale(1.06);
+      z-index:0;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
     }
 
-    /* small sparkle on hover */
-    .card-sparkle::after {
-      content: '';
-      position: absolute;
-      inset: -30%;
-      background: radial-gradient(circle at 30% 10%, rgba(255,255,255,0.04), transparent 20%),
-                  radial-gradient(circle at 80% 90%, rgba(255,255,255,0.02), transparent 25%);
-      opacity: 0;
-      transition: opacity .35s, transform .35s;
-      transform: translateY(6px);
-      pointer-events: none;
+    .metal-card {
+      background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(0,0,0,0.35));
+      border: 1px solid rgba(255,255,255,0.07);
+      backdrop-filter: blur(6px);
     }
-    a.group:hover .card-sparkle::after { opacity: 1; transform: translateY(0); }
   </style>
 </head>
-<body class="bg-gradient-to-b from-white to-slate-50 dark:from-beyBg dark:to-black text-slate-900 dark:text-slate-100">
 
-  <!-- Header (shared with home) -->
-  <header class="sticky top-0 z-40">
-    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center gap-4 justify-between
-                bg-gradient-to-r from-white/60 to-transparent backdrop-blur-sm dark:from-transparent dark:bg-gradient-to-r dark:from-beyBg/80">
-      <div class="flex items-center gap-4">
-        <a href="home.html" class="flex items-center gap-3">
-          <div id="logoSpin" class="w-10 h-10 rounded-full bg-gradient-to-br from-beyBlue to-beyRed flex items-center justify-center text-white shadow-neon-blue animate-spin">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="opacity-90">
-              <circle cx="12" cy="12" r="9" stroke="white" stroke-width="1.2" stroke-opacity="0.9"/>
-              <path d="M4 12h4" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
-          </div>
-          <span class="font-extrabold text-lg tracking-wider">BeyShop Arena</span>
-        </a>
-        <span class="hidden sm:inline-block text-sm text-slate-500 dark:text-slate-300">#GearUp • Elemental Series</span>
+<body class="bg-beyDark text-white">
+
+<!-- HEADER -->
+<header class="site-header shadow-xl">
+  <div class="max-w-6xl mx-auto px-4 flex items-center justify-between h-full">
+
+    <a href="home.html" class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-full bg-gradient-to-br from-beyBlue to-beyRed flex items-center justify-center text-white text-xl">
+        🌀
       </div>
+      <span class="font-extrabold text-lg">BeyShop Arena</span>
+    </a>
 
-      <!-- search -->
-      <div class="flex-1 px-4">
-        <div class="relative max-w-2xl mx-auto">
-          <input id="searchInput" placeholder="Buscar Beyblade, tipo, elemento..." class="w-full rounded-full px-4 py-2 shadow-sm metal-border focus:outline-none focus:ring-2 focus:ring-beyBlue dark:bg-slate-800 dark:border-slate-700" />
-          <button id="themeToggle" class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/90 dark:bg-slate-800/80 p-2 rounded-full shadow ml-2 metal-border" title="Alternar tema">
-            <span id="themeIcon">🌙</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- actions -->
-      <nav class="flex items-center gap-3">
-        <a href="category.html" class="px-3 py-1 rounded-full text-sm font-medium bg-gradient-to-r from-beyYellow/90 to-beyRed/80 text-black shadow-neon-red hover:scale-[1.03] transition">Categorias</a>
-        <a href="login.html" class="px-3 py-1 text-sm rounded-md metal-border">Login</a>
-        <a href="cart.html" class="px-3 py-1 rounded-md bg-gradient-to-r from-beyBlue to-beyPurple text-white shadow-neon-blue">Carrinho</a>
-      </nav>
-    </div>
-  </header>
-
-  <!-- Breadcrumb / Title -->
-  <main class="max-w-7xl mx-auto px-4 py-8">
-    <div class="flex items-center justify-between mb-6">
-      <div>
-        <h1 class="text-3xl font-extrabold">Categorias</h1>
-        <p class="text-slate-600 dark:text-slate-300 mt-1">Filtre por elemento, tipo e popularidade. Escolha seu bey e prepare o lançamento.</p>
-      </div>
-      <a href="home.html" class="text-sm text-slate-500 dark:text-slate-300">Voltar à Home</a>
+    <div class="hidden md:block flex-1 px-4">
+      <input placeholder="Buscar Beyblade..." 
+             class="w-full rounded-full px-4 py-2 metal-card text-white placeholder-gray-300">
     </div>
 
-    <!-- Filters -->
-    <section class="mb-6">
-      <div class="bg-white dark:bg-slate-800 p-4 rounded-lg metal-border shadow-sm flex flex-wrap gap-3 items-center">
-        <div class="flex items-center gap-2">
-          <label class="text-sm font-semibold">Elemento</label>
-          <select id="elementFilter" class="border rounded px-3 py-2 bg-white dark:bg-slate-700">
-            <option value="">Todos</option>
-            <option value="fire">Fogo</option>
-            <option value="water">Água</option>
-            <option value="wind">Vento</option>
-            <option value="lightning">Relâmpago</option>
-            <option value="shadow">Sombra</option>
-          </select>
-        </div>
+    <nav class="flex items-center gap-3">
+      <a href="category.html" class="px-3 py-2 rounded-full bg-beyYellow text-black font-semibold">Categorias</a>
+      <a href="cart.html" class="px-3 py-2 rounded-full bg-beyBlue text-black font-semibold">Carrinho</a>
+      <a href="login.html" class="px-3 py-2 rounded-full metal-card font-semibold">Login</a>
+    </nav>
 
-        <div class="flex items-center gap-2">
-          <label class="text-sm font-semibold">Tipo</label>
-          <select id="typeFilter" class="border rounded px-3 py-2 bg-white dark:bg-slate-700">
-            <option value="">Todos</option>
-            <option value="attack">Attack</option>
-            <option value="defense">Defense</option>
-            <option value="balance">Balance</option>
-            <option value="speed">Speed</option>
-          </select>
-        </div>
+  </div>
+</header>
 
-        <div class="flex items-center gap-2">
-          <label class="text-sm font-semibold">Ordenar</label>
-          <select id="sortFilter" class="border rounded px-3 py-2 bg-white dark:bg-slate-700">
-            <option value="new">Mais novos</option>
-            <option value="price-asc">Preço: menor → maior</option>
-            <option value="price-desc">Preço: maior → menor</option>
-            <option value="popular">Mais populares</option>
-          </select>
-        </div>
 
-        <div class="ml-auto flex items-center gap-3">
-          <button id="clearFilters" class="px-3 py-2 text-sm rounded-md metal-border">Limpar</button>
-          <a href="#elemental" class="px-3 py-2 rounded-md bg-beyBlue text-white">Ir para Elementos</a>
-        </div>
-      </div>
-    </section>
+<!-- HERO - CATEGORIAS -->
+<section class="bg-hero py-16">
+  <div class="hero-content max-w-6xl mx-auto px-4 text-center">
 
-    <!-- Grid + Sidebar (responsive) -->
-    <div class="grid lg:grid-cols-4 gap-6">
-      <!-- Sidebar: quick filters -->
-      <aside class="lg:col-span-1 bg-white dark:bg-slate-800 p-4 rounded-lg metal-border shadow-sm">
-        <h3 class="font-semibold mb-3">Filtrar por Atributos</h3>
+    <h1 class="text-4xl md:text-5xl font-extrabold drop-shadow-lg">
+      Categorias de <span class="text-beyYellow">Beyblades</span>
+    </h1>
 
-        <div class="mb-4">
-          <h4 class="text-sm font-medium mb-2">Rangos de Preço</h4>
-          <input id="priceMin" type="number" placeholder="Min R$" class="w-full border px-2 py-1 rounded mb-2 dark:bg-slate-700" />
-          <input id="priceMax" type="number" placeholder="Max R$" class="w-full border px-2 py-1 rounded dark:bg-slate-700" />
-        </div>
+    <p class="mt-3 text-lg text-gray-200 max-w-xl mx-auto">
+      Escolha sua categoria favorita e encontre seus peões lendários.
+    </p>
 
-        <div>
-          <h4 class="text-sm font-medium mb-2">Tipos Rápidos</h4>
-          <div class="flex flex-col gap-2">
-            <button class="text-left px-3 py-2 rounded metal-border" data-quick="attack">Attack</button>
-            <button class="text-left px-3 py-2 rounded metal-border" data-quick="defense">Defense</button>
-            <button class="text-left px-3 py-2 rounded metal-border" data-quick="balance">Balance</button>
-            <button class="text-left px-3 py-2 rounded metal-border" data-quick="speed">Speed</button>
-          </div>
-        </div>
-      </aside>
+  </div>
+</section>
 
-      <!-- Products grid -->
-      <section class="lg:col-span-3">
-        <div class="flex items-center justify-between mb-4">
-          <h2 class="text-xl font-semibold">Resultados</h2>
-          <p id="resultsCount" class="text-sm text-slate-500 dark:text-slate-300">— produtos</p>
-        </div>
 
-        <div id="productsGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 relative">
-          <!-- Product cards generated by JS; template below -->
-          <template id="cardTpl">
-            <a href="product.html" class="group block bg-white/80 dark:bg-slate-800 rounded-lg p-4 metal-border hover:scale-[1.03] transition relative overflow-hidden card-sparkle">
-              <div class="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-40 transition duration-300">
-                <div class="w-full h-full bg-gradient-to-tr from-beyBlue/20 to-beyRed/12 mix-blend-screen"></div>
-              </div>
+<!-- LISTA DE CATEGORIAS -->
+<main class="site-main max-w-6xl mx-auto px-4 py-10">
 
-              <div class="flex flex-col items-center">
-                <div class="w-36 h-36 rounded-full flex items-center justify-center text-white mb-4 shadow-neon-blue" data-avatar="">
-                  <!-- icon will be inserted -->
-                </div>
+  <h2 class="text-3xl font-bold mb-6">Selecione uma Categoria</h2>
 
-                <div class="flex items-center justify-between w-full">
-                  <h3 class="font-semibold text-lg" data-name>Nome</h3>
+  <div class="grid md:grid-cols-3 gap-6">
 
-                  <!-- ELEMENT BADGE -->
-                  <span data-element-badge
-                        class="px-2 py-1 text-xs rounded-md text-white font-bold shadow">
-                    Fogo
-                  </span>
-                </div>
+    <!-- Categoria Ataque -->
+    <a href="product.html" class="metal-card p-5 rounded-xl block hover:scale-105 transition">
+      <img src="/mnt/data/Gemini_Generated_Image_cnjizscnjizscnji.png"
+           class="w-full rounded-lg shadow-xl">
+      <h3 class="mt-3 text-xl font-bold text-beyRed">Tipo Ataque</h3>
+      <p class="text-gray-300 text-sm">Explosões poderosas e impacto máximo.</p>
+    </a>
 
-                <!-- TYPE BADGE -->
-                <p class="text-xs mt-1 px-2 py-1 rounded bg-slate-700 text-slate-200 inline-block" data-type-badge>
-                  Attack
-                </p>
+    <!-- Categoria Defesa -->
+    <a href="product.html" class="metal-card p-5 rounded-xl block hover:scale-105 transition">
+      <img src="/mnt/data/Gemini_Generated_Image_cnjizscnjizscnji.png"
+           class="w-full rounded-lg shadow-xl">
+      <h3 class="mt-3 text-xl font-bold text-beyBlue">Tipo Defesa</h3>
+      <p class="text-gray-300 text-sm">Proteção e resistência lendária.</p>
+    </a>
 
-                <!-- Tooltip stats -->
-                <div class="tooltip mt-2">
-                  <span class="text-xs underline cursor-pointer text-beyBlue">Ver atributos</span>
+    <!-- Categoria Stamina -->
+    <a href="product.html" class="metal-card p-5 rounded-xl block hover:scale-105 transition">
+      <img src="/mnt/data/Gemini_Generated_Image_cnjizscnjizscnji.png"
+           class="w-full rounded-lg shadow-xl">
+      <h3 class="mt-3 text-xl font-bold text-beyYellow">Tipo Stamina</h3>
+      <p class="text-gray-300 text-sm">Duração máxima e rotação estável.</p>
+    </a>
 
-                  <div class="tooltip-content">
-                    <p class="text-sm font-semibold mb-2">Atributos:</p>
+  </div>
 
-                    <p class="text-xs">Força</p>
-                    <div class="stat-bar"><div class="stat-fill" data-stat-force></div></div>
+</main>
 
-                    <p class="text-xs mt-2">Defesa</p>
-                    <div class="stat-bar"><div class="stat-fill" data-stat-defense></div></div>
-
-                    <p class="text-xs mt-2">Velocidade</p>
-                    <div class="stat-bar"><div class="stat-fill" data-stat-speed></div></div>
-
-                    <p class="text-xs mt-2">Stamina</p>
-                    <div class="stat-bar"><div class="stat-fill" data-stat-stamina></div></div>
-                  </div>
-                </div>
-
-                <div class="mt-3 flex items-center gap-3">
-                  <span class="text-xl font-bold text-beyYellow" data-price>R$ 0</span>
-                  <button class="ml-2 px-3 py-1 rounded-md bg-gradient-to-r from-beyBlue to-beyRed text-white text-sm" data-add>Adicionar</button>
-                </div>
-              </div>
-            </a>
-          </template>
-        </div>
-
-        <!-- pagination (simple) -->
-        <div class="mt-8 flex items-center justify-between">
-          <div class="text-sm text-slate-500 dark:text-slate-300">Página 1 de 1</div>
-          <div class="flex gap-2">
-            <button class="px-3 py-2 rounded metal-border">Anterior</button>
-            <button class="px-3 py-2 rounded bg-beyBlue text-white">Próxima</button>
-          </div>
-        </div>
-      </section>
-    </div>
-
-    <!-- Elemental showcase anchor -->
-    <section id="elemental" class="mt-12 bg-gradient-to-br from-white to-slate-50 dark:from-slate-900 dark:to-slate-800 p-6 rounded-lg metal-border">
-      <h2 class="text-2xl font-semibold mb-4">Elementos</h2>
-      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
-        <div class="p-4 rounded-lg bg-gradient-to-br from-beyRed/10 to-transparent metal-border flex items-center gap-4">
-          <div class="w-12 h-12 rounded-full bg-beyRed flex items-center justify-center text-white font-bold shadow-neon-red">🔥</div>
-          <div>
-            <h4 class="font-semibold">Fogo</h4>
-            <p class="text-sm text-slate-500 dark:text-slate-300">Alta agressividade e velocidade de ataque.</p>
-          </div>
-        </div>
-        <div class="p-4 rounded-lg bg-gradient-to-br from-beyBlue/10 to-transparent metal-border flex items-center gap-4">
-          <div class="w-12 h-12 rounded-full bg-beyBlue flex items-center justify-center text-white font-bold shadow-neon-blue">💧</div>
-          <div>
-            <h4 class="font-semibold">Água</h4>
-            <p class="text-sm text-slate-500 dark:text-slate-300">Controle e resistência.</p>
-          </div>
-        </div>
-        <div class="p-4 rounded-lg bg-gradient-to-br from-beyYellow/10 to-transparent metal-border flex items-center gap-4">
-          <div class="w-12 h-12 rounded-full bg-beyYellow flex items-center justify-center text-black font-bold">⚡</div>
-          <div>
-            <h4 class="font-semibold">Relâmpago</h4>
-            <p class="text-sm text-slate-500 dark:text-slate-300">Velocidade e manobra.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- Footer (shared style) -->
-  <footer class="bg-gradient-to-t from-white/70 to-transparent dark:from-black/60 py-10 mt-12">
-    <div class="max-w-7xl mx-auto px-4 grid sm:grid-cols-3 gap-6 text-sm">
-      <div>
-        <h4 class="font-semibold mb-2">Suporte</h4>
-        <p class="text-slate-600 dark:text-slate-300">Envios • Garantia • Peças</p>
-      </div>
-      <div>
-        <h4 class="font-semibold mb-2">Sobre</h4>
-        <p class="text-slate-600 dark:text-slate-300">Equipe BeyShop • Torneios • Parcerias</p>
-      </div>
-      <div>
-        <h4 class="font-semibold mb-2">Newsletter</h4>
-        <div class="flex gap-2">
-          <input placeholder="Seu e-mail" class="w-full rounded px-3 py-2 border dark:bg-slate-800" />
-          <button class="px-3 py-2 rounded bg-beyBlue text-white">OK</button>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Scripts: theme toggle + simple product demo + filters -->
-  <script>
-    // Theme toggle persisted (same logic as home)
-    (function () {
-      const html = document.documentElement;
-      const toggle = document.getElementById('themeToggle');
-      const icon = document.getElementById('themeIcon');
-      const stored = localStorage.getItem('theme');
-
-      function setDark(dark) {
-        if (dark) {
-          html.classList.add('dark');
-          icon.textContent = '☀️';
-        } else {
-          html.classList.remove('dark');
-          icon.textContent = '🌙';
-        }
-        localStorage.setItem('theme', dark ? 'dark' : 'light');
-      }
-
-      if (stored === 'dark') setDark(true);
-      else if (stored === 'light') setDark(false);
-      else {
-        const prefers = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-        setDark(prefers);
-      }
-
-      toggle.addEventListener('click', () => setDark(!document.documentElement.classList.contains('dark')));
-    })();
-
-    // Demo product data (replace with real data or API)
-    const PRODUCTS = [
-      { id:1, name:'Storm Valkyrie', element:'wind', type:'balance', price:150, icon:'🌀',
-        stats:{ force:60, defense:50, speed:80, stamina:70 }},
-      { id:2, name:'Blaze Phoenix', element:'fire', type:'attack', price:130, icon:'🔥',
-        stats:{ force:90, defense:30, speed:70, stamina:40 }},
-      { id:3, name:'Aqua Leviathan', element:'water', type:'defense', price:140, icon:'💧',
-        stats:{ force:50, defense:90, speed:40, stamina:80 }},
-      { id:4, name:'Volt Raptor', element:'lightning', type:'speed', price:120, icon:'⚡',
-        stats:{ force:70, defense:40, speed:95, stamina:50 }},
-      { id:5, name:'Void Reaper', element:'shadow', type:'attack', price:180, icon:'⚫',
-        stats:{ force:85, defense:55, speed:60, stamina:65 }},
-    ];
-
-    const productsGrid = document.getElementById('productsGrid');
-    const cardTpl = document.getElementById('cardTpl');
-
-    function renderProducts(list) {
-      productsGrid.innerHTML = '';
-      const frag = document.createDocumentFragment();
-      list.forEach(p => {
-        const tpl = cardTpl.content.cloneNode(true);
-        const avatar = tpl.querySelector('[data-avatar]');
-
-        // set avatar background by element
-        if (p.element === 'fire') avatar.className = 'w-36 h-36 rounded-full bg-gradient-to-br from-beyRed to-beyYellow flex items-center justify-center text-white mb-4 shadow-neon-red';
-        if (p.element === 'water') avatar.className = 'w-36 h-36 rounded-full bg-gradient-to-br from-beyBlue to-beyPurple flex items-center justify-center text-white mb-4 shadow-neon-blue';
-        if (p.element === 'wind') avatar.className = 'w-36 h-36 rounded-full bg-gradient-to-br from-beyPurple to-beyBlue flex items-center justify-center text-white mb-4 shadow-neon-blue';
-        if (p.element === 'lightning') avatar.className = 'w-36 h-36 rounded-full bg-gradient-to-br from-beyYellow to-beyRed flex items-center justify-center text-black mb-4';
-        if (p.element === 'shadow') avatar.className = 'w-36 h-36 rounded-full bg-gradient-to-br from-slate-700 to-beyPurple flex items-center justify-center text-white mb-4';
-
-        avatar.innerHTML = `<span class="text-3xl">${p.icon}</span>`;
-
-        tpl.querySelector('[data-name]').textContent = p.name;
-        tpl.querySelector('[data-meta]')?.remove?.(); // remove old meta if present
-        tpl.querySelector('[data-price]').textContent = `R$ ${p.price}`;
-
-        // Badges
-        const elBadge = tpl.querySelector('[data-element-badge]');
-        const tpBadge = tpl.querySelector('[data-type-badge]');
-
-        elBadge.textContent = p.element.toUpperCase();
-        tpBadge.textContent = p.type.toUpperCase();
-
-        // Element badge colors
-        elBadge.classList.remove('bg-beyRed','bg-beyBlue','bg-beyPurple','bg-beyYellow','bg-black','text-black');
-        if (p.element === 'fire') elBadge.classList.add('bg-beyRed');
-        if (p.element === 'water') elBadge.classList.add('bg-beyBlue');
-        if (p.element === 'wind') elBadge.classList.add('bg-beyPurple');
-        if (p.element === 'lightning') elBadge.classList.add('bg-beyYellow','text-black');
-        if (p.element === 'shadow') elBadge.classList.add('bg-black');
-
-        // Stats bars
-        tpl.querySelector('[data-stat-force]').style.width = p.stats.force + '%';
-        tpl.querySelector('[data-stat-defense]').style.width = p.stats.defense + '%';
-        tpl.querySelector('[data-stat-speed]').style.width = p.stats.speed + '%';
-        tpl.querySelector('[data-stat-stamina]').style.width = p.stats.stamina + '%';
-
-        const addBtn = tpl.querySelector('[data-add]');
-        addBtn.addEventListener('click', (e) => {
-          e.preventDefault();
-          const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-          cart.push({ id: p.id, name: p.name, price: p.price, qty: 1 });
-          localStorage.setItem('cart', JSON.stringify(cart));
-          addBtn.textContent = 'Adicionado';
-          addBtn.disabled = true;
-          setTimeout(() => { addBtn.textContent = 'Adicionar'; addBtn.disabled = false; }, 900);
-        });
-
-        frag.appendChild(tpl);
-      });
-      productsGrid.appendChild(frag);
-      document.getElementById('resultsCount').textContent = `${list.length} produtos`;
-    }
-
-    // Initial render
-    renderProducts(PRODUCTS);
-
-    // Filters handlers
-    document.getElementById('elementFilter').addEventListener('change', applyFilters);
-    document.getElementById('typeFilter').addEventListener('change', applyFilters);
-    document.getElementById('sortFilter').addEventListener('change', applyFilters);
-    document.getElementById('clearFilters').addEventListener('click', () => {
-      document.getElementById('elementFilter').value = '';
-      document.getElementById('typeFilter').value = '';
-      document.getElementById('sortFilter').value = 'new';
-      document.getElementById('priceMin').value = '';
-      document.getElementById('priceMax').value = '';
-      renderProducts(PRODUCTS);
-    });
-
-    // quick type buttons
-    document.querySelectorAll('[data-quick]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const val = btn.dataset.quick;
-        document.getElementById('typeFilter').value = val;
-        applyFilters();
-      });
-    });
-
-    function applyFilters() {
-      const el = document.getElementById('elementFilter').value;
-      const tp = document.getElementById('typeFilter').value;
-      const sort = document.getElementById('sortFilter').value;
-      const min = parseFloat(document.getElementById('priceMin').value) || 0;
-      const max = parseFloat(document.getElementById('priceMax').value) || Infinity;
-      let filtered = PRODUCTS.filter(p => {
-        const okEl = !el || p.element === el;
-        const okTp = !tp || p.type === tp;
-        const okPrice = p.price >= min && p.price <= max;
-        return okEl && okTp && okPrice;
-      });
-
-      if (sort === 'price-asc') filtered.sort((a,b) => a.price - b.price);
-      else if (sort === 'price-desc') filtered.sort((a,b) => b.price - a.price);
-      else if (sort === 'popular') filtered = filtered; // placeholder
-      else if (sort === 'new') filtered = filtered; // placeholder
-
-      renderProducts(filtered);
-    }
-
-    // simple search (by name)
-    document.getElementById('searchInput').addEventListener('input', (e) => {
-      const q = e.target.value.toLowerCase().trim();
-      if (!q) return renderProducts(PRODUCTS);
-      const res = PRODUCTS.filter(p => p.name.toLowerCase().includes(q) || p.element.includes(q) || p.type.includes(q));
-      renderProducts(res);
-    });
-  </script>
 </body>
 </html>
