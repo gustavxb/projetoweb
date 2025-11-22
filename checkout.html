@@ -1,146 +1,217 @@
-<!doctype html>
-<html lang="pt-BR" class="dark">
+<!DOCTYPE html>
+<html lang="pt-BR" class="antialiased">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Checkout - BeyShop Arena</title>
 
+  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
-      darkMode: "class",
       theme: {
         extend: {
           colors: {
-            beyRed: "#ff0033",
-            beyBlue: "#00aaff",
-            beyYellow: "#ffe600",
-            beyPurple: "#7f00ff",
-            beyDark: "#0b0f14",
+            beyRed:   "#ff2e2e",
+            beyBlue:  "#00b4ff",
+            beyYellow:"#ffd400",
+            beyDark:  "#0a0d12",
           }
         }
       }
-    };
+    }
   </script>
 
   <style>
+    :root {
+      --header-height: 72px;
+    }
+
+    header.site-header {
+      height: var(--header-height);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(90deg, rgba(10,10,20,.95), rgba(40,10,60,.95));
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      backdrop-filter: blur(6px);
+    }
+
+    main.site-main {
+      padding-top: calc(var(--header-height) + 12px);
+    }
+
+    @media (max-width: 640px) {
+      :root { --header-height: 64px; }
+      main.site-main {
+        padding-top: calc(var(--header-height) + 10px);
+      }
+    }
+
+    /* Background borrado */
+    .bg-hero {
+      position: relative;
+      overflow: hidden;
+    }
+    .bg-hero::before {
+      content:"";
+      position:absolute;
+      inset:0;
+      background-image: url("/mnt/data/Gemini_Generated_Image_cnjizscnjizscnji.png");
+      background-size: cover;
+      background-position:center;
+      filter: blur(7px) brightness(0.45);
+      transform: scale(1.06);
+      z-index:0;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
     .metal-card {
-      background: linear-gradient(145deg, #ffffff08, #00000040);
-      border: 1px solid rgba(255,255,255,0.1);
+      background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(0,0,0,0.35));
+      border: 1px solid rgba(255,255,255,0.07);
       backdrop-filter: blur(6px);
     }
   </style>
 </head>
 
-<body class="bg-gradient-to-br from-beyDark via-black to-beyPurple text-white min-h-screen">
+<body class="bg-beyDark text-white">
 
 <!-- HEADER -->
-<header class="bg-gradient-to-r from-beyRed via-beyYellow to-beyBlue p-4 shadow-xl">
-  <div class="max-w-6xl mx-auto flex justify-between items-center">
-    <a href="home.html" class="font-bold text-xl drop-shadow">🔥 BeyShop Arena</a>
+<header class="site-header shadow-xl">
+  <div class="max-w-6xl mx-auto px-4 flex items-center justify-between h-full">
 
-    <nav class="flex gap-4 items-center">
-      <a href="category.html" class="hover:underline">Categorias</a>
-      <a href="cart.html" class="hover:underline">Carrinho</a>
-      <button id="themeToggle" class="ml-4 text-2xl">🌙</button>
+    <a href="home.html" class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-full bg-gradient-to-br from-beyBlue to-beyRed flex items-center justify-center text-white text-xl">
+        🌀
+      </div>
+      <span class="font-extrabold text-lg">BeyShop Arena</span>
+    </a>
+
+    <div class="hidden md:block flex-1 px-4">
+      <input placeholder="Buscar Beyblade..." 
+             class="w-full rounded-full px-4 py-2 metal-card text-white placeholder-gray-300">
+    </div>
+
+    <nav class="flex items-center gap-3">
+      <a href="category.html" class="px-3 py-2 rounded-full bg-beyYellow text-black font-semibold">Categorias</a>
+      <a href="cart.html" class="px-3 py-2 rounded-full bg-beyBlue text-black font-semibold">Carrinho</a>
+      <a href="login.html" class="px-3 py-2 rounded-full metal-card font-semibold">Login</a>
     </nav>
+
   </div>
 </header>
 
-<!-- MAIN -->
-<main class="max-w-6xl mx-auto p-6">
 
-  <h1 class="text-3xl font-extrabold mb-6">📦 Finalizar Compra</h1>
+<!-- HERO -->
+<section class="bg-hero py-14">
+  <div class="hero-content max-w-6xl mx-auto px-4 text-center">
+    <h1 class="text-4xl md:text-5xl font-extrabold drop-shadow">
+      Finalizar <span class="text-beyYellow">Compra</span>
+    </h1>
+    <p class="opacity-80 mt-2">Preencha seus dados para completar o pedido</p>
+  </div>
+</section>
 
-  <div class="grid md:grid-cols-2 gap-10">
 
-    <!-- FORM -->
-    <form id="checkoutForm" class="metal-card p-6 rounded-xl space-y-4">
+<!-- CHECKOUT -->
+<main class="site-main max-w-6xl mx-auto px-4 py-10 grid md:grid-cols-2 gap-8">
 
-      <h2 class="text-xl font-bold mb-4">Dados do Cliente</h2>
+  <!-- FORMULÁRIO -->
+  <div class="metal-card p-6 rounded-xl">
+    <h2 class="text-2xl font-bold mb-4">Dados do Cliente</h2>
 
-      <input class="w-full rounded-lg p-3 bg-white/10" placeholder="Nome completo" required>
-      <input class="w-full rounded-lg p-3 bg-white/10" placeholder="Email" required>
-      <input class="w-full rounded-lg p-3 bg-white/10" placeholder="Telefone" required>
+    <div class="space-y-4">
 
-      <h2 class="text-xl font-bold mt-6 mb-4">Endereço</h2>
+      <div>
+        <label class="font-semibold">Nome Completo</label>
+        <input class="w-full mt-1 px-4 py-2 rounded-xl text-black" id="nome">
+      </div>
 
-      <input class="w-full rounded-lg p-3 bg-white/10" placeholder="Rua" required>
-      <input class="w-full rounded-lg p-3 bg-white/10" placeholder="Número" required>
-      <input class="w-full rounded-lg p-3 bg-white/10" placeholder="Bairro" required>
-      <input class="w-full rounded-lg p-3 bg-white/10" placeholder="Cidade" required>
-      <input class="w-full rounded-lg p-3 bg-white/10" placeholder="CEP" required>
+      <div>
+        <label class="font-semibold">Email</label>
+        <input class="w-full mt-1 px-4 py-2 rounded-xl text-black" id="email">
+      </div>
 
-      <h2 class="text-xl font-bold mt-6 mb-4">Pagamento</h2>
+      <div>
+        <label class="font-semibold">Endereço</label>
+        <input class="w-full mt-1 px-4 py-2 rounded-xl text-black" id="endereco">
+      </div>
 
-      <select class="w-full rounded-lg p-3 bg-white/10" required>
-        <option>Cartão de Crédito</option>
-        <option>Pix</option>
-        <option>Boleto</option>
-      </select>
-
-    </form>
-
-    <!-- RESUMO -->
-    <div class="metal-card p-6 rounded-xl">
-
-      <h2 class="text-2xl font-bold mb-6">Resumo da Compra</h2>
-
-      <div id="summaryList" class="space-y-3"></div>
-
-      <p class="text-2xl mt-5">
-        Total: 
-        <span id="totalPrice" class="text-beyYellow font-bold">R$ 0,00</span>
-      </p>
-
-      <button id="finish" 
-              class="w-full py-4 mt-6 rounded-xl bg-beyBlue text-black font-bold text-lg hover:scale-110 transition">
-        Finalizar Pedido
-      </button>
+      <div>
+        <label class="font-semibold">Forma de Pagamento</label>
+        <select class="w-full mt-1 px-4 py-2 rounded-xl text-black" id="pagamento">
+          <option>Cartão de Crédito</option>
+          <option>Pix</option>
+          <option>Boleto</option>
+        </select>
+      </div>
 
     </div>
   </div>
 
+  <!-- RESUMO -->
+  <div class="metal-card p-6 rounded-xl">
+    <h2 class="text-2xl font-bold mb-4">Resumo da Compra</h2>
+
+    <div id="checkoutItems" class="space-y-4"></div>
+
+    <div class="flex justify-between text-xl mt-4">
+      <span>Total:</span>
+      <span id="checkoutTotal" class="font-extrabold text-beyYellow">R$ 0,00</span>
+    </div>
+
+    <button onclick="finishOrder()"
+            class="w-full bg-beyYellow text-black mt-6 py-3 rounded-full text-lg font-bold hover:scale-105 transition">
+      Finalizar Pedido
+    </button>
+  </div>
+
 </main>
 
+
 <script>
-// Tema
-const btn = document.getElementById("themeToggle");
-btn.onclick = () => {
-  document.documentElement.classList.toggle("dark");
-  btn.textContent = document.documentElement.classList.contains("dark") ? "☀️" : "🌙";
-};
+function loadCheckout() {
+  const container = document.getElementById("checkoutItems");
+  const totalElement = document.getElementById("checkoutTotal");
 
-// Carregar resumo do carrinho
-function loadSummary() {
-  const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-  const summaryList = document.getElementById("summaryList");
+  let cart = JSON.parse(localStorage.getItem("cart") || "[]");
 
-  summaryList.innerHTML = "";
+  container.innerHTML = "";
 
   let total = 0;
 
-  cart.forEach(item => {
+  cart.forEach((item) => {
     total += item.price * item.qty;
 
-    summaryList.innerHTML += `
-      <div class="flex justify-between opacity-80">
-        <span>${item.name} (x${item.qty})</span>
-        <span>R$ ${item.price * item.qty},00</span>
+    container.innerHTML += `
+      <div class="flex items-center gap-4">
+        <img src="/mnt/data/Gemini_Generated_Image_cnjizscnjizscnji.png"
+             class="w-20 h-20 object-cover rounded-lg shadow">
+
+        <div class="flex-1">
+          <p class="font-bold">${item.name}</p>
+          <p class="text-beyYellow font-bold">R$ ${item.price}</p>
+        </div>
+
+        <span class="font-bold text-lg">${item.qty}x</span>
       </div>
     `;
   });
 
-  document.getElementById("totalPrice").textContent = "R$ " + total + ",00";
+  totalElement.textContent = "R$ " + total.toFixed(2).replace(".", ",");
 }
 
-loadSummary();
-
-// Finalizar pedido
-document.getElementById("finish").onclick = () => {
-  localStorage.removeItem("cart");
+function finishOrder() {
   window.location.href = "thankyou.html";
-};
+  localStorage.removeItem("cart");
+}
+
+window.onload = loadCheckout;
 </script>
 
 </body>
