@@ -7,8 +7,8 @@
         {
             "type": "chrome",
             "request": "launch",
-            "name": "Open home.html",
-            "file": "/home/gustavo/Documentos/PROJETOWEB/home.html"
+            "name": "Open login.html",
+            "file": "/home/gustavo/Documentos/PROJETOWEB/login.html"
         }
     ]
 }
