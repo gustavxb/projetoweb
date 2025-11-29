@@ -1,315 +1,281 @@
-<!doctype html>
-<html lang="pt-BR" class="antialiased">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>BeyShop Arena — Home</title>
-
-  <!-- Tailwind CDN + custom theme -->
-  <script>
-    // Tailwind theme extension (neon + metal + element colors)
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            beyRed: '#ff2e2e',
-            beyBlue: '#00b4ff',
-            beyYellow: '#ffd400',
-            beyPurple: '#8b3cff',
-            beyMetal: '#9aa4a8',
-            beyBg: '#0b0f14'
-          },
-          boxShadow: {
-            'neon-red': '0 6px 20px rgba(255,46,46,0.18), 0 0 18px rgba(255,46,46,0.08)',
-            'neon-blue': '0 6px 20px rgba(0,180,255,0.18), 0 0 18px rgba(0,180,255,0.08)'
-          },
-          keyframes: {
-            floaty: { '0%': { transform: 'translateY(0px)' }, '50%': { transform: 'translateY(-6px)' }, '100%': { transform: 'translateY(0px)' } },
-            pulse-glow: { '0%': { boxShadow: '0 0 0px rgba(255,255,255,0)' }, '50%': { boxShadow: '0 0 18px rgba(255,255,255,0.12)' }, '100%': { boxShadow: '0 0 0px rgba(255,255,255,0)' } }
-          },
-          animation: {
-            floaty: 'floaty 3s ease-in-out infinite',
-            'pulse-glow': 'pulse-glow 2.2s ease-in-out infinite'
-          }
-        }
-      }
-    }
-  </script>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Beyblade X</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
   <style>
-    /* Speed lines background (subtle) */
-    .speed-lines {
-      background-image:
-       radial-gradient(closest-side, rgba(255,255,255,0.02), rgba(0,0,0,0)),
-       linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-      background-size: 100% 100%, 60px 100%;
+    /* PARALLAX BACKGROUND */
+    .parallax-bg {
+      background-size: cover;
+      background-position: center;
+      will-change: transform;
+      transition: transform 0.6s ease;
     }
 
-    /* small helper for metallic border */
-    .metal-border {
-      border: 1px solid rgba(255,255,255,0.06);
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+    /* Theme variables default (verde) */
+    .theme-color {
+      --theme: #00ff85;
+      --theme-dark: #00d66d;
     }
+
+    /* Atualiza variáveis conforme radio selecionado (os inputs estão antes da .theme-color) */
+    input[name="heroSlide"]#hero1:checked ~ .theme-color {
+      --theme: #00ff85;
+      --theme-dark: #00d66d;
+    }
+    input[name="heroSlide"]#hero2:checked ~ .theme-color {
+      --theme: #8b0000;
+      --theme-dark: #a30000;
+    }
+    input[name="heroSlide"]#hero3:checked ~ .theme-color {
+      --theme: #f9db4a;
+      --theme-dark: #e6c63c;
+    }
+
+    /* Hero image visibility controlled by inputs */
+    .hero-img {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 600ms ease;
+      z-index: 0;
+    }
+    /* Show corresponding image when radio checked */
+    input#hero1:checked ~ .theme-color .hero-img.img1 { opacity: 1; }
+    input#hero2:checked ~ .theme-color .hero-img.img2 { opacity: 1; }
+    input#hero3:checked ~ .theme-color .hero-img.img3 { opacity: 1; }
+
+    /* Overlay uses theme color (semi-transparent) */
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background-color: var(--theme);
+      opacity: 0.20; /* tweak amount of tint */
+      transition: background-color 400ms ease, opacity 400ms ease;
+      pointer-events: none;
+      mix-blend-mode: normal;
+    }
+
+    /* Conteúdo do hero fica acima */
+    .hero-content { position: relative; z-index: 2; }
+
+    /* Small helper to make radio labels visible as active (optional) */
+    .dot {
+      width: 1rem; height: 1rem; border-radius: 9999px;
+      background: rgba(255,255,255,0.45);
+      display:inline-block;
+      transition: transform 200ms, background-color 200ms;
+      border: 2px solid rgba(255,255,255,0.15);
+    }
+    input#hero1:checked ~ .theme-color .dot.dot1 { transform: scale(1.1); background: var(--theme); }
+    input#hero2:checked ~ .theme-color .dot.dot2 { transform: scale(1.1); background: var(--theme); }
+    input#hero3:checked ~ .theme-color .dot.dot3 { transform: scale(1.1); background: var(--theme); }
   </style>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Michroma&display=swap" rel="stylesheet">
 </head>
-<body class="bg-gradient-to-b from-white to-slate-50 dark:from-beyBg dark:to-black text-slate-900 dark:text-slate-100">
+<body class="bg-black text-white font-sans">
 
-  <!-- Top bar / Header -->
-  <header class="sticky top-0 z-40">
-    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center gap-4 justify-between
-                bg-gradient-to-r from-white/60 to-transparent backdrop-blur-sm dark:from-transparent dark:bg-gradient-to-r dark:from-beyBg/80">
-      <div class="flex items-center gap-4">
-        <a href="home.html" class="flex items-center gap-3">
-          <!-- emblem: spinning bey -->
-          <div id="logoSpin" class="w-10 h-10 rounded-full bg-gradient-to-br from-beyBlue to-beyRed flex items-center justify-center text-white shadow-neon-blue animate-spin">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="opacity-90">
-              <circle cx="12" cy="12" r="9" stroke="white" stroke-width="1.2" stroke-opacity="0.9"/>
-              <path d="M4 12h4" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
-          </div>
-          <span class="font-extrabold text-lg tracking-wider">BeyShop Arena</span>
+  <!-- SISTEMA DE TROCA DE TEMA (inputs no topo) -->
+  <input type="radio" name="heroSlide" id="hero1" class="hidden" checked>
+  <input type="radio" name="heroSlide" id="hero2" class="hidden">
+  <input type="radio" name="heroSlide" id="hero3" class="hidden">
+
+  <!-- WRAPPER QUE RECEBE AS VARIÁVEIS DE TEMA -->
+  <div class="theme-color">
+
+    <!-- HEADER -->
+    <header class="w-full py-5 bg-black/70 backdrop-blur-md border-b border-[var(--theme)] z-20 relative">
+      <div class="w-[90%] mx-auto flex justify-between items-center gap-10">
+
+        <!-- LOGO -->
+        <a href="#" class="block">
+          <img src="company-logo-4.webp" alt="Beyblade X Logo" class="h-20 w-auto object-contain hover:brightness-110 transition">
         </a>
-        <span class="hidden sm:inline-block text-sm text-slate-500 dark:text-slate-300">#GearUp • Elemental Series</span>
-      </div>
 
-      <!-- search -->
-      <div class="flex-1 px-4">
-        <div class="relative max-w-2xl mx-auto">
-          <input id="search" placeholder="Buscar Beyblade, tipo, elemento..." class="w-full rounded-full px-4 py-2 shadow-sm metal-border focus:outline-none focus:ring-2 focus:ring-beyBlue dark:bg-slate-800 dark:border-slate-700" />
-          <button id="themeToggle" class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/90 dark:bg-slate-800/80 p-2 rounded-full shadow ml-2 metal-border" title="Alternar tema">
-            <!-- icon changes with theme by JS -->
-            <span id="themeIcon">🌙</span>
+        <!-- BARRA DE PESQUISA -->
+        <div class="flex-1 px-10">
+          <div class="relative w-full max-w-xl mx-auto">
+            <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[var(--theme)]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+
+            <input type="text" placeholder="Search products..." class="w-full pl-12 pr-4 py-2 border border-[var(--theme)] rounded-full
+              bg-transparent text-[var(--theme)] placeholder-white focus:outline-none focus:ring-2 focus:ring-[var(--theme-dark)]">
+          </div>
+        </div>
+
+        <!-- NAV -->
+        <nav class="flex space-x-8 text-lg">
+          <a href="#" class="hover:text-[var(--theme)] transition text-white font-black">HOME</a>
+          <a href="#" class="hover:text-[var(--theme)] transition text-white font-black">BEYS</a>
+          <a href="#" class="hover:text-[var(--theme)] transition text-white font-black">ARENAS</a>
+          <a href="#" class="hover:text-[var(--theme)] transition text-white font-black">LOGIN</a>
+
+          <!-- Ìcone de Login -->
+          <div class="flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="2"
+                 stroke-linecap="round"
+                 stroke-linejoin="round"
+                 class="w-7 h-7 text-[var(--theme)]">
+                <circle cx="12" cy="7" r="4" />
+                <path d="M4 21c0-4 4-7 8-7s8 3 8 7" />
+            </svg>
+          
+        </div>
+
+          <button class="flex items-center hover:text-[var(--theme)] transition">
+            <svg class="w-7 h-7 text-[var(--theme)]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 6h15l-1.5 9h-12z"></path>
+              <path d="M6 6L4 2H2"></path>
+              <circle cx="9" cy="20" r="1"></circle>
+              <circle cx="18" cy="20" r="1"></circle>
+            </svg>
+          </button>
+        </nav>
+
+      </div>
+    </header>
+
+    <!-- HERO COM CARROSSEL + PARALLAX (SEM JS) -->
+    <section class="relative h-[90vh] w-full overflow-hidden">
+
+      <!-- Slides (cada div é uma imagem de fundo) -->
+      <div class="hero-img img1 parallax-bg" style="background-image: url('header1.jpg');"></div>
+      <div class="hero-img img2 parallax-bg" style="background-image: url('header2.jpg');"></div>
+      <div class="hero-img img3 parallax-bg" style="background-image: url('header3.jpg');"></div>
+
+      <!-- Overlay colorida que usa a variável --theme -->
+      <div class="hero-overlay"></div>
+
+      <!-- Conteúdo do HERO -->
+      <div class="hero-content relative z-10 w-[90%] mx-auto h-full flex flex-col justify-center">
+        <h1 class="text-5xl md:text-6xl font-black mb-4 leading-tight drop-shadow-[0_0_20px_var(--theme)]">
+          BREAK YOUR<br>
+          <span class="text-[var(--theme)]">LIMITS</span>
+        </h1>
+
+        <p class="font-mont text-gray-200 text-lg max-w-xl drop-shadow-[0_0_15px_rgba(0,0,0,0.9)]">
+          Entre na velocidade extrema do Beyblade X — Tops ultra potentes, arenas que quebram limites
+          e batalhas com impacto real.
+        </p>
+
+        <div class="mt-8 flex space-x-4">
+          <button class="px-8 py-3 bg-[var(--theme)] text-black font-bold text-lg hover:bg-[var(--theme-dark)] transition">
+            COMPRAR BEYS
+          </button>
+
+          <button class="px-8 py-3 border border-[var(--theme)] text-[var(--theme)] font-bold text-lg hover:bg-[var(--theme)] hover:text-black transition">
+            ARENAS
           </button>
         </div>
-      </div>
 
-      <!-- actions -->
-      <nav class="flex items-center gap-3">
-        <a href="category.html" class="px-3 py-1 rounded-full text-sm font-medium bg-gradient-to-r from-beyYellow/90 to-beyRed/80 text-black shadow-neon-red hover:scale-[1.03] transition">Categorias</a>
-        <a href="login.html" class="px-3 py-1 text-sm rounded-md metal-border">Login</a>
-        <a href="cart.html" class="px-3 py-1 rounded-md bg-gradient-to-r from-beyBlue to-beyPurple text-white shadow-neon-blue">Carrinho</a>
-      </nav>
-    </div>
-
-    <!-- speed-lines hero accent -->
-    <div class="speed-lines">
-      <div class="max-w-7xl mx-auto px-4 py-6">
-        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-          <div class="flex-1">
-            <h1 class="text-4xl md:text-5xl font-extrabold leading-tight tracking-tight">
-              Bem-vindo à <span class="text-transparent bg-clip-text bg-gradient-to-r from-beyBlue to-beyRed dark:from-beyBlue dark:to-beyPurple">BeyShop Arena</span>
-            </h1>
-            <p class="mt-3 text-slate-600 dark:text-slate-300 max-w-xl">Encontre beyblades, capas, discos e peças oficiais — personalize seu spin. Torne-se o campeão da arena!</p>
-
-            <div class="mt-5 flex gap-3">
-              <a href="category.html" class="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-gradient-to-r from-beyRed to-beyBlue text-white font-semibold shadow-neon-red hover:scale-[1.02] transition">
-                Explorar Produtos
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </a>
-
-              <a href="category.html#elemental" class="inline-flex items-center gap-2 px-4 py-3 rounded-md border border-white/10 text-sm metal-border">Elementos</a>
-            </div>
-          </div>
-
-          <!-- hero right: spinning bey card -->
-          <div class="w-full md:w-96 flex items-center justify-center">
-            <div class="relative w-56 h-56">
-              <!-- arena rim -->
-              <div class="absolute inset-0 rounded-full bg-gradient-to-br from-slate-800/10 to-transparent p-2 flex items-center justify-center">
-                <div class="w-full h-full rounded-full bg-gradient-to-br from-beyMetal/20 to-transparent metal-border flex items-center justify-center">
-                  <!-- spinning bey (visual) -->
-                  <div class="w-36 h-36 rounded-full bg-gradient-to-br from-beyBlue to-beyRed flex items-center justify-center text-white animate-[spin_3s_linear_infinite] shadow-neon-blue">
-                    <div class="w-20 h-20 rounded-full bg-black/20 border border-white/10 flex items-center justify-center animate-floaty">
-                      <svg width="56" height="56" viewBox="0 0 24 24" fill="none">
-                        <path d="M12 2v20" stroke="white" stroke-opacity="0.85" stroke-width="1.2" stroke-linecap="round"/>
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- sparks (decor) -->
-              <div class="absolute -bottom-6 -right-6 w-14 h-14 rounded-full bg-beyYellow/90 blur-lg opacity-60 mix-blend-screen"></div>
-              <div class="absolute -top-6 -left-6 w-14 h-14 rounded-full bg-beyPurple/80 blur-lg opacity-60 mix-blend-screen"></div>
-            </div>
-          </div>
+        <!-- Botões de controle (labels para os radios) -->
+        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex space-x-3 z-20">
+          <label for="hero1" class="cursor-pointer" title="Tema 1 (verde)">
+            <span class="dot dot1"></span>
+          </label>
+          <label for="hero2" class="cursor-pointer" title="Tema 2 (vermelho)">
+            <span class="dot dot2"></span>
+          </label>
+          <label for="hero3" class="cursor-pointer" title="Tema 3 (amarelo)">
+            <span class="dot dot3"></span>
+          </label>
         </div>
-      </div>
-    </div>
-  </header>
 
-  <!-- Main: Featured & Grid -->
-  <main class="max-w-7xl mx-auto px-4 py-10">
-    <!-- Featured -->
-    <section class="mb-10">
-      <div class="grid md:grid-cols-2 gap-6 items-center">
-        <article class="bg-gradient-to-r from-slate-900/5 to-transparent p-6 rounded-lg metal-border shadow hover:shadow-lg transition">
-          <div class="flex items-start gap-6">
-            <div class="w-28 h-28 rounded-full bg-gradient-to-br from-beyRed to-beyYellow flex items-center justify-center text-white text-lg font-bold shadow-neon-red animate-pulse">
-              🔥
-            </div>
-            <div>
-              <h3 class="text-2xl font-bold">Dragoon X — Attack Type</h3>
-              <p class="mt-1 text-slate-600 dark:text-slate-300">Alta velocidade de impacto. Perfeito para arrancar vitórias com ataques decisivos.</p>
-              <div class="mt-4 flex gap-3">
-                <a href="product.html" class="px-4 py-2 rounded-md bg-beyRed text-white font-semibold">Comprar</a>
-                <a href="product.html" class="px-4 py-2 rounded-md border metal-border text-sm">Ver detalhes</a>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <article class="bg-gradient-to-br from-slate-50 to-white p-6 rounded-lg metal-border shadow hover:scale-[1.02] transition">
-          <div class="flex items-center justify-between">
-            <div>
-              <h3 class="text-2xl font-bold text-slate-900 dark:text-white">Arena Oficial — Stadium</h3>
-              <p class="text-slate-600 dark:text-slate-300 mt-1">Simule lutas com bordas metálicas e sistema de choque.</p>
-            </div>
-            <div class="flex flex-col items-end gap-2">
-              <span class="text-lg font-extrabold text-beyBlue">R$ 299</span>
-              <a href="product.html" class="px-3 py-2 rounded-md bg-beyBlue text-white">Ver</a>
-            </div>
-          </div>
-        </article>
       </div>
     </section>
 
-    <!-- Products grid -->
-    <section>
-      <div class="flex items-center justify-between mb-6">
-        <h2 class="text-2xl font-semibold">Destaques</h2>
-        <a href="category.html" class="text-sm text-slate-500 dark:text-slate-300">Ver todos</a>
-      </div>
+    <!-- DESTAQUES -->
+    <section class="w-[90%] mx-auto mt-20">
+      <h2 class="text-3xl font-bold mb-6 text-[var(--theme)]">Destaques</h2>
 
-      <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        <!-- product card (example) -->
-        <a href="product.html" class="group block bg-gradient-to-br from-white to-slate-50 dark:from-slate-800 dark:to-slate-800 rounded-lg p-4 metal-border hover:scale-[1.03] transition relative overflow-hidden">
-          <div class="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-40 transition duration-300">
-            <div class="w-full h-full bg-gradient-to-tr from-beyBlue/20 to-beyRed/12 mix-blend-screen"></div>
-          </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 
-          <div class="flex flex-col items-center">
-            <div class="w-40 h-40 rounded-full bg-gradient-to-br from-beyBlue to-beyPurple flex items-center justify-center text-white mb-4 shadow-neon-blue group-hover:scale-105 transition">
-              <!-- small bey icon -->
-              <svg width="64" height="64" viewBox="0 0 24 24" fill="none">
-                <circle cx="12" cy="12" r="9" stroke="white" stroke-width="1.2"/>
-                <path d="M7 12h10" stroke="white" stroke-width="1.6" stroke-linecap="round"/>
-              </svg>
-            </div>
+        <!-- Produto 1 -->
+        <div class="border border-[var(--theme)] p-4 bg-black/40 hover:bg-black/60 transition">
+          <div class="bg-[var(--theme)]/20 h-100% flex items-center justify-center font-bold text-xl">
+            <img src="image.png" class="h-100% w-100% object-cover rounded"></div>
+          <h3 class="font-bold mt-3 text-xl">Lançador</h3>
+          <p class="text-gray-400 text-sm">Atinja velocidades extremas com o lançador de corda!</p>
+          <button class="mt-4 w-full py-2 bg-[var(--theme)] text-black font-bold hover:bg-[var(--theme-dark)] transition">VER MAIS</button>
+        </div>
 
-            <h3 class="font-semibold text-lg">Storm Valkyrie</h3>
-            <p class="text-sm text-slate-500 dark:text-slate-300 mt-1">Element: Wind • Type: Balance</p>
-            <div class="mt-3 flex items-center gap-3">
-              <span class="text-xl font-bold text-beyYellow">R$ 150</span>
-              <button class="ml-2 px-3 py-1 rounded-md bg-gradient-to-r from-beyBlue to-beyRed text-white text-sm" onclick="event.preventDefault(); addToCartDemo()">Adicionar</button>
-            </div>
-          </div>
-        </a>
+        <!-- Produto 2 -->
+        <div class="border border-[var(--theme)] p-4 bg-black/40 hover:bg-black/60 transition">
+          <div class="bg-[var(--theme)]/20 h-40 flex items-center justify-center font-bold text-xl">TOP Drive</div>
+          <img src="image (1).png" class="h-40 w-full object-cover rounded">
+          <h3 class="font-bold mt-3 text-xl">Turbo Cyclone</h3>
+          <p class="text-gray-400 text-sm">Controle e estabilidade em alta rotação.</p>
+          <button class="mt-4 w-full py-2 bg-[var(--theme)] text-black font-bold hover:bg-[var(--theme-dark)] transition">VER MAIS</button>
+        </div>
 
-        <!-- duplicate sample cards -->
-        <a href="product.html" class="group block bg-white/80 dark:bg-slate-800 rounded-lg p-4 metal-border hover:scale-[1.03] transition">
-          <div class="flex flex-col items-center">
-            <div class="w-40 h-40 rounded-full bg-gradient-to-br from-beyRed to-beyYellow flex items-center justify-center text-white mb-4 shadow-neon-red">
-              ⚡
-            </div>
-            <h3 class="font-semibold text-lg">Blaze Phoenix</h3>
-            <p class="text-sm text-slate-500 dark:text-slate-300 mt-1">Element: Fire • Type: Attack</p>
-            <div class="mt-3 flex items-center gap-3">
-              <span class="text-xl font-bold text-beyBlue">R$ 130</span>
-              <button class="ml-2 px-3 py-1 rounded-md bg-gradient-to-r from-beyBlue to-beyPurple text-white text-sm" onclick="event.preventDefault(); addToCartDemo()">Adicionar</button>
-            </div>
-          </div>
-        </a>
+        <!-- Produto 3 -->
+        <div class="border border-[var(--theme)] p-4 bg-black/40 hover:bg-black/60 transition">
+          <div class="bg-[var(--theme)]/20 h-40 flex items-center justify-center font-bold text-xl">ARENA X</div>
+          <img src="image (2).png" class="h-40 w-full object-cover rounded">
+          <h3 class="font-bold mt-3 text-xl">Xtreme Stadium</h3>
+          <p class="text-gray-400 text-sm">Arenas com o sistema Xtreme Drift de aceleração.</p>
+          <button class="mt-4 w-full py-2 bg-[var(--theme)] text-black font-bold hover:bg-[var(--theme-dark)] transition">VER MAIS</button>
+        </div>
 
-        <a href="product.html" class="group block bg-white/80 dark:bg-slate-800 rounded-lg p-4 metal-border hover:scale-[1.03] transition">
-          <div class="flex flex-col items-center">
-            <div class="w-40 h-40 rounded-full bg-gradient-to-br from-beyPurple to-beyBlue flex items-center justify-center text-white mb-4 shadow-neon-blue">
-              🌀
-            </div>
-            <h3 class="font-semibold text-lg">Aqua Leviathan</h3>
-            <p class="text-sm text-slate-500 dark:text-slate-300 mt-1">Element: Water • Type: Defense</p>
-            <div class="mt-3 flex items-center gap-3">
-              <span class="text-xl font-bold text-beyYellow">R$ 140</span>
-              <button class="ml-2 px-3 py-1 rounded-md bg-gradient-to-r from-beyYellow to-beyRed text-white text-sm" onclick="event.preventDefault(); addToCartDemo()">Adicionar</button>
-            </div>
-          </div>
-        </a>
-
-        <!-- more cards... replicate as needed -->
       </div>
     </section>
-  </main>
 
-  <!-- Footer -->
-  <footer class="bg-gradient-to-t from-white/70 to-transparent dark:from-black/60 py-10 mt-12">
-    <div class="max-w-7xl mx-auto px-4 grid sm:grid-cols-3 gap-6 text-sm">
-      <div>
-        <h4 class="font-semibold mb-2">Suporte</h4>
-        <p class="text-slate-600 dark:text-slate-300">Envios • Garantia • Peças</p>
-      </div>
-      <div>
-        <h4 class="font-semibold mb-2">Sobre</h4>
-        <p class="text-slate-600 dark:text-slate-300">Equipe BeyShop • Torneios • Parcerias</p>
-      </div>
-      <div>
-        <h4 class="font-semibold mb-2">Newsletter</h4>
-        <div class="flex gap-2">
-          <input placeholder="Seu e-mail" class="w-full rounded px-3 py-2 border dark:bg-slate-800" />
-          <button class="px-3 py-2 rounded bg-beyBlue text-white">OK</button>
+    <!-- FOOTER -->
+    <footer class="mt-20 py-12 border-t border-[var(--theme)] bg-black/70">
+      <div class="w-[90%] mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div>
+          <h3 class="font-bold text-xl mb-3 text-[var(--theme)]">Sobre</h3>
+          <p class="text-gray-400 text-sm max-w-sm">Inspirado no universo oficial de Beyblade X. Site temático criado para fins de demonstração.</p>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-xl mb-3 text-[var(--theme)]">Links</h3>
+          <ul class="text-gray-300 space-y-2">
+            <li>Produtos</li>
+            <li>Arenas</li>
+            <li>Top Rankings</li>
+            <li>Comunidade</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-xl mb-3 text-[var(--theme)]">Contato</h3>
+          <p class="text-gray-300">battlex@bladers.com</p>
+          <p class="text-gray-300">Discord & Comunidade</p>
         </div>
       </div>
-    </div>
-  </footer>
+    </footer>
 
-  <!-- Scripts: theme toggle + cart demo -->
+  </div> <!-- end .theme-color -->
+
+  <!-- PARALLAX SCRIPT (aplica a todos os .parallax-bg visíveis) -->
   <script>
-    // theme toggle persisted
-    (function () {
-      const html = document.documentElement;
-      const toggle = document.getElementById('themeToggle');
-      const icon = document.getElementById('themeIcon');
-      const stored = localStorage.getItem('theme');
-
-      function setDark(dark) {
-        if (dark) {
-          html.classList.add('dark');
-          icon.textContent = '☀️';
-        } else {
-          html.classList.remove('dark');
-          icon.textContent = '🌙';
-        }
-        localStorage.setItem('theme', dark ? 'dark' : 'light');
-      }
-
-      // initial: stored or prefer
-      if (stored === 'dark') setDark(true);
-      else if (stored === 'light') setDark(false);
-      else {
-        const prefers = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-        setDark(prefers);
-      }
-
-      toggle.addEventListener('click', () => setDark(!document.documentElement.classList.contains('dark')));
-    })();
-
-    // small demo add to cart for cards (push simple item)
-    function addToCartDemo() {
-      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-      cart.push({ id: Date.now(), name: 'Bey Demo', price: 120, qty: 1 });
-      localStorage.setItem('cart', JSON.stringify(cart));
-      // short feedback
-      const btn = event?.target;
-      if (btn) {
-        btn.textContent = 'Adicionado';
-        btn.disabled = true;
-        setTimeout(() => { btn.textContent = 'Adicionar'; btn.disabled = false; }, 1200);
-      } else {
-        alert('Adicionado ao carrinho (demo)');
-      }
-    }
+    const bgs = document.querySelectorAll('.parallax-bg');
+    window.addEventListener('scroll', () => {
+      const offset = window.scrollY * 0.4;
+      requestAnimationFrame(() => {
+        bgs.forEach(bg => {
+          bg.style.transform = `translateY(${offset}px)`;
+        });
+      });
+    });
   </script>
 </body>
+
 </html>
