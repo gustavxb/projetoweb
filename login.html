@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - Beyblade X</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <style>
+    /* PARALLAX BACKGROUND */
+    .parallax-bg {
+      background-size: cover;
+      background-position: center;
+      will-change: transform;
+      transition: transform 0.6s ease;
+    }
+
+    /* Theme variables default (verde) */
+    .theme-color {
+      --theme: #00ff85;
+      --theme-dark: #00d66d;
+    }
+
+    /* Atualiza variáveis conforme radio selecionado (os inputs estão antes da .theme-color) */
+    input[name="heroSlide"]#hero1:checked ~ .theme-color {
+      --theme: #00ff85;
+      --theme-dark: #00d66d;
+    }
+    input[name="heroSlide"]#hero2:checked ~ .theme-color {
+      --theme: #8b0000;
+      --theme-dark: #a30000;
+    }
+    input[name="heroSlide"]#hero3:checked ~ .theme-color {
+      --theme: #f9db4a;
+      --theme-dark: #e6c63c;
+    }
+
+    /* Hero image visibility controlled by inputs */
+    .hero-img {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 600ms ease;
+      z-index: 0;
+    }
+    /* Show corresponding image when radio checked */
+    input#hero1:checked ~ .theme-color .hero-img.img1 { opacity: 1; }
+    input#hero2:checked ~ .theme-color .hero-img.img2 { opacity: 1; }
+    input#hero3:checked ~ .theme-color .hero-img.img3 { opacity: 1; }
+
+    /* Overlay uses theme color (semi-transparent) */
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background-color: var(--theme);
+      opacity: 0.20; /* tweak amount of tint */
+      transition: background-color 400ms ease, opacity 400ms ease;
+      pointer-events: none;
+      mix-blend-mode: normal;
+    }
+
+    /* Conteúdo do hero fica acima */
+    .hero-content { position: relative; z-index: 2; }
+
+    /* Small helper to make radio labels visible as active (optional) */
+    .dot {
+      width: 1rem; height: 1rem; border-radius: 9999px;
+      background: rgba(255,255,255,0.45);
+      display:inline-block;
+      transition: transform 200ms, background-color 200ms;
+      border: 2px solid rgba(255,255,255,0.15);
+    }
+    input#hero1:checked ~ .theme-color .dot.dot1 { transform: scale(1.1); background: var(--theme); }
+    input#hero2:checked ~ .theme-color .dot.dot2 { transform: scale(1.1); background: var(--theme); }
+    input#hero3:checked ~ .theme-color .dot.dot3 { transform: scale(1.1); background: var(--theme); }
+
+    /* Login form specific styles */
+    .login-container {
+      min-height: calc(100vh - 80px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .login-card {
+      background-color: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      border: 2px solid var(--theme);
+      border-radius: 12px;
+      box-shadow: 0 0 30px rgba(0, 255, 133, 0.3);
+    }
+    
+    .input-field {
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 1px solid var(--theme);
+      color: white;
+      transition: all 0.3s ease;
+    }
+    
+    .input-field:focus {
+      background-color: rgba(255, 255, 255, 0.15);
+      box-shadow: 0 0 10px var(--theme);
+    }
+    
+    .input-field::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+  </style>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Michroma&display=swap" rel="stylesheet">
+</head>
+<body class="bg-black text-white font-sans">
+
+  <!-- SISTEMA DE TROCA DE TEMA (inputs no topo) -->
+  <input type="radio" name="heroSlide" id="hero1" class="hidden" checked>
+  <input type="radio" name="heroSlide" id="hero2" class="hidden">
+  <input type="radio" name="heroSlide" id="hero3" class="hidden">
+
+  <!-- WRAPPER QUE RECEBE AS VARIÁVEIS DE TEMA -->
+  <div class="theme-color">
+
+    <!-- HEADER -->
+    <header class="w-full py-5 bg-black/70 backdrop-blur-md border-b border-[var(--theme)] z-20 relative">
+      <div class="w-[90%] mx-auto flex justify-between items-center gap-10">
+
+        <!-- LOGO -->
+        <a href="#" class="block">
+          <img src="beybladelogo.webp" alt="Beyblade X Logo" class="h-20 w-auto object-contain hover:brightness-110 transition">
+        </a>
+
+        <!-- BARRA DE PESQUISA -->
+        <div class="flex-1 px-10">
+          <div class="relative w-full max-w-xl mx-auto">
+            <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[var(--theme)]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+
+            <input type="text" placeholder="Search products..." class="w-full pl-12 pr-4 py-2 border border-[var(--theme)] rounded-full
+              bg-transparent text-[var(--theme)] placeholder-white focus:outline-none focus:ring-2 focus:ring-[var(--theme-dark)]">
+          </div>
+        </div>
+
+        <!-- NAV -->
+        <nav class="flex space-x-8 text-lg">
+          <a href="#" class="hover:text-[var(--theme)] transition text-white font-black">HOME</a>
+          <a href="#" class="hover:text-[var(--theme)] transition text-white font-black">BEYS</a>
+          <a href="#" class="hover:text-[var(--theme)] transition text-white font-black">ARENAS</a>
+          <a href="#" class="hover:text-[var(--theme)] transition text-white font-black font-bold underline">LOGIN</a>
+
+          <!-- Ícone de Login -->
+          <div class="flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="2"
+                 stroke-linecap="round"
+                 stroke-linejoin="round"
+                 class="w-7 h-7 text-[var(--theme)]">
+                <circle cx="12" cy="7" r="4" />
+                <path d="M4 21c0-4 4-7 8-7s8 3 8 7" />
+            </svg>
+          </div>
+
+          <button class="flex items-center hover:text-[var(--theme)] transition">
+            <svg class="w-7 h-7 text-[var(--theme)]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 6h15l-1.5 9h-12z"></path>
+              <path d="M6 6L4 2H2"></path>
+              <circle cx="9" cy="20" r="1"></circle>
+              <circle cx="18" cy="20" r="1"></circle>
+            </svg>
+          </button>
+        </nav>
+
+      </div>
+    </header>
+
+    <!-- HERO COM PARALLAX -->
+    <section class="relative h-[60vh] w-full overflow-hidden">
+
+      <!-- Slides (cada div é uma imagem de fundo) -->
+      <div class="hero-img img1 parallax-bg" style="background-image: url('header1.jpg');"></div>
+      <div class="hero-img img2 parallax-bg" style="background-image: url('header2.jpg');"></div>
+      <div class="hero-img img3 parallax-bg" style="background-image: url('header3.jpg');"></div>
+
+      <!-- Overlay colorida que usa a variável --theme -->
+      <div class="hero-overlay"></div>
+
+      <!-- Conteúdo do HERO -->
+      <div class="hero-content relative z-10 w-[90%] mx-auto h-full flex flex-col justify-center">
+        <h1 class="text-5xl md:text-6xl font-black mb-4 leading-tight drop-shadow-[0_0_20px_var(--theme)]">
+          LOGIN<br>
+          <span class="text-[var(--theme)]">BLADER</span>
+        </h1>
+
+        <p class="font-mont text-gray-200 text-lg max-w-xl drop-shadow-[0_0_15px_rgba(0,0,0,0.9)]">
+          Acesse sua conta para gerenciar sua coleção, participar de torneios e conectar-se com outros Bladers.
+        </p>
+
+        <!-- Botões de controle (labels para os radios) -->
+        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex space-x-3 z-20">
+          <label for="hero1" class="cursor-pointer" title="Tema 1 (verde)">
+            <span class="dot dot1"></span>
+          </label>
+          <label for="hero2" class="cursor-pointer" title="Tema 2 (vermelho)">
+            <span class="dot dot2"></span>
+          </label>
+          <label for="hero3" class="cursor-pointer" title="Tema 3 (amarelo)">
+            <span class="dot dot3"></span>
+          </label>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FORMULÁRIO DE LOGIN -->
+    <section class="login-container py-12">
+      <div class="login-card w-full max-w-md mx-4 p-8">
+        <h2 class="text-3xl font-bold mb-2 text-center text-[var(--theme)]">ACESSO BATTLE X</h2>
+        <p class="text-gray-400 text-center mb-8">Entre na arena digital</p>
+        
+        <form id="loginForm" class="space-y-6">
+          <div>
+            <label for="email" class="block text-sm font-medium mb-2">Email ou Nome de Usuário</label>
+            <input 
+              type="text" 
+              id="email" 
+              name="email" 
+              class="input-field w-full px-4 py-3 rounded-lg focus:outline-none" 
+              placeholder="seu@email.com"
+              required
+            >
+          </div>
+          
+          <div>
+            <label for="password" class="block text-sm font-medium mb-2">Senha</label>
+            <input 
+              type="password" 
+              id="password" 
+              name="password" 
+              class="input-field w-full px-4 py-3 rounded-lg focus:outline-none" 
+              placeholder="••••••••"
+              required
+            >
+          </div>
+          
+          <div class="flex items-center justify-between">
+            <div class="flex items-center">
+              <input 
+                type="checkbox" 
+                id="remember" 
+                name="remember" 
+                class="w-4 h-4 text-[var(--theme)] bg-gray-700 border-gray-600 rounded focus:ring-[var(--theme)] focus:ring-2"
+              >
+              <label for="remember" class="ml-2 text-sm text-gray-300">Lembrar-me</label>
+            </div>
+            
+            <a href="#" class="text-sm text-[var(--theme)] hover:text-[var(--theme-dark)] transition">Esqueceu a senha?</a>
+          </div>
+          
+          <button 
+            type="submit" 
+            class="w-full py-3 bg-[var(--theme)] text-black font-bold text-lg rounded-lg hover:bg-[var(--theme-dark)] transition flex items-center justify-center gap-2"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M3 3a1 1 0 011 1v12a1 1 0 11-2 0V4a1 1 0 011-1zm7.707 3.293a1 1 0 010 1.414L9.414 9H17a1 1 0 110 2H9.414l1.293 1.293a1 1 0 01-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0z" clip-rule="evenodd" />
+            </svg>
+            ENTRAR NA ARENA
+          </button>
+        </form>
+        
+        <div class="mt-8 text-center">
+          <p class="text-gray-400">Não tem uma conta?</p>
+          <a href="#" class="inline-block mt-2 px-6 py-2 border border-[var(--theme)] text-[var(--theme)] font-bold hover:bg-[var(--theme)] hover:text-black transition rounded-lg">
+            REGISTRE-SE
+          </a>
+        </div>
+        
+        <div class="mt-8 pt-6 border-t border-gray-700">
+          <p class="text-sm text-gray-400 text-center">Ou entre com</p>
+          <div class="flex justify-center space-x-4 mt-4">
+            <button class="p-2 border border-gray-600 rounded-lg hover:bg-gray-800 transition">
+              <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/>
+              </svg>
+            </button>
+            <button class="p-2 border border-gray-600 rounded-lg hover:bg-gray-800 transition">
+              <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+              </svg>
+            </button>
+            <button class="p-2 border border-gray-600 rounded-lg hover:bg-gray-800 transition">
+              <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="mt-20 py-12 border-t border-[var(--theme)] bg-black/70">
+      <div class="w-[90%] mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div>
+          <h3 class="font-bold text-xl mb-3 text-[var(--theme)]">Sobre</h3>
+          <p class="text-gray-400 text-sm max-w-sm">Inspirado no universo oficial de Beyblade X. Site temático criado para fins de demonstração.</p>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-xl mb-3 text-[var(--theme)]">Links</h3>
+          <ul class="text-gray-300 space-y-2">
+            <li>Produtos</li>
+            <li>Arenas</li>
+            <li>Top Rankings</li>
+            <li>Comunidade</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-xl mb-3 text-[var(--theme)]">Contato</h3>
+          <p class="text-gray-300">battlex@bladers.com</p>
+          <p class="text-gray-300">Discord & Comunidade</p>
+        </div>
+      </div>
+    </footer>
+
+  </div> <!-- end .theme-color -->
+
+  <!-- PARALLAX SCRIPT (aplica a todos os .parallax-bg visíveis) -->
+  <script>
+    const bgs = document.querySelectorAll('.parallax-bg');
+    window.addEventListener('scroll', () => {
+      const offset = window.scrollY * 0.4;
+      requestAnimationFrame(() => {
+        bgs.forEach(bg => {
+          bg.style.transform = `translateY(${offset}px)`;
+        });
+      });
+    });
+    
+    // Form submission handler
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      // Simulate login process
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      
+      // In a real application, you would send this data to a server
+      console.log('Login attempt:', { email, password });
+      
+      // Show success message
+      alert('Login realizado com sucesso! Bem-vindo de volta, Blader!');
+      
+      // Redirect to home page (in a real app)
+      // window.location.href = 'index.html';
+    });
+  </script>
+</body>
+</html>
