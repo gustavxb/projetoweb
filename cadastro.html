@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cadastro - Beyblade X</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <style>
+    .parallax-bg {
+      background-size: cover;
+      background-position: center;
+      will-change: transform;
+      transition: transform 0.6s ease;
+    }
+
+    .theme-color {
+      --theme: #00ff85;
+      --theme-dark: #00d66d;
+    }
+
+    input[name="heroSlide"]#hero1:checked ~ .theme-color {
+      --theme: #00ff85;
+      --theme-dark: #00d66d;
+    }
+    input[name="heroSlide"]#hero2:checked ~ .theme-color {
+      --theme: #8b0000;
+      --theme-dark: #a30000;
+    }
+    input[name="heroSlide"]#hero3:checked ~ .theme-color {
+      --theme: #f9db4a;
+      --theme-dark: #e6c63c;
+    }
+
+    .hero-img {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 600ms ease;
+      z-index: 0;
+    }
+    input#hero1:checked ~ .theme-color .img1 { opacity: 1; }
+    input#hero2:checked ~ .theme-color .img2 { opacity: 1; }
+    input#hero3:checked ~ .theme-color .img3 { opacity: 1; }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background-color: var(--theme);
+      opacity: 0.20;
+      transition: background-color 400ms ease;
+      pointer-events: none;
+    }
+
+    .hero-content { position: relative; z-index: 2; }
+
+    .dot {
+      width: 1rem; height: 1rem; border-radius: 9999px;
+      background: rgba(255,255,255,0.45);
+      display:inline-block;
+      border: 2px solid rgba(255,255,255,0.15);
+      transition: 200ms;
+    }
+    input#hero1:checked ~ .theme-color .dot1 { background: var(--theme); transform: scale(1.1); }
+    input#hero2:checked ~ .theme-color .dot2 { background: var(--theme); transform: scale(1.1); }
+    input#hero3:checked ~ .theme-color .dot3 { background: var(--theme); transform: scale(1.1); }
+
+    .cad-card {
+      background-color: rgba(0,0,0,0.8);
+      backdrop-filter: blur(10px);
+      border: 2px solid var(--theme);
+      border-radius: 12px;
+      box-shadow: 0 0 30px rgba(0,255,133,0.3);
+    }
+    .input-field {
+      background-color: rgba(255,255,255,0.1);
+      border: 1px solid var(--theme);
+      color: white;
+      transition: 0.3s;
+    }
+    .input-field:focus {
+      background-color: rgba(255,255,255,0.15);
+      box-shadow: 0 0 10px var(--theme);
+    }
+  </style>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-black text-white">
+
+  <!-- RADIO THEMES -->
+  <input type="radio" name="heroSlide" id="hero1" class="hidden" checked>
+  <input type="radio" name="heroSlide" id="hero2" class="hidden">
+  <input type="radio" name="heroSlide" id="hero3" class="hidden">
+
+  <div class="theme-color">
+
+    <!-- HEADER -->
+    <header class="w-full py-5 bg-black/60 border-b border-[var(--theme)]">
+      <div class="w-[90%] mx-auto flex justify-between items-center">
+
+        <a href="index.html">
+          <img src="beybladelogo.webp" class="h-20">
+        </a>
+
+        <nav class="flex gap-8 text-lg font-bold">
+          <a href="index.html" class="hover:text-[var(--theme)]">HOME</a>
+          <a href="#" class="hover:text-[var(--theme)]">BEYS</a>
+          <a href="#" class="hover:text-[var(--theme)]">ARENAS</a>
+          <a href="login.html" class="hover:text-[var(--theme)]">LOGIN</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="relative h-[60vh] overflow-hidden">
+      <div class="hero-img img1" style="background-image:url('header1.jpg');"></div>
+      <div class="hero-img img2" style="background-image:url('header2.jpg');"></div>
+      <div class="hero-img img3" style="background-image:url('header3.jpg');"></div>
+
+      <div class="hero-overlay"></div>
+
+      <div class="hero-content w-[90%] mx-auto h-full flex flex-col justify-center">
+        <h1 class="text-6xl font-extrabold drop-shadow-[0_0_25px_var(--theme)]">
+          CRIAR <span class="text-[var(--theme)]">CONTA</span>
+        </h1>
+        <p class="text-gray-200 max-w-xl mt-3">
+          Junte-se aos Bladers e prepare-se para batalhas lendárias.
+        </p>
+
+        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3">
+          <label for="hero1"><span class="dot dot1"></span></label>
+          <label for="hero2"><span class="dot dot2"></span></label>
+          <label for="hero3"><span class="dot dot3"></span></label>
+        </div>
+      </div>
+    </section>
+
+    <!-- FORM CADASTRO -->
+    <section class="py-16 flex justify-center">
+      <div class="cad-card w-full max-w-md p-8 mx-4">
+
+        <h2 class="text-3xl text-center font-bold text-[var(--theme)] mb-2">
+          REGISTRO BATTLE X
+        </h2>
+        <p class="text-center text-gray-400 mb-6">
+          Crie sua conta de Blader
+        </p>
+
+        <form id="cadastroForm" class="space-y-6">
+
+          <div>
+            <label class="block mb-2 text-sm font-medium">Nome de Usuário</label>
+            <input type="text" class="input-field w-full px-4 py-3 rounded-lg" required>
+          </div>
+
+          <div>
+            <label class="block mb-2 text-sm font-medium">Email</label>
+            <input type="email" class="input-field w-full px-4 py-3 rounded-lg" required>
+          </div>
+
+          <div>
+            <label class="block mb-2 text-sm font-medium">Senha</label>
+            <input type="password" class="input-field w-full px-4 py-3 rounded-lg" required>
+          </div>
+
+          <div>
+            <label class="block mb-2 text-sm font-medium">Confirmar Senha</label>
+            <input type="password" class="input-field w-full px-4 py-3 rounded-lg" required>
+          </div>
+
+          <button class="w-full py-3 rounded-lg bg-[var(--theme)] text-black font-bold hover:bg-[var(--theme-dark)] transition">
+            CRIAR CONTA
+          </button>
+
+        </form>
+
+        <div class="mt-6 text-center">
+          <p class="text-gray-400">Já possui uma conta?</p>
+          <a href="login.html" class="text-[var(--theme)] font-bold hover:text-[var(--theme-dark)]">
+            Entre agora
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <footer class="mt-20 py-12 border-t border-[var(--theme)] bg-black/70 text-center text-gray-400">
+      Beyblade X — Projeto demonstrativo.
+    </footer>
+
+  </div>
+
+  <script>
+    const bgs = document.querySelectorAll('.parallax-bg');
+    window.addEventListener('scroll', () => {
+      const offset = window.scrollY * 0.4;
+      bgs.forEach(bg => bg.style.transform = `translateY(${offset}px)`);
+    });
+
+    document.getElementById('cadastroForm').addEventListener('submit', e => {
+      e.preventDefault();
+      alert("Conta criada com sucesso! Bem-vindo à arena, Blader!");
+      window.location.href = "login.html";
+    });
+  </script>
+
+</body>
+</html>

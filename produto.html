@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Produto - Beyblade X</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-black text-white font-sans">
+
+<!-- HEADER -->
+<header class="w-full py-5 bg-black/70 backdrop-blur-md border-b border-[#00ff85] z-20 relative">
+  <div class="w-[90%] mx-auto flex justify-between items-center gap-10">
+      <a href="#"><img src="beybladelogo.webp" class="h-20"></a>
+      <nav class="flex space-x-8 text-lg">
+          <a class="hover:text-[#00ff85] font-bold">HOME</a>
+          <a class="hover:text-[#00ff85] font-bold">BEYS</a>
+          <a class="hover:text-[#00ff85] font-bold">ARENAS</a>
+          <a class="hover:text-[#00ff85] font-bold">LOGIN</a>
+      </nav>
+  </div>
+</header>
+
+<!-- CONTAINER DO PRODUTO -->
+<section class="w-[90%] mx-auto py-16 grid grid-cols-1 lg:grid-cols-2 gap-10">
+
+  <!-- GALERIA DE IMAGENS -->
+  <div>
+    <div class="w-full h-96 bg-[#00ff85]/20 border border-[#00ff85] flex items-center justify-center">
+      <img src="produto.jpg" class="object-contain h-full w-full">
+    </div>
+
+    <div class="flex space-x-4 mt-4">
+      <div class="h-20 w-24 border border-[#00ff85] bg-[#00ff85]/20"></div>
+      <div class="h-20 w-24 border border-[#00ff85] bg-[#00ff85]/20"></div>
+      <div class="h-20 w-24 border border-[#00ff85] bg-[#00ff85]/20"></div>
+    </div>
+  </div>
+
+  <!-- INFORMAÇÕES DO PRODUTO -->
+  <div>
+    <h1 class="text-4xl font-bold">Nome do Produto</h1>
+    <p class="text-xl text-[#00ff85] mt-3">R$ 95 <span class="line-through text-gray-500">R$ 119</span> <span class="text-green-400">-20%</span></p>
+
+    <div class="flex items-center mt-3 text-yellow-400">★★★★★ <span class="ml-2 text-gray-300">(23)</span></div>
+
+    <div class="mt-6">
+      <p class="font-bold">Cor:</p>
+      <select class="bg-black border border-[#00ff85] p-2 mt-2 w-40"> <option>Black</option> </select>
+    </div>
+
+    <button class="mt-6 px-10 py-3 bg-[#00ff85] text-black font-bold text-lg hover:bg-[#00d66d] transition">Adicionar ao Carrinho</button>
+
+    <ul class="mt-6 text-gray-300 space-y-2 text-sm">
+      <li>✔ Envio rápido</li>
+      <li>✔ Garantia de 30 dias</li>
+      <li>✔ Produto oficial</li>
+    </ul>
+
+    <!-- ACORDEÕES -->
+    <div class="mt-10 space-y-3">
+      <details class="border border-[#00ff85] p-4">
+        <summary class="cursor-pointer font-bold">Detalhes do Produto</summary>
+        <p class="mt-2 text-gray-300">Descrição completa do produto...</p>
+      </details>
+
+      <details class="border border-[#00ff85] p-4">
+        <summary class="cursor-pointer font-bold">Tamanhos / Medidas</summary>
+        <p class="mt-2 text-gray-300">Informações de tamanho...</p>
+      </details>
+
+      <details class="border border-[#00ff85] p-4">
+        <summary class="cursor-pointer font-bold">Avaliações</summary>
+        <p class="mt-2 text-gray-300">Comentários dos clientes...</p>
+      </details>
+    </div>
+
+  </div>
+</section>
+
+<!-- RELACIONADOS -->
+<section class="w-[90%] mx-auto mt-10">
+  <h2 class="text-3xl font-bold mb-6 text-[#00ff85]">Produtos Relacionados</h2>
+
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+    <div class="border border-[#00ff85] p-4 bg-black/40 hover:bg-black/60 transition text-center">
+      <div class="h-32 bg-[#00ff85]/20"></div>
+      <p class="mt-2 font-bold">Produto</p>
+      <p class="text-gray-400 text-sm">R$ 55</p>
+    </div>
+
+    <div class="border border-[#00ff85] p-4 bg-black/40 hover:bg-black/60 transition text-center">
+      <div class="h-32 bg-[#00ff85]/20"></div>
+      <p class="mt-2 font-bold">Produto</p>
+      <p class="text-gray-400 text-sm">R$ 55</p>
+    </div>
+
+    <div class="border border-[#00ff85] p-4 bg-black/40 hover:bg-black/60 transition text-center">
+      <div class="h-32 bg-[#00ff85]/20"></div>
+      <p class="mt-2 font-bold">Produto</p>
+      <p class="text-gray-400 text-sm">R$ 55</p>
+    </div>
+
+    <div class="border border-[#00ff85] p-4 bg-black/40 hover:bg-black/60 transition text-center">
+      <div class="h-32 bg-[#00ff85]/20"></div>
+      <p class="mt-2 font-bold">Produto</p>
+      <p class="text-gray-400 text-sm">R$ 55</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="mt-20 py-12 border-t border-[#00ff85] bg-black/70">
+  <div class="w-[90%] mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
+    <div>
+      <h3 class="font-bold text-xl mb-3 text-[#00ff85]">Sobre</h3>
+      <p class="text-gray-400 text-sm">Site temático Beyblade X.</p>
+    </div>
+
+    <div>
+      <h3 class="font-bold text-xl mb-3 text-[#00ff85]">Links</h3>
+      <ul class="text-gray-300 space-y-2">
+        <li>Produtos</li>
+        <li>Arenas</li>
+        <li>Ranking</li>
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="font-bold text-xl mb-3 text-[#00ff85]">Contato</h3>
+      <p class="text-gray-300">battlex@bladers.com</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
