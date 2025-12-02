@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Beyblade X</title>
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
@@ -17,62 +18,111 @@
 
     /* CONFIGURAÇÃO DO TEMA */
     .theme-color {
-      --theme: #00ff85;       /* Verde Neon Padrão */
+      --theme: #00ff85;
+      /* Verde Neon Padrão */
       --theme-dark: #00d66d;
-      --card-bg: #18181b;     /* Zinc-900 para os cards */
+      --card-bg: #18181b;
+      /* Zinc-900 para os cards */
     }
 
     /* Atualiza variáveis conforme radio selecionado */
-    input[name="heroSlide"]#hero1:checked ~ .theme-color {
-      --theme: #00ff85; --theme-dark: #00d66d;
+    input[name="heroSlide"]#hero1:checked~.theme-color {
+      --theme: #00ff85;
+      --theme-dark: #00d66d;
     }
-    input[name="heroSlide"]#hero2:checked ~ .theme-color {
-      --theme: #ff003c; --theme-dark: #cc0030; /* Vermelho Neon */
+
+    input[name="heroSlide"]#hero2:checked~.theme-color {
+      --theme: #ff003c;
+      --theme-dark: #cc0030;
+      /* Vermelho Neon */
     }
-    input[name="heroSlide"]#hero3:checked ~ .theme-color {
-      --theme: #f4e04d; --theme-dark: #c4b030; /* Amarelo Cyberpunk */
+
+    input[name="heroSlide"]#hero3:checked~.theme-color {
+      --theme: #f4e04d;
+      --theme-dark: #c4b030;
+      /* Amarelo Cyberpunk */
     }
 
     /* Hero images */
     .hero-img {
-      position: absolute; inset: 0; background-size: cover; background-position: center;
-      opacity: 0; transition: opacity 600ms ease; z-index: 0;
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 600ms ease;
+      z-index: 0;
     }
-    input#hero1:checked ~ .theme-color .hero-img.img1 { opacity: 1; }
-    input#hero2:checked ~ .theme-color .hero-img.img2 { opacity: 1; }
-    input#hero3:checked ~ .theme-color .hero-img.img3 { opacity: 1; }
+
+    input#hero1:checked~.theme-color .hero-img.img1 {
+      opacity: 1;
+    }
+
+    input#hero2:checked~.theme-color .hero-img.img2 {
+      opacity: 1;
+    }
+
+    input#hero3:checked~.theme-color .hero-img.img3 {
+      opacity: 1;
+    }
 
     /* Overlay */
     .hero-overlay {
-      position: absolute; inset: 0; z-index: 1;
-      background-color: var(--theme); opacity: 0.15;
-      transition: background-color 400ms ease; pointer-events: none; mix-blend-mode: hard-light;
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background-color: var(--theme);
+      opacity: 0.15;
+      transition: background-color 400ms ease;
+      pointer-events: none;
+      mix-blend-mode: hard-light;
     }
 
-    .hero-content { position: relative; z-index: 2; }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
 
     /* Dots Navigation */
     .dot {
-      width: 0.75rem; height: 0.75rem; border-radius: 9999px;
-      background: rgba(255,255,255,0.2); border: 2px solid rgba(255,255,255,0.1);
-      display:inline-block; transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+      width: 0.75rem;
+      height: 0.75rem;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.2);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      display: inline-block;
+      transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
     }
-    input#hero1:checked ~ .theme-color .dot.dot1,
-    input#hero2:checked ~ .theme-color .dot.dot2,
-    input#hero3:checked ~ .theme-color .dot.dot3 {
-      transform: scale(1.5); background: var(--theme); border-color: var(--theme); box-shadow: 0 0 15px var(--theme);
+
+    input#hero1:checked~.theme-color .dot.dot1,
+    input#hero2:checked~.theme-color .dot.dot2,
+    input#hero3:checked~.theme-color .dot.dot3 {
+      transform: scale(1.5);
+      background: var(--theme);
+      border-color: var(--theme);
+      box-shadow: 0 0 15px var(--theme);
     }
 
     /* Fontes */
-    body { font-family: 'Montserrat', sans-serif; }
-    h1, h2, h3, .font-tech { font-family: 'Michroma', sans-serif; }
+    body {
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    h1,
+    h2,
+    h3,
+    .font-tech {
+      font-family: 'Michroma', sans-serif;
+    }
   </style>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900&display=swap"
+    rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Michroma&display=swap" rel="stylesheet">
 </head>
+
 <body class="bg-black text-white font-sans selection:bg-[var(--theme)] selection:text-black">
 
   <input type="radio" name="heroSlide" id="hero1" class="hidden" checked>
@@ -81,28 +131,69 @@
 
   <div class="theme-color">
 
-    <header class="w-full py-5 bg-black/80 backdrop-blur-md border-b border-[var(--theme)] z-50 fixed top-0 transition-colors duration-500">
-      <div class="w-[90%] max-w-7xl mx-auto flex justify-between items-center gap-10">
+    <header
+      class="w-full py-4 bg-black/80 backdrop-blur-md border-b border-[var(--theme)] z-50 fixed top-0 transition-all duration-300">
+      <div class="w-[90%] max-w-7xl mx-auto flex justify-between items-center gap-4 md:gap-8">
 
-        <a href="#" class="block text-2xl font-tech font-black tracking-tighter italic hover:opacity-80 transition">
-           BEYBLADE <span class="text-[var(--theme)] text-3xl not-italic">X</span>
+        <a href="index.html" class="block shrink-0">
+          <img src="beybladelogo.webp" alt="Beyblade X Logo"
+            class="h-12 md:h-16 w-auto object-contain hover:brightness-125 transition drop-shadow-[0_0_5px_var(--theme)]">
         </a>
 
-        <div class="hidden md:block flex-1 px-10">
-          <div class="relative w-full max-w-lg mx-auto group">
-            <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-500 group-focus-within:text-[var(--theme)] transition" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-            <input type="text" placeholder="Search products..." class="w-full pl-12 pr-4 py-2 border border-zinc-800 rounded-sm bg-zinc-950 text-white placeholder-zinc-600 focus:outline-none focus:border-[var(--theme)] focus:ring-1 focus:ring-[var(--theme)] transition-all">
+        <div class="hidden md:block flex-1 max-w-xl px-6">
+          <div class="relative w-full group">
+            <svg
+              class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[var(--theme)] group-focus-within:text-white transition"
+              fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" placeholder="Search products..."
+              class="w-full pl-12 pr-4 py-2.5 rounded-full border border-zinc-700 bg-zinc-900/50 text-white placeholder-zinc-500
+                 focus:outline-none focus:border-[var(--theme)] focus:ring-1 focus:ring-[var(--theme)] transition-all shadow-inner">
           </div>
         </div>
 
-        <nav class="flex items-center space-x-6 text-sm font-bold tracking-widest">
-          <a href="#" class="hidden md:block hover:text-[var(--theme)] transition text-zinc-300">HOME</a>
-          <a href="#" class="hover:text-[var(--theme)] transition text-zinc-300">BEYS</a>
-          <a href="#" class="hover:text-[var(--theme)] transition text-zinc-300">ARENAS</a>
-          <a href="login.html" class="flex items-center gap-2 hover:text-[var(--theme)] transition text-white border border-white px-4 py-1.5 rounded-sm hover:border-[var(--theme)]">
-             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-             LOGIN
-          </a>
+        <nav class="flex items-center gap-6">
+
+          <div class="hidden lg:flex gap-6 text-sm font-black tracking-widest text-zinc-300">
+            <a href="#" class="hover:text-[var(--theme)] transition">HOME</a>
+            <a href="#" class="hover:text-[var(--theme)] transition">BEYS</a>
+            <a href="#" class="hover:text-[var(--theme)] transition">ARENAS</a>
+          </div>
+
+          <div class="hidden lg:block w-px h-6 bg-zinc-800"></div>
+
+          <div class="flex items-center gap-3">
+
+            <a href="login.html"
+              class="hidden sm:flex items-center gap-2 text-xs font-bold tracking-wide text-white border border-zinc-600 px-5 py-2 rounded-full hover:border-[var(--theme)] hover:text-[var(--theme)] hover:bg-[var(--theme)]/10 transition">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+              </svg>
+              LOGIN
+            </a>
+
+            <button class="relative group p-2 text-white hover:text-[var(--theme)] transition">
+              <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 6h15l-1.5 9h-12z"></path>
+                <path d="M6 6L4 2H2"></path>
+                <circle cx="9" cy="20" r="1"></circle>
+                <circle cx="18" cy="20" r="1"></circle>
+              </svg>
+              <span
+                class="absolute top-0 right-0 w-4 h-4 bg-[var(--theme)] text-black text-[10px] font-black flex items-center justify-center rounded-full border border-black">2</span>
+            </button>
+
+            <button class="lg:hidden text-white hover:text-[var(--theme)] ml-2">
+              <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+              </svg>
+            </button>
+
+          </div>
         </nav>
 
       </div>
@@ -116,20 +207,25 @@
       <div class="hero-overlay"></div>
 
       <div class="hero-content relative z-10 w-[90%] max-w-7xl mx-auto h-full flex flex-col justify-center">
-        <h1 class="text-5xl md:text-8xl font-black mb-6 leading-none uppercase italic tracking-tighter drop-shadow-[0_0_25px_rgba(0,0,0,0.8)]">
+        <h1
+          class="text-5xl md:text-8xl font-black mb-6 leading-none uppercase italic tracking-tighter drop-shadow-[0_0_25px_rgba(0,0,0,0.8)]">
           BREAK YOUR<br>
           <span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-[var(--theme)]">LIMITS </span>
         </h1>
 
-        <p class="font-mont text-gray-200 text-lg md:text-xl max-w-xl drop-shadow-md border-l-4 border-[var(--theme)] pl-6 py-2">
-          Entre na velocidade extrema do Beyblade X. Tops ultra potentes, arenas que quebram limites e batalhas com impacto real.
+        <p
+          class="font-mont text-gray-200 text-lg md:text-xl max-w-xl drop-shadow-md border-l-4 border-[var(--theme)] pl-6 py-2">
+          Entre na velocidade extrema do Beyblade X. Tops ultra potentes, arenas que quebram limites e batalhas com
+          impacto real.
         </p>
 
         <div class="mt-10 flex space-x-4">
-          <button class="px-8 py-4 bg-[var(--theme)] text-black font-black text-lg uppercase tracking-wider hover:bg-white hover:scale-105 transition skew-x-[-10deg]">
+          <button
+            class="px-8 py-4 bg-[var(--theme)] text-black font-black text-lg uppercase tracking-wider hover:bg-white hover:scale-105 transition skew-x-[-10deg]">
             Shop Beys
           </button>
-          <button class="px-8 py-4 border border-[var(--theme)] text-[var(--theme)] font-black text-lg uppercase tracking-wider hover:bg-[var(--theme)] hover:text-black transition skew-x-[-10deg]">
+          <button
+            class="px-8 py-4 border border-[var(--theme)] text-[var(--theme)] font-black text-lg uppercase tracking-wider hover:bg-[var(--theme)] hover:text-black transition skew-x-[-10deg]">
             Arenas
           </button>
         </div>
@@ -144,61 +240,73 @@
 
     <section class="w-[90%] max-w-7xl mx-auto mt-24">
       <div class="flex items-center gap-4 mb-8">
-          <div class="h-8 w-1.5 bg-[var(--theme)]"></div>
-          <h2 class="text-3xl md:text-4xl font-tech font-bold text-white uppercase tracking-wider">
-              Featured <span class="text-[var(--theme)]">Gear</span>
-          </h2>
+        <div class="h-8 w-1.5 bg-[var(--theme)]"></div>
+        <h2 class="text-3xl md:text-4xl font-tech font-bold text-white uppercase tracking-wider">
+          Featured <span class="text-[var(--theme)]">Gear</span>
+        </h2>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 
-        <div class="group relative bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden hover:border-[var(--theme)] transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,0,0,0.6)] flex flex-col">
-           <div class="h-64 overflow-hidden relative bg-zinc-800 flex items-center justify-center">
-               <div class="absolute inset-0 bg-[var(--theme)]/5 z-10 group-hover:opacity-0 transition"></div>
-               <img src="lançador.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="Lançador">
-           </div>
-           <div class="p-6 flex flex-col flex-grow relative">
-               <h3 class="font-tech text-xl text-white mb-2 italic uppercase">String Launcher</h3>
-               <p class="text-gray-400 text-sm mb-6 flex-grow">Atinja velocidades extremas e controle total com o novo sistema de corda.</p>
-               
-               <button class="w-full py-3 border border-zinc-700 text-white font-bold uppercase tracking-wider hover:bg-[var(--theme)] hover:text-black hover:border-[var(--theme)] transition flex items-center justify-center gap-2 group/btn">
-                  View Details 
-                  <span class="group-hover/btn:translate-x-1 transition-transform">→</span>
-               </button>
-           </div>
+        <div
+          class="group relative bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden hover:border-[var(--theme)] transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,0,0,0.6)] flex flex-col">
+          <div class="h-64 overflow-hidden relative bg-zinc-800 flex items-center justify-center">
+            <div class="absolute inset-0 bg-[var(--theme)]/5 z-10 group-hover:opacity-0 transition"></div>
+            <img src="lançador.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+              alt="Lançador">
+          </div>
+          <div class="p-6 flex flex-col flex-grow relative">
+            <h3 class="font-tech text-xl text-white mb-2 italic uppercase">String Launcher</h3>
+            <p class="text-gray-400 text-sm mb-6 flex-grow">Atinja velocidades extremas e controle total com o novo
+              sistema de corda.</p>
+
+            <button
+              class="w-full py-3 border border-zinc-700 text-white font-bold uppercase tracking-wider hover:bg-[var(--theme)] hover:text-black hover:border-[var(--theme)] transition flex items-center justify-center gap-2 group/btn">
+              View Details
+              <span class="group-hover/btn:translate-x-1 transition-transform">→</span>
+            </button>
+          </div>
         </div>
 
-        <div class="group relative bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden hover:border-[var(--theme)] transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,0,0,0.6)] flex flex-col">
-            <div class="h-64 overflow-hidden relative bg-zinc-800 flex items-center justify-center">
-                <div class="absolute inset-0 bg-[var(--theme)]/5 z-10 group-hover:opacity-0 transition"></div>
-                <img src="beyazul.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="Dran Sword">
-            </div>
-            <div class="p-6 flex flex-col flex-grow relative">
-                <h3 class="font-tech text-xl text-white mb-2 italic uppercase">Dran Sword</h3>
-                <p class="text-gray-400 text-sm mb-6 flex-grow">Ataque explosivo. O equilíbrio perfeito entre peso e velocidade de rotação.</p>
-                
-                <button class="w-full py-3 border border-zinc-700 text-white font-bold uppercase tracking-wider hover:bg-[var(--theme)] hover:text-black hover:border-[var(--theme)] transition flex items-center justify-center gap-2 group/btn">
-                   View Details 
-                   <span class="group-hover/btn:translate-x-1 transition-transform">→</span>
-                </button>
-            </div>
-         </div>
+        <div
+          class="group relative bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden hover:border-[var(--theme)] transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,0,0,0.6)] flex flex-col">
+          <div class="h-64 overflow-hidden relative bg-zinc-800 flex items-center justify-center">
+            <div class="absolute inset-0 bg-[var(--theme)]/5 z-10 group-hover:opacity-0 transition"></div>
+            <img src="beyazul.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+              alt="Dran Sword">
+          </div>
+          <div class="p-6 flex flex-col flex-grow relative">
+            <h3 class="font-tech text-xl text-white mb-2 italic uppercase">Dran Sword</h3>
+            <p class="text-gray-400 text-sm mb-6 flex-grow">Ataque explosivo. O equilíbrio perfeito entre peso e
+              velocidade de rotação.</p>
 
-         <div class="group relative bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden hover:border-[var(--theme)] transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,0,0,0.6)] flex flex-col">
-            <div class="h-64 overflow-hidden relative bg-zinc-800 flex items-center justify-center">
-                <div class="absolute inset-0 bg-[var(--theme)]/5 z-10 group-hover:opacity-0 transition"></div>
-                <img src="arena.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="Arena">
-            </div>
-            <div class="p-6 flex flex-col flex-grow relative">
-                <h3 class="font-tech text-xl text-white mb-2 italic uppercase">Xtreme Stadium</h3>
-                <p class="text-gray-400 text-sm mb-6 flex-grow">Acelere nos trilhos Xtreme Line e cause impactos devastadores na arena.</p>
-                
-                <button class="w-full py-3 border border-zinc-700 text-white font-bold uppercase tracking-wider hover:bg-[var(--theme)] hover:text-black hover:border-[var(--theme)] transition flex items-center justify-center gap-2 group/btn">
-                   View Details 
-                   <span class="group-hover/btn:translate-x-1 transition-transform">→</span>
-                </button>
-            </div>
-         </div>
+            <button
+              class="w-full py-3 border border-zinc-700 text-white font-bold uppercase tracking-wider hover:bg-[var(--theme)] hover:text-black hover:border-[var(--theme)] transition flex items-center justify-center gap-2 group/btn">
+              View Details
+              <span class="group-hover/btn:translate-x-1 transition-transform">→</span>
+            </button>
+          </div>
+        </div>
+
+        <div
+          class="group relative bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden hover:border-[var(--theme)] transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,0,0,0.6)] flex flex-col">
+          <div class="h-64 overflow-hidden relative bg-zinc-800 flex items-center justify-center">
+            <div class="absolute inset-0 bg-[var(--theme)]/5 z-10 group-hover:opacity-0 transition"></div>
+            <img src="arena.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+              alt="Arena">
+          </div>
+          <div class="p-6 flex flex-col flex-grow relative">
+            <h3 class="font-tech text-xl text-white mb-2 italic uppercase">Xtreme Stadium</h3>
+            <p class="text-gray-400 text-sm mb-6 flex-grow">Acelere nos trilhos Xtreme Line e cause impactos
+              devastadores na arena.</p>
+
+            <button
+              class="w-full py-3 border border-zinc-700 text-white font-bold uppercase tracking-wider hover:bg-[var(--theme)] hover:text-black hover:border-[var(--theme)] transition flex items-center justify-center gap-2 group/btn">
+              View Details
+              <span class="group-hover/btn:translate-x-1 transition-transform">→</span>
+            </button>
+          </div>
+        </div>
 
       </div>
     </section>
@@ -206,175 +314,264 @@
 
     <div class="w-[90%] max-w-7xl mx-auto py-24 space-y-24">
 
-        <section>
-            <div class="flex justify-between items-end mb-8 border-b border-zinc-800 pb-4">
-                <h2 class="text-2xl md:text-3xl font-tech uppercase italic text-white">New <span class="text-[var(--theme)]">Arrivals</span></h2>
-                <a href="#" class="text-xs text-[var(--theme)] uppercase font-bold tracking-widest hover:text-white transition">View All Products_</a>
+      <section>
+        <div class="flex justify-between items-end mb-8 border-b border-zinc-800 pb-4">
+          <h2 class="text-2xl md:text-3xl font-tech uppercase italic text-white">New <span
+              class="text-[var(--theme)]">Arrivals</span></h2>
+          <a href="#"
+            class="text-xs text-[var(--theme)] uppercase font-bold tracking-widest hover:text-white transition">View All
+            Products_</a>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+          <div class="group cursor-pointer">
+            <div
+              class="bg-[var(--card-bg)] border border-zinc-800 aspect-[4/5] rounded-sm mb-3 relative flex items-center justify-center overflow-hidden transition-all duration-300 group-hover:border-[var(--theme)] group-hover:shadow-[0_0_15px_rgba(0,0,0,0.5)]">
+              <span
+                class="absolute top-2 left-2 bg-[var(--theme)] text-black text-[10px] font-black px-2 py-0.5 uppercase skew-x-[-10deg] z-20">New</span>
+              <svg
+                class="w-16 h-16 text-zinc-700 group-hover:text-white transition transform group-hover:scale-110 duration-500 relative z-10"
+                fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2L2 22h20L12 2zm0 3.5L18.5 20h-13L12 5.5z" />
+              </svg>
+              <div
+                class="absolute inset-0 bg-gradient-to-b from-transparent via-[var(--theme)] to-transparent opacity-0 group-hover:opacity-10 translate-y-[-100%] group-hover:translate-y-[100%] transition-all duration-700 pointer-events-none z-0">
+              </div>
             </div>
-
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-                <div class="group cursor-pointer">
-                    <div class="bg-[var(--card-bg)] border border-zinc-800 aspect-[4/5] rounded-sm mb-3 relative flex items-center justify-center overflow-hidden transition-all duration-300 group-hover:border-[var(--theme)] group-hover:shadow-[0_0_15px_rgba(0,0,0,0.5)]">
-                        <span class="absolute top-2 left-2 bg-[var(--theme)] text-black text-[10px] font-black px-2 py-0.5 uppercase skew-x-[-10deg] z-20">New</span>
-                        <svg class="w-16 h-16 text-zinc-700 group-hover:text-white transition transform group-hover:scale-110 duration-500 relative z-10" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 22h20L12 2zm0 3.5L18.5 20h-13L12 5.5z"/></svg>
-                        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[var(--theme)] to-transparent opacity-0 group-hover:opacity-10 translate-y-[-100%] group-hover:translate-y-[100%] transition-all duration-700 pointer-events-none z-0"></div>
-                    </div>
-                    <h3 class="font-bold text-white text-sm uppercase tracking-wide group-hover:text-[var(--theme)] transition">Dran Sword 3-60F</h3>
-                    <p class="text-xs text-zinc-500 mb-1">Attack Type</p>
-                    <div class="flex items-center gap-2">
-                        <span class="font-bold text-[var(--theme)] text-lg">$19.99</span>
-                        <span class="text-xs text-zinc-600 line-through">$24.99</span>
-                    </div>
-                </div>
-
-                <div class="group cursor-pointer">
-                    <div class="bg-[var(--card-bg)] border border-zinc-800 aspect-[4/5] rounded-sm mb-3 flex items-center justify-center overflow-hidden transition-all duration-300 group-hover:border-[var(--theme)]">
-                        <svg class="w-16 h-16 text-zinc-700 group-hover:text-white transition transform group-hover:scale-110" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 22h20L12 2zm0 3.5L18.5 20h-13L12 5.5z"/></svg>
-                    </div>
-                    <h3 class="font-bold text-white text-sm uppercase tracking-wide group-hover:text-[var(--theme)] transition">Hells Scythe</h3>
-                    <p class="text-xs text-zinc-500 mb-1">Balance Type</p>
-                    <span class="font-bold text-[var(--theme)] text-lg">$19.99</span>
-                </div>
-
-                <div class="group cursor-pointer">
-                    <div class="bg-[var(--card-bg)] border border-zinc-800 aspect-[4/5] rounded-sm mb-3 flex items-center justify-center overflow-hidden transition-all duration-300 group-hover:border-[var(--theme)]">
-                        <svg class="w-16 h-16 text-zinc-700 group-hover:text-white transition transform group-hover:scale-110" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 22h20L12 2zm0 3.5L18.5 20h-13L12 5.5z"/></svg>
-                    </div>
-                    <h3 class="font-bold text-white text-sm uppercase tracking-wide group-hover:text-[var(--theme)] transition">Wizard Arrow</h3>
-                    <p class="text-xs text-zinc-500 mb-1">Stamina Type</p>
-                    <span class="font-bold text-[var(--theme)] text-lg">$19.99</span>
-                </div>
-
-                <div class="group cursor-pointer">
-                    <div class="bg-[var(--card-bg)] border border-zinc-800 aspect-[4/5] rounded-sm mb-3 flex items-center justify-center overflow-hidden transition-all duration-300 group-hover:border-[var(--theme)]">
-                        <svg class="w-16 h-16 text-zinc-700 group-hover:text-white transition transform group-hover:scale-110" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 22h20L12 2zm0 3.5L18.5 20h-13L12 5.5z"/></svg>
-                    </div>
-                    <h3 class="font-bold text-white text-sm uppercase tracking-wide group-hover:text-[var(--theme)] transition">Knight Shield</h3>
-                    <p class="text-xs text-zinc-500 mb-1">Defense Type</p>
-                    <span class="font-bold text-[var(--theme)] text-lg">$19.99</span>
-                </div>
-
-                <div class="group cursor-pointer hidden lg:block">
-                    <div class="bg-[var(--card-bg)] border border-zinc-800 aspect-[4/5] rounded-sm mb-3 flex items-center justify-center overflow-hidden transition-all duration-300 group-hover:border-[var(--theme)]">
-                        <svg class="w-16 h-16 text-zinc-700 group-hover:text-white transition transform group-hover:scale-110" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 22h20L12 2zm0 3.5L18.5 20h-13L12 5.5z"/></svg>
-                    </div>
-                    <h3 class="font-bold text-white text-sm uppercase tracking-wide group-hover:text-[var(--theme)] transition">Shark Edge</h3>
-                    <p class="text-xs text-zinc-500 mb-1">Attack Type</p>
-                    <span class="font-bold text-[var(--theme)] text-lg">$19.99</span>
-                </div>
+            <h3 class="font-bold text-white text-sm uppercase tracking-wide group-hover:text-[var(--theme)] transition">
+              Dran Sword 3-60F</h3>
+            <p class="text-xs text-zinc-500 mb-1">Attack Type</p>
+            <div class="flex items-center gap-2">
+              <span class="font-bold text-[var(--theme)] text-lg">$19.99</span>
+              <span class="text-xs text-zinc-600 line-through">$24.99</span>
             </div>
-        </section>
+          </div>
 
-        <section class="bg-[var(--card-bg)] border border-[var(--theme)] rounded-xl p-8 md:p-12 relative overflow-hidden group">
-            <div class="absolute inset-0 bg-[var(--theme)] opacity-5 blur-3xl group-hover:opacity-15 transition duration-700"></div>
-            
-            <div class="relative z-10 flex flex-col md:flex-row items-center justify-between">
-                <div class="max-w-md">
-                    <h2 class="text-2xl font-tech font-bold text-white mb-2 italic">GEAR UP // BLADERS</h2>
-                    <div class="text-6xl md:text-8xl font-black text-[var(--theme)] mb-4 tracking-tighter drop-shadow-[0_0_15px_rgba(0,0,0,0.5)]">50% OFF</div>
-                    <p class="text-sm text-zinc-400 uppercase tracking-widest mb-8 border-l-2 border-zinc-700 pl-4">Limited time discount on Xtreme Stadium Sets</p>
-                    
-                    <button class="px-8 py-3 bg-white text-black font-black uppercase tracking-widest hover:bg-[var(--theme)] hover:scale-105 transition skew-x-[-10deg]">
-                        Check Offers
-                    </button>
-                </div>
-                
-                <div class="mt-8 md:mt-0 text-[var(--theme)] opacity-80 group-hover:scale-110 transition duration-700 ease-out">
-                     <svg class="w-48 h-48 md:w-72 md:h-72 drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 12h3v8h6v-6h2v6h6v-8h3L12 2z"/></svg>
-                </div>
+          <div class="group cursor-pointer">
+            <div
+              class="bg-[var(--card-bg)] border border-zinc-800 aspect-[4/5] rounded-sm mb-3 flex items-center justify-center overflow-hidden transition-all duration-300 group-hover:border-[var(--theme)]">
+              <svg class="w-16 h-16 text-zinc-700 group-hover:text-white transition transform group-hover:scale-110"
+                fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2L2 22h20L12 2zm0 3.5L18.5 20h-13L12 5.5z" />
+              </svg>
             </div>
-        </section>
+            <h3 class="font-bold text-white text-sm uppercase tracking-wide group-hover:text-[var(--theme)] transition">
+              Hells Scythe</h3>
+            <p class="text-xs text-zinc-500 mb-1">Balance Type</p>
+            <span class="font-bold text-[var(--theme)] text-lg">$19.99</span>
+          </div>
 
-        <section>
-            <div class="flex justify-between items-end mb-8 border-b border-zinc-800 pb-4">
-                <h2 class="text-2xl md:text-3xl font-tech uppercase italic text-white">Top <span class="text-[var(--theme)]">Ranked</span></h2>
-                <a href="#" class="text-xs text-[var(--theme)] uppercase font-bold tracking-widest hover:text-white transition">Full List_</a>
+          <div class="group cursor-pointer">
+            <div
+              class="bg-[var(--card-bg)] border border-zinc-800 aspect-[4/5] rounded-sm mb-3 flex items-center justify-center overflow-hidden transition-all duration-300 group-hover:border-[var(--theme)]">
+              <svg class="w-16 h-16 text-zinc-700 group-hover:text-white transition transform group-hover:scale-110"
+                fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2L2 22h20L12 2zm0 3.5L18.5 20h-13L12 5.5z" />
+              </svg>
             </div>
+            <h3 class="font-bold text-white text-sm uppercase tracking-wide group-hover:text-[var(--theme)] transition">
+              Wizard Arrow</h3>
+            <p class="text-xs text-zinc-500 mb-1">Stamina Type</p>
+            <span class="font-bold text-[var(--theme)] text-lg">$19.99</span>
+          </div>
 
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-                <div class="group cursor-pointer">
-                    <div class="bg-[var(--card-bg)] border border-zinc-800 aspect-[4/5] rounded-sm mb-3 relative flex items-center justify-center transition-all duration-300 group-hover:border-[var(--theme)]">
-                        <span class="absolute top-2 right-2 bg-zinc-800 text-white text-[10px] font-bold px-2 py-0.5 rounded-sm border border-zinc-600">#1</span>
-                        <svg class="w-16 h-16 text-zinc-700 group-hover:text-white transition" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 22h20L12 2zm0 3.5L18.5 20h-13L12 5.5z"/></svg>
-                    </div>
-                    <h3 class="font-bold text-white text-sm uppercase tracking-wide group-hover:text-[var(--theme)] transition">Cobalt Drake</h3>
-                    <p class="text-xs text-zinc-500 mb-1">Rare Bey</p>
-                    <span class="font-bold text-[var(--theme)] text-lg">$45.00</span>
-                </div>
-                <div class="group cursor-pointer">
-                    <div class="bg-[var(--card-bg)] border border-zinc-800 aspect-[4/5] rounded-sm mb-3 flex items-center justify-center transition-all duration-300 group-hover:border-[var(--theme)]">
-                        <span class="absolute top-2 right-2 bg-zinc-800 text-zinc-400 text-[10px] font-bold px-2 py-0.5 rounded-sm border border-zinc-700">#2</span>
-                        <svg class="w-16 h-16 text-zinc-700 group-hover:text-white transition" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 22h20L12 2zm0 3.5L18.5 20h-13L12 5.5z"/></svg>
-                    </div>
-                    <h3 class="font-bold text-white text-sm uppercase tracking-wide group-hover:text-[var(--theme)] transition">Phoenix Wing</h3>
-                    <p class="text-xs text-zinc-500 mb-1">Attack Type</p>
-                    <span class="font-bold text-[var(--theme)] text-lg">$25.00</span>
-                </div>
-                 <div class="group cursor-pointer">
-                    <div class="bg-[var(--card-bg)] border border-zinc-800 aspect-[4/5] rounded-sm mb-3 flex items-center justify-center transition-all duration-300 group-hover:border-[var(--theme)]">
-                         <span class="absolute top-2 right-2 bg-zinc-800 text-zinc-400 text-[10px] font-bold px-2 py-0.5 rounded-sm border border-zinc-700">#3</span>
-                        <svg class="w-16 h-16 text-zinc-700 group-hover:text-white transition" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 22h20L12 2zm0 3.5L18.5 20h-13L12 5.5z"/></svg>
-                    </div>
-                    <h3 class="font-bold text-white text-sm uppercase tracking-wide group-hover:text-[var(--theme)] transition">Wyvern Gale</h3>
-                    <p class="text-xs text-zinc-500 mb-1">Defense Type</p>
-                    <span class="font-bold text-[var(--theme)] text-lg">$18.00</span>
-                </div>
-                 <div class="group cursor-pointer">
-                    <div class="bg-[var(--card-bg)] border border-zinc-800 aspect-[4/5] rounded-sm mb-3 flex items-center justify-center transition-all duration-300 group-hover:border-[var(--theme)]">
-                        <svg class="w-16 h-16 text-zinc-700 group-hover:text-white transition" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 22h20L12 2zm0 3.5L18.5 20h-13L12 5.5z"/></svg>
-                    </div>
-                    <h3 class="font-bold text-white text-sm uppercase tracking-wide group-hover:text-[var(--theme)] transition">Unicorn Sting</h3>
-                    <p class="text-xs text-zinc-500 mb-1">Balance Type</p>
-                    <span class="font-bold text-[var(--theme)] text-lg">$19.99</span>
-                </div>
-                 <div class="group cursor-pointer hidden lg:block">
-                    <div class="bg-[var(--card-bg)] border border-zinc-800 aspect-[4/5] rounded-sm mb-3 flex items-center justify-center transition-all duration-300 group-hover:border-[var(--theme)]">
-                        <svg class="w-16 h-16 text-zinc-700 group-hover:text-white transition" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 22h20L12 2zm0 3.5L18.5 20h-13L12 5.5z"/></svg>
-                    </div>
-                    <h3 class="font-bold text-white text-sm uppercase tracking-wide group-hover:text-[var(--theme)] transition">Sphinx Cowl</h3>
-                    <p class="text-xs text-zinc-500 mb-1">Defense Type</p>
-                    <span class="font-bold text-[var(--theme)] text-lg">$19.99</span>
-                </div>
+          <div class="group cursor-pointer">
+            <div
+              class="bg-[var(--card-bg)] border border-zinc-800 aspect-[4/5] rounded-sm mb-3 flex items-center justify-center overflow-hidden transition-all duration-300 group-hover:border-[var(--theme)]">
+              <svg class="w-16 h-16 text-zinc-700 group-hover:text-white transition transform group-hover:scale-110"
+                fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2L2 22h20L12 2zm0 3.5L18.5 20h-13L12 5.5z" />
+              </svg>
             </div>
-        </section>
+            <h3 class="font-bold text-white text-sm uppercase tracking-wide group-hover:text-[var(--theme)] transition">
+              Knight Shield</h3>
+            <p class="text-xs text-zinc-500 mb-1">Defense Type</p>
+            <span class="font-bold text-[var(--theme)] text-lg">$19.99</span>
+          </div>
 
-        <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            
-            <div class="bg-[var(--card-bg)] border border-zinc-800 p-8 rounded-xl relative overflow-hidden flex flex-col justify-center h-72 group hover:border-[var(--theme)] transition duration-500">
-                <div class="relative z-10">
-                    <h3 class="text-2xl font-tech font-bold text-white uppercase italic">Parts & Gears</h3>
-                    <p class="text-xs text-[var(--theme)] uppercase mt-1 mb-0 font-bold tracking-widest">Customize your Bey</p>
-                    <div class="text-5xl font-black text-white mt-4 opacity-50 group-hover:opacity-100 transition">UP TO 25%</div>
-                    <a href="#" class="inline-block mt-8 text-xs font-bold text-white border-b border-[var(--theme)] uppercase pb-1 hover:text-[var(--theme)] transition">Shop Parts</a>
-                </div>
-                 <div class="absolute right-[-20px] bottom-[-20px] text-zinc-800 opacity-50 group-hover:text-zinc-700 transition duration-500">
-                    <svg class="w-48 h-48" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 22h20L12 2zm0 3.5L18.5 20h-13L12 5.5z"/></svg>
-                </div>
+          <div class="group cursor-pointer hidden lg:block">
+            <div
+              class="bg-[var(--card-bg)] border border-zinc-800 aspect-[4/5] rounded-sm mb-3 flex items-center justify-center overflow-hidden transition-all duration-300 group-hover:border-[var(--theme)]">
+              <svg class="w-16 h-16 text-zinc-700 group-hover:text-white transition transform group-hover:scale-110"
+                fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2L2 22h20L12 2zm0 3.5L18.5 20h-13L12 5.5z" />
+              </svg>
             </div>
+            <h3 class="font-bold text-white text-sm uppercase tracking-wide group-hover:text-[var(--theme)] transition">
+              Shark Edge</h3>
+            <p class="text-xs text-zinc-500 mb-1">Attack Type</p>
+            <span class="font-bold text-[var(--theme)] text-lg">$19.99</span>
+          </div>
+        </div>
+      </section>
 
-            <div class="bg-[var(--card-bg)] border border-zinc-800 p-8 rounded-xl relative overflow-hidden flex flex-col justify-center h-72 group hover:border-[var(--theme)] transition duration-500">
-                <div class="relative z-10">
-                    <h3 class="text-2xl font-tech font-bold text-white uppercase italic">Outlet Store</h3>
-                    <p class="text-xs text-[var(--theme)] uppercase mt-1 mb-0 font-bold tracking-widest">Last Chance</p>
-                    <div class="text-5xl font-black text-white mt-4 opacity-50 group-hover:opacity-100 transition">CLEARANCE</div>
-                    <a href="#" class="inline-block mt-8 text-xs font-bold text-white border-b border-[var(--theme)] uppercase pb-1 hover:text-[var(--theme)] transition">View All Products</a>
-                </div>
-                <div class="absolute right-[-20px] bottom-[-20px] text-zinc-800 opacity-50 group-hover:text-zinc-700 transition duration-500">
-                    <svg class="w-48 h-48" fill="currentColor" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-                </div>
+      <section
+        class="bg-[var(--card-bg)] border border-[var(--theme)] rounded-xl p-8 md:p-12 relative overflow-hidden group">
+        <div
+          class="absolute inset-0 bg-[var(--theme)] opacity-5 blur-3xl group-hover:opacity-15 transition duration-700">
+        </div>
+
+        <div class="relative z-10 flex flex-col md:flex-row items-center justify-between">
+          <div class="max-w-md">
+            <h2 class="text-2xl font-tech font-bold text-white mb-2 italic">GEAR UP // BLADERS</h2>
+            <div
+              class="text-6xl md:text-8xl font-black text-[var(--theme)] mb-4 tracking-tighter drop-shadow-[0_0_15px_rgba(0,0,0,0.5)]">
+              50% OFF</div>
+            <p class="text-sm text-zinc-400 uppercase tracking-widest mb-8 border-l-2 border-zinc-700 pl-4">Limited time
+              discount on Xtreme Stadium Sets</p>
+
+            <button
+              class="px-8 py-3 bg-white text-black font-black uppercase tracking-widest hover:bg-[var(--theme)] hover:scale-105 transition skew-x-[-10deg]">
+              Check Offers
+            </button>
+          </div>
+
+          <div
+            class="mt-8 md:mt-0 text-[var(--theme)] opacity-80 group-hover:scale-110 transition duration-700 ease-out">
+            <svg class="w-48 h-48 md:w-72 md:h-72 drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]" fill="currentColor"
+              viewBox="0 0 24 24">
+              <path d="M12 2L2 12h3v8h6v-6h2v6h6v-8h3L12 2z" />
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="flex justify-between items-end mb-8 border-b border-zinc-800 pb-4">
+          <h2 class="text-2xl md:text-3xl font-tech uppercase italic text-white">Top <span
+              class="text-[var(--theme)]">Ranked</span></h2>
+          <a href="#"
+            class="text-xs text-[var(--theme)] uppercase font-bold tracking-widest hover:text-white transition">Full
+            List_</a>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+          <div class="group cursor-pointer">
+            <div
+              class="bg-[var(--card-bg)] border border-zinc-800 aspect-[4/5] rounded-sm mb-3 relative flex items-center justify-center transition-all duration-300 group-hover:border-[var(--theme)]">
+              <span
+                class="absolute top-2 right-2 bg-zinc-800 text-white text-[10px] font-bold px-2 py-0.5 rounded-sm border border-zinc-600">#1</span>
+              <svg class="w-16 h-16 text-zinc-700 group-hover:text-white transition" fill="currentColor"
+                viewBox="0 0 24 24">
+                <path d="M12 2L2 22h20L12 2zm0 3.5L18.5 20h-13L12 5.5z" />
+              </svg>
             </div>
+            <h3 class="font-bold text-white text-sm uppercase tracking-wide group-hover:text-[var(--theme)] transition">
+              Cobalt Drake</h3>
+            <p class="text-xs text-zinc-500 mb-1">Rare Bey</p>
+            <span class="font-bold text-[var(--theme)] text-lg">$45.00</span>
+          </div>
+          <div class="group cursor-pointer">
+            <div
+              class="bg-[var(--card-bg)] border border-zinc-800 aspect-[4/5] rounded-sm mb-3 flex items-center justify-center transition-all duration-300 group-hover:border-[var(--theme)]">
+              <span
+                class="absolute top-2 right-2 bg-zinc-800 text-zinc-400 text-[10px] font-bold px-2 py-0.5 rounded-sm border border-zinc-700">#2</span>
+              <svg class="w-16 h-16 text-zinc-700 group-hover:text-white transition" fill="currentColor"
+                viewBox="0 0 24 24">
+                <path d="M12 2L2 22h20L12 2zm0 3.5L18.5 20h-13L12 5.5z" />
+              </svg>
+            </div>
+            <h3 class="font-bold text-white text-sm uppercase tracking-wide group-hover:text-[var(--theme)] transition">
+              Phoenix Wing</h3>
+            <p class="text-xs text-zinc-500 mb-1">Attack Type</p>
+            <span class="font-bold text-[var(--theme)] text-lg">$25.00</span>
+          </div>
+          <div class="group cursor-pointer">
+            <div
+              class="bg-[var(--card-bg)] border border-zinc-800 aspect-[4/5] rounded-sm mb-3 flex items-center justify-center transition-all duration-300 group-hover:border-[var(--theme)]">
+              <span
+                class="absolute top-2 right-2 bg-zinc-800 text-zinc-400 text-[10px] font-bold px-2 py-0.5 rounded-sm border border-zinc-700">#3</span>
+              <svg class="w-16 h-16 text-zinc-700 group-hover:text-white transition" fill="currentColor"
+                viewBox="0 0 24 24">
+                <path d="M12 2L2 22h20L12 2zm0 3.5L18.5 20h-13L12 5.5z" />
+              </svg>
+            </div>
+            <h3 class="font-bold text-white text-sm uppercase tracking-wide group-hover:text-[var(--theme)] transition">
+              Wyvern Gale</h3>
+            <p class="text-xs text-zinc-500 mb-1">Defense Type</p>
+            <span class="font-bold text-[var(--theme)] text-lg">$18.00</span>
+          </div>
+          <div class="group cursor-pointer">
+            <div
+              class="bg-[var(--card-bg)] border border-zinc-800 aspect-[4/5] rounded-sm mb-3 flex items-center justify-center transition-all duration-300 group-hover:border-[var(--theme)]">
+              <svg class="w-16 h-16 text-zinc-700 group-hover:text-white transition" fill="currentColor"
+                viewBox="0 0 24 24">
+                <path d="M12 2L2 22h20L12 2zm0 3.5L18.5 20h-13L12 5.5z" />
+              </svg>
+            </div>
+            <h3 class="font-bold text-white text-sm uppercase tracking-wide group-hover:text-[var(--theme)] transition">
+              Unicorn Sting</h3>
+            <p class="text-xs text-zinc-500 mb-1">Balance Type</p>
+            <span class="font-bold text-[var(--theme)] text-lg">$19.99</span>
+          </div>
+          <div class="group cursor-pointer hidden lg:block">
+            <div
+              class="bg-[var(--card-bg)] border border-zinc-800 aspect-[4/5] rounded-sm mb-3 flex items-center justify-center transition-all duration-300 group-hover:border-[var(--theme)]">
+              <svg class="w-16 h-16 text-zinc-700 group-hover:text-white transition" fill="currentColor"
+                viewBox="0 0 24 24">
+                <path d="M12 2L2 22h20L12 2zm0 3.5L18.5 20h-13L12 5.5z" />
+              </svg>
+            </div>
+            <h3 class="font-bold text-white text-sm uppercase tracking-wide group-hover:text-[var(--theme)] transition">
+              Sphinx Cowl</h3>
+            <p class="text-xs text-zinc-500 mb-1">Defense Type</p>
+            <span class="font-bold text-[var(--theme)] text-lg">$19.99</span>
+          </div>
+        </div>
+      </section>
 
-        </section>
+      <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <div
+          class="bg-[var(--card-bg)] border border-zinc-800 p-8 rounded-xl relative overflow-hidden flex flex-col justify-center h-72 group hover:border-[var(--theme)] transition duration-500">
+          <div class="relative z-10">
+            <h3 class="text-2xl font-tech font-bold text-white uppercase italic">Parts & Gears</h3>
+            <p class="text-xs text-[var(--theme)] uppercase mt-1 mb-0 font-bold tracking-widest">Customize your Bey</p>
+            <div class="text-5xl font-black text-white mt-4 opacity-50 group-hover:opacity-100 transition">UP TO 25%
+            </div>
+            <a href="#"
+              class="inline-block mt-8 text-xs font-bold text-white border-b border-[var(--theme)] uppercase pb-1 hover:text-[var(--theme)] transition">Shop
+              Parts</a>
+          </div>
+          <div
+            class="absolute right-[-20px] bottom-[-20px] text-zinc-800 opacity-50 group-hover:text-zinc-700 transition duration-500">
+            <svg class="w-48 h-48" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2L2 22h20L12 2zm0 3.5L18.5 20h-13L12 5.5z" />
+            </svg>
+          </div>
+        </div>
+
+        <div
+          class="bg-[var(--card-bg)] border border-zinc-800 p-8 rounded-xl relative overflow-hidden flex flex-col justify-center h-72 group hover:border-[var(--theme)] transition duration-500">
+          <div class="relative z-10">
+            <h3 class="text-2xl font-tech font-bold text-white uppercase italic">Outlet Store</h3>
+            <p class="text-xs text-[var(--theme)] uppercase mt-1 mb-0 font-bold tracking-widest">Last Chance</p>
+            <div class="text-5xl font-black text-white mt-4 opacity-50 group-hover:opacity-100 transition">CLEARANCE
+            </div>
+            <a href="#"
+              class="inline-block mt-8 text-xs font-bold text-white border-b border-[var(--theme)] uppercase pb-1 hover:text-[var(--theme)] transition">View
+              All Products</a>
+          </div>
+          <div
+            class="absolute right-[-20px] bottom-[-20px] text-zinc-800 opacity-50 group-hover:text-zinc-700 transition duration-500">
+            <svg class="w-48 h-48" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </div>
+        </div>
+
+      </section>
 
     </div>
 
     <footer class="mt-0 py-16 border-t border-[var(--theme)] bg-zinc-950">
       <div class="w-[90%] max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
         <div class="col-span-1 md:col-span-1">
-            <a href="#" class="text-xl font-tech font-black italic text-white flex gap-1 mb-4">BEYBLADE <span class="text-[var(--theme)] not-italic">X</span></a>
-            <p class="text-zinc-500 text-xs leading-relaxed">
-                Experience the extreme speed and impact of the Gear Sports era. Customize, Battle, and Win.
-            </p>
+          <a href="#" class="text-xl font-tech font-black italic text-white flex gap-1 mb-4">BEYBLADE <span
+              class="text-[var(--theme)] not-italic">X</span></a>
+          <p class="text-zinc-500 text-xs leading-relaxed">
+            Experience the extreme speed and impact of the Gear Sports era. Customize, Battle, and Win.
+          </p>
         </div>
 
         <div>
@@ -399,16 +596,17 @@
         <div>
           <h3 class="font-bold text-white mb-4 uppercase text-sm tracking-wider">Stay Connected</h3>
           <div class="flex space-x-4 mb-4">
-              <div class="w-8 h-8 bg-zinc-800 hover:bg-[var(--theme)] transition rounded-full cursor-pointer"></div>
-              <div class="w-8 h-8 bg-zinc-800 hover:bg-[var(--theme)] transition rounded-full cursor-pointer"></div>
-              <div class="w-8 h-8 bg-zinc-800 hover:bg-[var(--theme)] transition rounded-full cursor-pointer"></div>
+            <div class="w-8 h-8 bg-zinc-800 hover:bg-[var(--theme)] transition rounded-full cursor-pointer"></div>
+            <div class="w-8 h-8 bg-zinc-800 hover:bg-[var(--theme)] transition rounded-full cursor-pointer"></div>
+            <div class="w-8 h-8 bg-zinc-800 hover:bg-[var(--theme)] transition rounded-full cursor-pointer"></div>
           </div>
           <p class="text-zinc-600 text-xs">© 2025 Beyblade X Project. All rights reserved.</p>
         </div>
       </div>
     </footer>
 
-  </div> <script>
+  </div>
+  <script>
     const bgs = document.querySelectorAll('.parallax-bg');
     window.addEventListener('scroll', () => {
       const offset = window.scrollY * 0.4;
@@ -420,4 +618,5 @@
     });
   </script>
 </body>
+
 </html>
