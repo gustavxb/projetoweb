@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Beyblade X</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <style>
+    /* PARALLAX BACKGROUND */
+    .parallax-bg {
+      background-size: cover;
+      background-position: center;
+      will-change: transform;
+      transition: transform 0.6s ease;
+    }
+
+    /* Theme variables default (verde) */
+    .theme-color {
+      --theme: #00ff85;
+      --theme-dark: #00d66d;
+    }
+
+    /* Atualiza variáveis conforme radio selecionado (os inputs estão antes da .theme-color) */
+    input[name="heroSlide"]#hero1:checked ~ .theme-color {
+      --theme: #00ff85;
+      --theme-dark: #00d66d;
+    }
+    input[name="heroSlide"]#hero2:checked ~ .theme-color {
+      --theme: #8b0000;
+      --theme-dark: #a30000;
+    }
+    input[name="heroSlide"]#hero3:checked ~ .theme-color {
+      --theme: #f9db4a;
+      --theme-dark: #e6c63c;
+    }
+
+    /* Hero image visibility controlled by inputs */
+    .hero-img {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 600ms ease;
+      z-index: 0;
+    }
+    /* Show corresponding image when radio checked */
+    input#hero1:checked ~ .theme-color .hero-img.img1 { opacity: 1; }
+    input#hero2:checked ~ .theme-color .hero-img.img2 { opacity: 1; }
+    input#hero3:checked ~ .theme-color .hero-img.img3 { opacity: 1; }
+
+    /* Overlay uses theme color (semi-transparent) */
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background-color: var(--theme);
+      opacity: 0.20; /* tweak amount of tint */
+      transition: background-color 400ms ease, opacity 400ms ease;
+      pointer-events: none;
+      mix-blend-mode: normal;
+    }
+
+    /* Conteúdo do hero fica acima */
+    .hero-content { position: relative; z-index: 2; }
+
+    /* Small helper to make radio labels visible as active (optional) */
+    .dot {
+      width: 1rem; height: 1rem; border-radius: 9999px;
+      background: rgba(255,255,255,0.45);
+      display:inline-block;
+      transition: transform 200ms, background-color 200ms;
+      border: 2px solid rgba(255,255,255,0.15);
+    }
+    input#hero1:checked ~ .theme-color .dot.dot1 { transform: scale(1.1); background: var(--theme); }
+    input#hero2:checked ~ .theme-color .dot.dot2 { transform: scale(1.1); background: var(--theme); }
+    input#hero3:checked ~ .theme-color .dot.dot3 { transform: scale(1.1); background: var(--theme); }
+  </style>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Michroma&display=swap" rel="stylesheet">
+</head>
+<body class="bg-black text-white font-sans">
+
+  <input type="radio" name="heroSlide" id="hero1" class="hidden" checked>
+  <input type="radio" name="heroSlide" id="hero2" class="hidden">
+  <input type="radio" name="heroSlide" id="hero3" class="hidden">
+
+  <div class="theme-color">
+
+    <header class="w-full py-5 bg-black/70 backdrop-blur-md border-b border-[var(--theme)] z-20 relative">
+      <div class="w-[90%] mx-auto flex justify-between items-center gap-10">
+
+        <a href="#" class="block">
+          <img src="beybladelogo.webp" alt="Beyblade X Logo" class="h-20 w-auto object-contain hover:brightness-110 transition">
+        </a>
+
+        <div class="flex-1 px-10">
+          <div class="relative w-full max-w-xl mx-auto">
+            <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[var(--theme)]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+
+            <input type="text" placeholder="Search products..." class="w-full pl-12 pr-4 py-2 border border-[var(--theme)] rounded-full
+              bg-transparent text-[var(--theme)] placeholder-white focus:outline-none focus:ring-2 focus:ring-[var(--theme-dark)]">
+          </div>
+        </div>
+
+        <nav class="flex space-x-8 text-lg">
+          <a href="#" class="hover:text-[var(--theme)] transition text-white font-black">HOME</a>
+          <a href="#" class="hover:text-[var(--theme)] transition text-white font-black">BEYS</a>
+          <a href="#" class="hover:text-[var(--theme)] transition text-white font-black">ARENAS</a>
+
+          <div class="flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="2"
+                 stroke-linecap="round"
+                 stroke-linejoin="round"
+                 class="w-7 h-7 text-[var(--theme)]">
+                <circle cx="12" cy="7" r="4" />
+                <path d="M4 21c0-4 4-7 8-7s8 3 8 7" />
+            </svg>
+          <a href="login.html" class="hover:text-[var(--theme)] transition text-white font-black">LOGIN</a>
+        </div>
+
+          <button class="flex items-center hover:text-[var(--theme)] transition">
+            <svg class="w-7 h-7 text-[var(--theme)]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 6h15l-1.5 9h-12z"></path>
+              <path d="M6 6L4 2H2"></path>
+              <circle cx="9" cy="20" r="1"></circle>
+              <circle cx="18" cy="20" r="1"></circle>
+            </svg>
+          </button>
+        </nav>
+
+      </div>
+    </header>
+
+    <section class="relative h-[90vh] w-full overflow-hidden">
+
+      <div class="hero-img img1 parallax-bg" style="background-image: url('header1.jpg');"></div>
+      <div class="hero-img img2 parallax-bg" style="background-image: url('header2.jpg');"></div>
+      <div class="hero-img img3 parallax-bg" style="background-image: url('header3.jpg');"></div>
+
+      <div class="hero-overlay"></div>
+
+      <div class="hero-content relative z-10 w-[90%] mx-auto h-full flex flex-col justify-center">
+        <h1 class="text-5xl md:text-6xl font-black mb-4 leading-tight drop-shadow-[0_0_20px_var(--theme)]">
+          BREAK YOUR<br>
+          <span class="text-[var(--theme)]">LIMITS</span>
+        </h1>
+
+        <p class="font-mont text-gray-200 text-lg max-w-xl drop-shadow-[0_0_15px_rgba(0,0,0,0.9)]">
+          Entre na velocidade extrema do Beyblade X — Tops ultra potentes, arenas que quebram limites
+          e batalhas com impacto real.
+        </p>
+
+        <div class="mt-8 flex space-x-4">
+          <button class="px-8 py-3 bg-[var(--theme)] text-black font-bold text-lg hover:bg-[var(--theme-dark)] transition">
+            COMPRAR BEYS
+          </button>
+
+          <button class="px-8 py-3 border border-[var(--theme)] text-[var(--theme)] font-bold text-lg hover:bg-[var(--theme)] hover:text-black transition">
+            ARENAS
+          </button>
+        </div>
+
+        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex space-x-3 z-20">
+          <label for="hero1" class="cursor-pointer" title="Tema 1 (verde)">
+            <span class="dot dot1"></span>
+          </label>
+          <label for="hero2" class="cursor-pointer" title="Tema 2 (vermelho)">
+            <span class="dot dot2"></span>
+          </label>
+          <label for="hero3" class="cursor-pointer" title="Tema 3 (amarelo)">
+            <span class="dot dot3"></span>
+          </label>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="w-[90%] mx-auto mt-20">
+      <h2 class="text-3xl font-bold mb-6 text-[var(--theme)]">Destaques</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+        <div class="border border-[var(--theme)] p-4 bg-black/40 hover:bg-black/60 transition">
+          <div class="bg-[var(--theme)]/20 h-100% flex items-center justify-center font-bold text-xl">
+            <img src="lançador.jpg" class="h-100% w-100% object-cover rounded"></div>
+          <h3 class="font-bold mt-3 text-xl">Lançador</h3>
+          <p class="text-gray-400 text-sm">Atinja velocidades extremas com o lançador de corda!</p>
+          <button class="mt-4 w-full py-2 bg-[var(--theme)] text-black font-bold hover:bg-[var(--theme-dark)] transition">VER MAIS</button>
+        </div>
+
+        <div class="border border-[var(--theme)] p-4 bg-black/40 hover:bg-black/60 transition">
+          <div class="bg-[var(--theme)]/20 h-100% flex items-center justify-center font-bold text-xl">
+          <img src="beyazul.jpg" class="h-100% w-100% object-cover rounded"></div>
+          <h3 class="font-bold mt-3 text-xl">Sword Dran</h3>
+          <p class="text-gray-400 text-sm">Controle e estabilidade em alta rotação.</p>
+          <button class="mt-4 w-full py-2 bg-[var(--theme)] text-black font-bold hover:bg-[var(--theme-dark)] transition">VER MAIS</button>
+        </div>
+
+        <div class="border border-[var(--theme)] p-4 bg-black/40 hover:bg-black/60 transition">
+          <div class="bg-[var(--theme)]/20 h-100% flex items-center justify-center font-bold text-xl">
+          <img src="arena.jpg" class="h-100% w-100% object-cover rounded"></div>
+          <h3 class="font-bold mt-3 text-xl">Xtreme Stadium</h3>
+          <p class="text-gray-400 text-sm">Arenas com o sistema Xtreme Drift de aceleração.</p>
+          <button class="mt-4 w-full py-2 bg-[var(--theme)] text-black font-bold hover:bg-[var(--theme-dark)] transition">VER MAIS</button>
+        </div>
+
+      </div>
+    </section>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
+
+        <section>
+            <div class="flex justify-between items-end mb-6 border-b border-gray-800 pb-2">
+                <h2 class="text-xl font-bold text-[var(--theme)]">New products!</h2>
+                <a href="#" class="text-xs text-gray-400 uppercase font-semibold border-b border-gray-600 pb-0.5 hover:text-[var(--theme)] hover:border-[var(--theme)] transition">See all products</a>
+            </div>
+
+            <div class="relative">
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                    
+                    <div class="group cursor-pointer">
+                        <div class="bg-zinc-900 border border-zinc-800 aspect-[4/5] rounded-sm mb-3 relative flex items-center justify-center group-hover:border-[var(--theme)] transition-colors">
+                            <span class="absolute top-3 left-3 bg-[var(--theme)] text-black text-[10px] font-bold px-2 py-1 uppercase rounded-sm">New</span>
+                            <svg class="w-12 h-12 text-zinc-700 group-hover:text-[var(--theme)] transition" fill="currentColor" viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                        </div>
+                        <h3 class="font-bold text-sm text-white">Product Name</h3>
+                        <p class="text-xs text-gray-500 mb-1">Category / Short desc</p>
+                        <div class="flex items-center gap-2">
+                            <span class="font-bold text-sm text-[var(--theme)]">$95</span>
+                            <span class="text-xs text-gray-600 line-through">$120</span>
+                            <span class="text-xs text-red-500 font-medium">-20%</span>
+                        </div>
+                    </div>
+
+                    <div class="group cursor-pointer">
+                        <div class="bg-zinc-900 border border-zinc-800 aspect-[4/5] rounded-sm mb-3 flex items-center justify-center group-hover:border-[var(--theme)] transition-colors">
+                            <svg class="w-12 h-12 text-zinc-700 group-hover:text-[var(--theme)] transition" fill="currentColor" viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                        </div>
+                        <h3 class="font-bold text-sm text-white">Product Name</h3>
+                        <p class="text-xs text-gray-500 mb-1">Category / Short desc</p>
+                        <span class="font-bold text-sm text-[var(--theme)]">$95</span>
+                    </div>
+
+                    <div class="group cursor-pointer">
+                        <div class="bg-zinc-900 border border-zinc-800 aspect-[4/5] rounded-sm mb-3 flex items-center justify-center group-hover:border-[var(--theme)] transition-colors">
+                            <svg class="w-12 h-12 text-zinc-700 group-hover:text-[var(--theme)] transition" fill="currentColor" viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                        </div>
+                        <h3 class="font-bold text-sm text-white">Product Name</h3>
+                        <p class="text-xs text-gray-500 mb-1">Category / Short desc</p>
+                        <span class="font-bold text-sm text-[var(--theme)]">$95</span>
+                    </div>
+
+                    <div class="group cursor-pointer">
+                        <div class="bg-zinc-900 border border-zinc-800 aspect-[4/5] rounded-sm mb-3 flex items-center justify-center group-hover:border-[var(--theme)] transition-colors">
+                            <svg class="w-12 h-12 text-zinc-700 group-hover:text-[var(--theme)] transition" fill="currentColor" viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                        </div>
+                        <h3 class="font-bold text-sm text-white">Product Name</h3>
+                        <p class="text-xs text-gray-500 mb-1">Category / Short desc</p>
+                        <span class="font-bold text-sm text-[var(--theme)]">$95</span>
+                    </div>
+
+                    <div class="group cursor-pointer hidden lg:block">
+                        <div class="bg-zinc-900 border border-zinc-800 aspect-[4/5] rounded-sm mb-3 flex items-center justify-center group-hover:border-[var(--theme)] transition-colors">
+                            <svg class="w-12 h-12 text-zinc-700 group-hover:text-[var(--theme)] transition" fill="currentColor" viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                        </div>
+                        <h3 class="font-bold text-sm text-white">Product Name</h3>
+                        <p class="text-xs text-gray-500 mb-1">Category / Short desc</p>
+                        <span class="font-bold text-sm text-[var(--theme)]">$95</span>
+                    </div>
+
+                </div>
+                
+                <button class="absolute top-1/3 -right-4 bg-[var(--theme)] text-black rounded-full p-2 hover:bg-white hidden lg:flex items-center justify-center w-10 h-10 shadow-lg transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </button>
+            </div>
+        </section>
+
+        <section class="bg-zinc-900 border border-[var(--theme)] rounded-sm p-8 md:p-12 flex flex-col md:flex-row items-center justify-between relative overflow-hidden">
+            <div class="z-10 max-w-md">
+                <h2 class="text-2xl font-extrabold text-white mb-2">Promo box</h2>
+                <div class="text-5xl md:text-6xl font-black text-[var(--theme)] mb-2">50%</div>
+                <p class="text-sm text-gray-400 uppercase tracking-wide mb-6">up to discount on products from Category</p>
+                
+                <div class="flex gap-2">
+                   <div class="h-1 w-8 bg-zinc-600 rounded-full"></div>
+                   <div class="h-1 w-8 bg-zinc-700 rounded-full"></div>
+                   <div class="h-1 w-8 bg-zinc-700 rounded-full"></div>
+                </div>
+            </div>
+            
+            <div class="mt-8 md:mt-0 md:absolute md:right-20 md:top-1/2 md:-translate-y-1/2 text-zinc-800">
+                 <svg class="w-48 h-48 md:w-64 md:h-64" fill="currentColor" viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+            </div>
+        </section>
+
+        <section>
+            <div class="flex justify-between items-end mb-6 border-b border-gray-800 pb-2">
+                <h2 class="text-xl font-bold text-[var(--theme)]">Category highlights</h2>
+                <a href="#" class="text-xs text-gray-400 uppercase font-semibold border-b border-gray-600 pb-0.5 hover:text-[var(--theme)] hover:border-[var(--theme)] transition">See all products</a>
+            </div>
+
+            <div class="relative">
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                    
+                    <div class="group cursor-pointer">
+                        <div class="bg-zinc-900 border border-zinc-800 aspect-[4/5] rounded-sm mb-3 relative flex items-center justify-center group-hover:border-[var(--theme)] transition-colors">
+                             <span class="absolute top-3 left-3 bg-[var(--theme)] text-black text-[10px] font-bold px-2 py-1 uppercase rounded-sm">New</span>
+                            <svg class="w-12 h-12 text-zinc-700 group-hover:text-[var(--theme)] transition" fill="currentColor" viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                        </div>
+                        <h3 class="font-bold text-sm text-white">Product Name</h3>
+                        <p class="text-xs text-gray-500 mb-1">Category / Short desc</p>
+                        <span class="font-bold text-sm text-[var(--theme)]">$95</span>
+                    </div>
+
+                    <div class="group cursor-pointer">
+                        <div class="bg-zinc-900 border border-zinc-800 aspect-[4/5] rounded-sm mb-3 flex items-center justify-center group-hover:border-[var(--theme)] transition-colors">
+                            <svg class="w-12 h-12 text-zinc-700 group-hover:text-[var(--theme)] transition" fill="currentColor" viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                        </div>
+                        <h3 class="font-bold text-sm text-white">Product Name</h3>
+                        <p class="text-xs text-gray-500 mb-1">Category / Short desc</p>
+                        <span class="font-bold text-sm text-[var(--theme)]">$95</span>
+                    </div>
+
+                    <div class="group cursor-pointer">
+                        <div class="bg-zinc-900 border border-zinc-800 aspect-[4/5] rounded-sm mb-3 flex items-center justify-center group-hover:border-[var(--theme)] transition-colors">
+                            <svg class="w-12 h-12 text-zinc-700 group-hover:text-[var(--theme)] transition" fill="currentColor" viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                        </div>
+                        <h3 class="font-bold text-sm text-white">Product Name</h3>
+                        <p class="text-xs text-gray-500 mb-1">Category / Short desc</p>
+                        <span class="font-bold text-sm text-[var(--theme)]">$95</span>
+                    </div>
+
+                    <div class="group cursor-pointer">
+                        <div class="bg-zinc-900 border border-zinc-800 aspect-[4/5] rounded-sm mb-3 flex items-center justify-center group-hover:border-[var(--theme)] transition-colors">
+                            <svg class="w-12 h-12 text-zinc-700 group-hover:text-[var(--theme)] transition" fill="currentColor" viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                        </div>
+                        <h3 class="font-bold text-sm text-white">Product Name</h3>
+                        <p class="text-xs text-gray-500 mb-1">Category / Short desc</p>
+                        <span class="font-bold text-sm text-[var(--theme)]">$95</span>
+                    </div>
+                    
+                    <div class="group cursor-pointer hidden lg:block">
+                        <div class="bg-zinc-900 border border-zinc-800 aspect-[4/5] rounded-sm mb-3 flex items-center justify-center group-hover:border-[var(--theme)] transition-colors">
+                            <svg class="w-12 h-12 text-zinc-700 group-hover:text-[var(--theme)] transition" fill="currentColor" viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                        </div>
+                        <h3 class="font-bold text-sm text-white">Product Name</h3>
+                        <p class="text-xs text-gray-500 mb-1">Category / Short desc</p>
+                        <span class="font-bold text-sm text-[var(--theme)]">$95</span>
+                    </div>
+
+                </div>
+                 <button class="absolute top-1/3 -right-4 bg-[var(--theme)] text-black rounded-full p-2 hover:bg-white hidden lg:flex items-center justify-center w-10 h-10 shadow-lg transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </button>
+            </div>
+        </section>
+
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            <div class="bg-zinc-900 border border-zinc-800 p-8 rounded-sm relative overflow-hidden flex flex-col justify-center h-64 group hover:border-[var(--theme)] transition-colors">
+                <div class="relative z-10">
+                    <h3 class="text-xl font-bold text-white">Category</h3>
+                    <p class="text-xs text-gray-400 uppercase mt-1 mb-0">up to</p>
+                    <div class="text-5xl font-black text-[var(--theme)]">25%</div>
+                    <p class="text-xs text-gray-400 mt-1">discount on products from Category</p>
+                    <a href="#" class="inline-block mt-6 text-xs font-bold border-b border-[var(--theme)] text-white uppercase pb-0.5">Shop now</a>
+                </div>
+                 <div class="absolute right-[-20px] bottom-[-20px] text-zinc-800 opacity-80">
+                    <svg class="w-40 h-40" fill="currentColor" viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                </div>
+            </div>
+
+            <div class="bg-zinc-900 border border-zinc-800 p-8 rounded-sm relative overflow-hidden flex flex-col justify-center h-64 group hover:border-[var(--theme)] transition-colors">
+                <div class="relative z-10">
+                    <h3 class="text-xl font-bold text-white">Outlet</h3>
+                    <p class="text-xs text-gray-400 uppercase mt-1 mb-0">up to</p>
+                    <div class="text-5xl font-black text-[var(--theme)]">50%</div>
+                    <p class="text-xs text-gray-400 mt-1">discount on all products</p>
+                    <a href="#" class="inline-block mt-6 text-xs font-bold border-b border-gray-600 uppercase pb-0.5 text-gray-400 hover:text-white hover:border-white transition">check all products</a>
+                </div>
+                <div class="absolute right-[-20px] bottom-[-20px] text-zinc-800 opacity-80">
+                    <svg class="w-40 h-40" fill="currentColor" viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+    <footer class="mt-20 py-12 border-t border-[var(--theme)] bg-black/70">
+      <div class="w-[90%] mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div>
+          <h3 class="font-bold text-xl mb-3 text-[var(--theme)]">Sobre</h3>
+          <p class="text-gray-400 text-sm max-w-sm">Inspirado no universo oficial de Beyblade X. Site temático criado para fins de demonstração.</p>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-xl mb-3 text-[var(--theme)]">Links</h3>
+          <ul class="text-gray-300 space-y-2">
+            <li>Produtos</li>
+            <li>Arenas</li>
+            <li>Top Rankings</li>
+            <li>Comunidade</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-xl mb-3 text-[var(--theme)]">Contato</h3>
+          <p class="text-gray-300">battlex@bladers.com</p>
+          <p class="text-gray-300">Discord & Comunidade</p>
+        </div>
+      </div>
+    </footer>
+
+  </div> <script>
+    const bgs = document.querySelectorAll('.parallax-bg');
+    window.addEventListener('scroll', () => {
+      const offset = window.scrollY * 0.4;
+      requestAnimationFrame(() => {
+        bgs.forEach(bg => {
+          bg.style.transform = `translateY(${offset}px)`;
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Carrinho | Beyblade X</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <style>
+    /* PARALLAX */
+    .parallax-bg {
+      background-size: cover;
+      background-position: center;
+      will-change: transform;
+      transition: transform 0.6s ease;
+    }
+
+    /* THEME */
+    .theme-color {
+      --theme: #00ff85;
+      --theme-dark: #00d66d;
+    }
+
+    input#hero1:checked ~ .theme-color { --theme: #00ff85; --theme-dark: #00d66d; }
+    input#hero2:checked ~ .theme-color { --theme: #8b0000; --theme-dark: #a30000; }
+    input#hero3:checked ~ .theme-color { --theme: #f9db4a; --theme-dark: #e6c63c; }
+
+    /* HERO IMG CONTROLLER */
+    .hero-img {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: 600ms ease;
+      z-index: 0;
+    }
+
+    input#hero1:checked ~ .theme-color .img1 { opacity: 1; }
+    input#hero2:checked ~ .theme-color .img2 { opacity: 1; }
+    input#hero3:checked ~ .theme-color .img3 { opacity: 1; }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: var(--theme);
+      opacity: .20;
+      z-index: 1;
+    }
+  </style>
+
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Michroma&display=swap" rel="stylesheet">
+</head>
+
+<body class="bg-black text-white font-sans">
+
+  <!-- THEME SWITCH -->
+  <input type="radio" name="heroSlide" id="hero1" class="hidden" checked>
+  <input type="radio" name="heroSlide" id="hero2" class="hidden">
+  <input type="radio" name="heroSlide" id="hero3" class="hidden">
+
+  <div class="theme-color">
+
+    <!-- HEADER -->
+    <header class="w-full py-5 bg-black/70 backdrop-blur-md border-b border-[var(--theme)] relative">
+      <div class="w-[90%] mx-auto flex justify-between items-center gap-10">
+        
+        <a href="index.html">
+          <img src="beybladelogo.webp" class="h-20 hover:brightness-110 transition">
+        </a>
+
+        <div class="flex-1 px-10">
+          <div class="relative max-w-xl mx-auto">
+            <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[var(--theme)]"
+                 fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" placeholder="Search products..."
+              class="w-full pl-12 pr-4 py-2 border border-[var(--theme)] rounded-full bg-transparent text-[var(--theme)]">
+          </div>
+        </div>
+
+        <nav class="flex space-x-8 text-lg">
+          <a href="index.html" class="hover:text-[var(--theme)]">HOME</a>
+          <a href="#" class="hover:text-[var(--theme)]">BEYS</a>
+          <a href="#" class="hover:text-[var(--theme)]">ARENAS</a>
+
+          <a href="login.html" class="hover:text-[var(--theme)]">LOGIN</a>
+
+          <a href="carrinho.html" class="flex items-center hover:text-[var(--theme)]">
+            <svg class="w-7 h-7 text-[var(--theme)]" fill="none" stroke="currentColor" stroke-width="2"
+                 viewBox="0 0 24 24">
+              <path d="M6 6h15l-1.5 9h-12z"></path>
+              <path d="M6 6L4 2H2"></path>
+              <circle cx="9" cy="20" r="1"></circle>
+              <circle cx="18" cy="20" r="1"></circle>
+            </svg>
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- CONTEÚDO DO CARRINHO -->
+    <section class="w-[90%] mx-auto mt-16">
+
+      <h1 class="text-4xl font-black mb-10 text-[var(--theme)] drop-shadow-[0_0_10px_var(--theme)]">
+        SEU CARRINHO
+      </h1>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+
+        <!-- LISTA DE ITENS -->
+        <div class="lg:col-span-2 space-y-6">
+
+          <!-- ITEM -->
+          <div class="flex items-center bg-black/40 border border-[var(--theme)] p-4 rounded-lg">
+            <img src="beyazul.jpg" class="h-24 w-24 object-cover rounded">
+
+            <div class="ml-4 flex-1">
+              <h3 class="text-xl font-bold">Sword Dran</h3>
+              <p class="text-gray-400 text-sm">Beyblade oficial Xtreme</p>
+
+              <div class="flex items-center mt-3 gap-3">
+                <button class="px-2 py-1 border border-[var(--theme)]">-</button>
+                <span class="px-3">1</span>
+                <button class="px-2 py-1 bg-[var(--theme)] text-black">+</button>
+              </div>
+            </div>
+
+            <span class="text-lg font-bold mr-6">R$ 129,90</span>
+
+            <button class="text-red-500 hover:text-red-700">Remover</button>
+          </div>
+
+        </div>
+
+        <!-- RESUMO -->
+        <div class="border border-[var(--theme)] bg-black/40 p-6 rounded-lg h-fit">
+
+          <h2 class="text-2xl font-bold mb-4">Resumo</h2>
+
+          <div class="flex justify-between text-gray-300 mb-2">
+            <span>Subtotal</span>
+            <span>R$ 129,90</span>
+          </div>
+
+          <div class="flex justify-between text-gray-300 mb-6">
+            <span>Frete</span>
+            <span>R$ 15,00</span>
+          </div>
+
+          <hr class="border-[var(--theme)]/40 mb-6">
+
+          <div class="flex justify-between text-xl font-black text-white mb-6">
+            <span>Total</span>
+            <span>R$ 144,90</span>
+          </div>
+
+          <a href="checkout.html"
+             class="block w-full text-center py-3 bg-[var(--theme)] text-black font-bold text-lg hover:bg-[var(--theme-dark)]">
+            IR PARA O CHECKOUT
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="mt-20 py-12 border-t border-[var(--theme)] bg-black/70">
+      <div class="w-[90%] mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div>
+          <h3 class="font-bold text-xl mb-3 text-[var(--theme)]">Sobre</h3>
+          <p class="text-gray-400 text-sm">Site temático inspirado em Beyblade X.</p>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-xl mb-3 text-[var(--theme)]">Links</h3>
+          <ul class="text-gray-300 space-y-2">
+            <li>Produtos</li>
+            <li>Arenas</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-xl mb-3 text-[var(--theme)]">Contato</h3>
+          <p class="text-gray-300">battlex@bladers.com</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const bgs = document.querySelectorAll(".parallax-bg");
+    window.addEventListener("scroll", () => {
+      const offset = window.scrollY * 0.4;
+      requestAnimationFrame(() => {
+        bgs.forEach(bg => bg.style.transform = `translateY(${offset}px)`);
+      });
+    });
+  </script>
+
+</body>
+</html>
