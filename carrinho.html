@@ -41,8 +41,10 @@
 
     <header class="w-full py-5 bg-zinc-950/80 backdrop-blur-md border-b border-[var(--theme)] sticky top-0 z-50">
       <div class="w-[90%] max-w-7xl mx-auto flex justify-between items-center">
-        <a href="index.html" class="text-xl font-tech font-black italic">BEYBLADE <span class="text-[var(--theme)]">X</span></a>
-        
+        <a href="index.html" class="block shrink-0">
+          <img src="beybladelogo.webp" alt="Beyblade X Logo"
+            class="h-12 md:h-16 w-auto object-contain hover:brightness-125 transition drop-shadow-[0_0_5px_var(--theme)]">
+        </a>
         <div class="flex items-center gap-6 text-xs font-bold uppercase tracking-widest text-zinc-400">
            <a href="index.html" class="hover:text-white flex items-center gap-2 transition">
              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
@@ -220,13 +222,43 @@
 
     </main>
 
-    <footer class="py-12 border-t border-[var(--theme)] bg-zinc-950 text-center text-zinc-500 text-sm">
-      <div class="w-[90%] max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-        <p>© 2025 BEYBLADE X PROJECT. ALL RIGHTS RESERVED.</p>
-        <div class="flex gap-4">
-             <a href="#" class="hover:text-white">Terms</a>
-             <a href="#" class="hover:text-white">Privacy</a>
-             <a href="#" class="hover:text-white">Shipping</a>
+    <footer class="mt-0 py-16 border-t border-[var(--theme)] bg-zinc-950">
+      <div class="w-[90%] max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+        <div class="col-span-1 md:col-span-1">
+          <a href="#" class="text-xl font-tech font-black italic text-white flex gap-1 mb-4">BEYBLADE <span
+              class="text-[var(--theme)] not-italic">X</span></a>
+          <p class="text-zinc-500 text-xs leading-relaxed">
+            Experience the extreme speed and impact of the Gear Sports era. Customize, Battle, and Win.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-white mb-4 uppercase text-sm tracking-wider">Shop</h3>
+          <ul class="text-zinc-500 text-sm space-y-3">
+            <li><a href="#" class="hover:text-[var(--theme)] transition">Starters</a></li>
+            <li><a href="#" class="hover:text-[var(--theme)] transition">Boosters</a></li>
+            <li><a href="#" class="hover:text-[var(--theme)] transition">Arenas</a></li>
+            <li><a href="#" class="hover:text-[var(--theme)] transition">Accessories</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-white mb-4 uppercase text-sm tracking-wider">Community</h3>
+          <ul class="text-zinc-500 text-sm space-y-3">
+            <li><a href="#" class="hover:text-[var(--theme)] transition">Tournaments</a></li>
+            <li><a href="#" class="hover:text-[var(--theme)] transition">Ranking</a></li>
+            <li><a href="#" class="hover:text-[var(--theme)] transition">Rules</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-white mb-4 uppercase text-sm tracking-wider">Stay Connected</h3>
+          <div class="flex space-x-4 mb-4">
+            <div class="w-8 h-8 bg-zinc-800 hover:bg-[var(--theme)] transition rounded-full cursor-pointer"></div>
+            <div class="w-8 h-8 bg-zinc-800 hover:bg-[var(--theme)] transition rounded-full cursor-pointer"></div>
+            <div class="w-8 h-8 bg-zinc-800 hover:bg-[var(--theme)] transition rounded-full cursor-pointer"></div>
+          </div>
+          <p class="text-zinc-600 text-xs">© 2025 Beyblade X Project. All rights reserved.</p>
         </div>
       </div>
     </footer>
