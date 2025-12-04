@@ -1,46 +1,74 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Shopping Cart | Beyblade X</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carrinho de Compras | Beyblade X</title> <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
-    /* CONFIGURAÇÃO DO TEMA */
+    /* COMENTÁRIO: Configuração do Tema
+       Define as cores variáveis que serão usadas em todo o site.
+       --theme: Cor principal (neon)
+       --card-bg: Cor de fundo dos cartões
+    */
     .theme-color {
-      --theme: #00ff85;       
+      --theme: #00ff85;
       --theme-dark: #00d66d;
-      --card-bg: #18181b;    
+      --card-bg: #18181b;
     }
 
-    input[name="heroSlide"]#hero1:checked ~ .theme-color { --theme: #00ff85; --theme-dark: #00d66d; }
-    input[name="heroSlide"]#hero2:checked ~ .theme-color { --theme: #ff003c; --theme-dark: #cc0030; }
-    input[name="heroSlide"]#hero3:checked ~ .theme-color { --theme: #f4e04d; --theme-dark: #c4b030; }
+    /* Lógica de troca de cores via CSS (sem JavaScript) */
+    input[name="heroSlide"]#hero1:checked~.theme-color {
+      --theme: #00ff85;
+      --theme-dark: #00d66d;
+    }
 
-    /* Fontes */
+    input[name="heroSlide"]#hero2:checked~.theme-color {
+      --theme: #ff003c;
+      --theme-dark: #cc0030;
+    }
+
+    input[name="heroSlide"]#hero3:checked~.theme-color {
+      --theme: #f4e04d;
+      --theme-dark: #c4b030;
+    }
+
+    /* Fontes Futuristas */
     @import url('https://fonts.googleapis.com/css2?family=Michroma&family=Montserrat:wght@300;400;600;700;900&display=swap');
-    body { font-family: 'Montserrat', sans-serif; }
-    h1, h2, h3, .font-tech { font-family: 'Michroma', sans-serif; }
 
-    /* Remove setas do input number */
-    input[type=number]::-webkit-inner-spin-button, 
-    input[type=number]::-webkit-outer-spin-button { 
-      -webkit-appearance: none; 
-      margin: 0; 
+    body {
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    h1,
+    h2,
+    h3,
+    .font-tech {
+      font-family: 'Michroma', sans-serif;
+    }
+
+    /* COMENTÁRIO: UX - Remover Setas do Input Number
+       Remove as setinhas padrão feias dos inputs de número nos navegadores
+       para podermos usar nossos próprios botões +/-.
+    */
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
     }
   </style>
 </head>
+
 <body class="bg-black text-white selection:bg-[var(--theme)] selection:text-black">
 
   <input type="radio" name="heroSlide" id="hero1" class="hidden" checked>
   <input type="radio" name="heroSlide" id="hero2" class="hidden">
   <input type="radio" name="heroSlide" id="hero3" class="hidden">
 
-  <div class="theme-color">
+  <div class="theme-color flex flex-col min-h-screen">
 
-    <header
-      class="fixed top-0 left-0 w-full py-4 bg-black/80 backdrop-blur-md border-b border-[var(--theme)] z-50 transition-all duration-300">
+    <header class="fixed top-0 left-0 w-full py-4 bg-black/80 backdrop-blur-md border-b border-[var(--theme)] z-50 transition-all duration-300">
       <div class="w-[90%] max-w-7xl mx-auto flex justify-between items-center gap-4 md:gap-8">
 
         <a href="index.html" class="block shrink-0">
@@ -48,21 +76,34 @@
             class="h-12 md:h-16 w-auto object-contain hover:brightness-125 transition drop-shadow-[0_0_5px_var(--theme)]">
         </a>
 
+        <div class="hidden md:block flex-1 max-w-xl px-6">
+          <div class="relative w-full group">
+            <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[var(--theme)] group-focus-within:text-white transition"
+              fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" placeholder="Buscar produtos..."
+              class="w-full pl-12 pr-4 py-2.5 rounded-full border border-zinc-700 bg-zinc-900/50 text-white placeholder-zinc-500 focus:outline-none focus:border-[var(--theme)] focus:ring-1 focus:ring-[var(--theme)] transition-all shadow-inner">
+          </div>
+        </div>
+
         <nav class="flex items-center gap-6">
           <div class="flex items-center gap-6 text-xs font-bold uppercase tracking-widest text-zinc-400">
-            <a href="index.html" class="hover:text-white flex items-center gap-2 transition font-black text-zinc-300">
+            <a href="index.html" class="hover:text-white flex items-center gap-2 transition">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18">
-                </path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
               </svg>
-              Voltar à Loja </a>
-            <a href="#" class="hover:text-white flex items-center gap-2 transition font-black text-zinc-300">
+              Voltar à Loja
+            </a>
+            <a href="#" class="hover:text-white flex items-center gap-2 transition">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                   d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z">
                 </path>
               </svg>
-              Suporte </a>
+              Suporte
+            </a>
           </div>
           <div class="hidden lg:block w-px h-6 bg-zinc-800"></div>
         </nav>
@@ -70,253 +111,202 @@
       </div>
     </header>
 
-    <main class="w-[90%] max-w-7xl mx-auto py-12">
+    <main class="w-[90%] max-w-7xl mx-auto py-12 pt-32 flex-grow">
 
-        <div class="text-center mb-12">
-            <h1 class="text-3xl md:text-4xl font-tech font-bold uppercase text-white mb-2">Shopping <span class="text-[var(--theme)]">Cart</span></h1>
-            <p class="text-zinc-500 text-sm">Verifique seus itens antes de entrar na arena.</p>
-        </div>
+      <div class="text-center mb-12">
+        <h1 class="text-3xl md:text-4xl font-tech font-bold uppercase text-white mb-2">Seu <span class="text-[var(--theme)]">Carrinho</span></h1> <p class="text-zinc-500 text-sm">Verifique seus itens antes de entrar na arena.</p>
+      </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
 
-            <div class="lg:col-span-2 space-y-8">
-                <h2 class="text-xl font-bold uppercase tracking-wide border-b border-zinc-800 pb-4">Your Order</h2>
+        <div class="lg:col-span-2 space-y-8">
+          <h2 class="text-xl font-bold uppercase tracking-wide border-b border-zinc-800 pb-4">Seu Pedido</h2> <div class="space-y-4" id="cartItemsContainer">
 
-                <div class="space-y-4" id="cartItemsContainer">
+            <div
+              class="cart-item bg-[var(--card-bg)] border border-zinc-800 rounded-lg p-4 flex gap-4 md:gap-6 items-center relative group hover:border-[var(--theme)] transition duration-300">
+              <div class="w-24 h-24 md:w-32 md:h-32 bg-zinc-900 rounded-md overflow-hidden flex-shrink-0 border border-zinc-700">
+                <img src="beyazul.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+              </div>
 
-                    <div class="cart-item bg-[var(--card-bg)] border border-zinc-800 rounded-lg p-4 flex gap-4 md:gap-6 items-center relative group hover:border-[var(--theme)] transition duration-300">
-                        <div class="w-24 h-24 md:w-32 md:h-32 bg-zinc-900 rounded-md overflow-hidden flex-shrink-0 border border-zinc-700">
-                            <img src="beyazul.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                        </div>
-
-                        <div class="flex-1">
-                            <div class="flex justify-between items-start">
-                                <div>
-                                    <h3 class="font-bold text-white text-lg">Dran Sword 3-60F</h3>
-                                    <p class="text-xs text-zinc-500 mb-1">Color: Blue | Type: Attack</p>
-                                    <p class="text-xs text-[var(--theme)] font-bold">Ships in 2-3 days</p>
-                                </div>
-                                <button onclick="removeItem(this)" class="text-zinc-600 hover:text-red-500 transition p-1">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
-                                </button>
-                            </div>
-
-                            <div class="flex justify-between items-end mt-4">
-                                <div class="flex items-center border border-zinc-700 rounded-sm">
-                                    <button onclick="updateQty(this, -1)" class="px-3 py-1 text-zinc-400 hover:text-white hover:bg-zinc-800 transition">-</button>
-                                    <input type="number" value="1" min="1" class="qty-input w-10 bg-transparent text-center text-sm font-bold focus:outline-none" readonly>
-                                    <button onclick="updateQty(this, 1)" class="px-3 py-1 text-zinc-400 hover:text-white hover:bg-zinc-800 transition">+</button>
-                                </div>
-
-                                <div class="text-right">
-                                    <div class="flex items-center gap-2 justify-end">
-                                        <span class="text-xs text-zinc-500 line-through">$24.99</span>
-                                        <span class="product-price text-xl font-black text-white" data-price="19.99">$19.99</span>
-                                    </div>
-                                    <span class="text-xs text-[var(--theme)] font-bold">You save 20%</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="cart-item bg-[var(--card-bg)] border border-zinc-800 rounded-lg p-4 flex gap-4 md:gap-6 items-center relative group hover:border-[var(--theme)] transition duration-300">
-                        <div class="w-24 h-24 md:w-32 md:h-32 bg-zinc-900 rounded-md overflow-hidden flex-shrink-0 border border-zinc-700">
-                            <img src="arena.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                        </div>
-
-                        <div class="flex-1">
-                            <div class="flex justify-between items-start">
-                                <div>
-                                    <h3 class="font-bold text-white text-lg">Xtreme Stadium</h3>
-                                    <p class="text-xs text-zinc-500 mb-1">Color: Transparent | Size: Standard</p>
-                                    <p class="text-xs text-zinc-500">Ships in 5-7 days</p>
-                                </div>
-                                <button onclick="removeItem(this)" class="text-zinc-600 hover:text-red-500 transition p-1">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
-                                </button>
-                            </div>
-
-                            <div class="flex justify-between items-end mt-4">
-                                <div class="flex items-center border border-zinc-700 rounded-sm">
-                                    <button onclick="updateQty(this, -1)" class="px-3 py-1 text-zinc-400 hover:text-white hover:bg-zinc-800 transition">-</button>
-                                    <input type="number" value="1" min="1" class="qty-input w-10 bg-transparent text-center text-sm font-bold focus:outline-none" readonly>
-                                    <button onclick="updateQty(this, 1)" class="px-3 py-1 text-zinc-400 hover:text-white hover:bg-zinc-800 transition">+</button>
-                                </div>
-
-                                <div class="text-right">
-                                    <span class="product-price text-xl font-black text-white" data-price="79.99">$79.99</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+              <div class="flex-1">
+                <div class="flex justify-between items-start">
+                  <div>
+                    <h3 class="font-bold text-white text-lg">Dran Sword 3-60F</h3>
+                    <p class="text-xs text-zinc-500 mb-1">Cor: Azul | Tipo: Ataque</p> <p class="text-xs text-[var(--theme)] font-bold">Envio em 2-3 dias</p> </div>
+                  <button onclick="removeItem(this)" class="text-zinc-600 hover:text-red-500 transition p-1">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                      </path>
+                    </svg>
+                  </button>
                 </div>
 
-                <div class="pt-8">
-                    <h3 class="text-lg font-bold text-zinc-400 mb-4">Safe & easy shopping</h3>
-                    <div class="space-y-1">
-                        
-                        <div class="flex items-center justify-between p-4 border-b border-zinc-800 hover:bg-zinc-900 transition cursor-pointer group">
-                            <div class="flex items-center gap-3">
-                                <svg class="w-5 h-5 text-[var(--theme)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
-                                <span class="text-sm text-zinc-300">Free returns for 30 days</span>
-                            </div>
-                            <svg class="w-4 h-4 text-zinc-600 group-hover:text-white transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                        </div>
+                <div class="flex justify-between items-end mt-4">
+                  <div class="flex items-center border border-zinc-700 rounded-sm">
+                    <button onclick="updateQty(this, -1)" class="px-3 py-1 text-zinc-400 hover:text-white hover:bg-zinc-800 transition">-</button>
+                    <input type="number" value="1" min="1" class="qty-input w-10 bg-transparent text-center text-sm font-bold focus:outline-none" readonly>
+                    <button onclick="updateQty(this, 1)" class="px-3 py-1 text-zinc-400 hover:text-white hover:bg-zinc-800 transition">+</button>
+                  </div>
 
-                        <div class="flex items-center justify-between p-4 border-b border-zinc-800 hover:bg-zinc-900 transition cursor-pointer group">
-                            <div class="flex items-center gap-3">
-                                <svg class="w-5 h-5 text-[var(--theme)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
-                                <span class="text-sm text-zinc-300">Convenient payment methods</span>
-                            </div>
-                            <svg class="w-4 h-4 text-zinc-600 group-hover:text-white transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                        </div>
-
-                        <div class="flex items-center justify-between p-4 border-b border-zinc-800 hover:bg-zinc-900 transition cursor-pointer group">
-                            <div class="flex items-center gap-3">
-                                <svg class="w-5 h-5 text-[var(--theme)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"></path></svg>
-                                <span class="text-sm text-zinc-300">Deliver to home or pick-up point</span>
-                            </div>
-                            <svg class="w-4 h-4 text-zinc-600 group-hover:text-white transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                        </div>
-
+                  <div class="text-right">
+                    <div class="flex items-center gap-2 justify-end">
+                      <span class="text-xs text-zinc-500 line-through">R$ 124,99</span>
+                      <span class="product-price text-xl font-black text-white" data-price="99.99">R$ 99,99</span>
                     </div>
+                    <span class="text-xs text-[var(--theme)] font-bold">Você economiza 20%</span> </div>
                 </div>
+              </div>
             </div>
 
-            <div class="lg:col-span-1">
-                <div class="bg-zinc-900 border border-zinc-800 rounded-lg p-6 sticky top-24 shadow-[0_0_20px_rgba(0,0,0,0.5)]">
-                    <h2 class="text-xl font-bold uppercase tracking-wide mb-6">Summary</h2>
+            <div
+              class="cart-item bg-[var(--card-bg)] border border-zinc-800 rounded-lg p-4 flex gap-4 md:gap-6 items-center relative group hover:border-[var(--theme)] transition duration-300">
+              <div class="w-24 h-24 md:w-32 md:h-32 bg-zinc-900 rounded-md overflow-hidden flex-shrink-0 border border-zinc-700">
+                <img src="arena.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+              </div>
 
-                    <div class="space-y-4 mb-6 border-b border-zinc-800 pb-6 text-sm">
-                        <div class="flex justify-between text-zinc-400">
-                            <span>Items in Cart</span>
-                            <span id="subtotalDisplay">$99.98</span>
-                        </div>
-                        <div class="flex justify-between text-[var(--theme)]">
-                            <span>Savings applied</span>
-                            <span id="discountDisplay">-$5.00</span>
-                        </div>
-                        <div class="flex justify-between text-zinc-400">
-                            <span>Estimated Shipping</span>
-                            <span>Free</span>
-                        </div>
-                    </div>
-
-                    <div class="flex justify-between items-center mb-6">
-                        <span class="text-xl font-bold text-white">Total</span>
-                        <span id="totalDisplay" class="text-2xl font-black text-white">$94.98</span>
-                    </div>
-
-                    <button class="w-full py-4 bg-[var(--theme)] text-black font-black text-lg uppercase tracking-widest hover:bg-white hover:scale-[1.02] transition skew-x-[-5deg] mb-6">
-                        Go to Checkout
-                    </button>
-
-                    <div class="border-t border-zinc-800 pt-4">
-                        <details class="group">
-                            <summary class="flex justify-between items-center cursor-pointer text-xs font-bold text-zinc-500 uppercase tracking-widest hover:text-white transition">
-                                <span>Discount Code / Gift Card</span>
-                                <span class="transform group-open:rotate-90 transition">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                                </span>
-                            </summary>
-                            <div class="mt-4 flex gap-2">
-                                <input type="text" placeholder="CODE" class="flex-1 bg-black border border-zinc-700 rounded-sm px-3 py-2 text-sm text-white focus:border-[var(--theme)] focus:outline-none">
-                                <button class="px-4 py-2 bg-zinc-800 text-white text-xs font-bold rounded-sm hover:bg-[var(--theme)] hover:text-black transition">APPLY</button>
-                            </div>
-                        </details>
-                    </div>
-
+              <div class="flex-1">
+                <div class="flex justify-between items-start">
+                  <div>
+                    <h3 class="font-bold text-white text-lg">Xtreme Stadium</h3>
+                    <p class="text-xs text-zinc-500 mb-1">Cor: Transparente | Tam: Padrão</p> <p class="text-xs text-zinc-500">Envio em 5-7 dias</p> </div>
+                  <button onclick="removeItem(this)" class="text-zinc-600 hover:text-red-500 transition p-1">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                      </path>
+                    </svg>
+                  </button>
                 </div>
+
+                <div class="flex justify-between items-end mt-4">
+                  <div class="flex items-center border border-zinc-700 rounded-sm">
+                    <button onclick="updateQty(this, -1)" class="px-3 py-1 text-zinc-400 hover:text-white hover:bg-zinc-800 transition">-</button>
+                    <input type="number" value="1" min="1" class="qty-input w-10 bg-transparent text-center text-sm font-bold focus:outline-none" readonly>
+                    <button onclick="updateQty(this, 1)" class="px-3 py-1 text-zinc-400 hover:text-white hover:bg-zinc-800 transition">+</button>
+                  </div>
+
+                  <div class="text-right">
+                    <span class="product-price text-xl font-black text-white" data-price="399.99">R$ 399,99</span>
+                  </div>
+                </div>
+              </div>
             </div>
 
+          </div>
+
+          <div class="pt-8">
+            <h3 class="text-lg font-bold text-zinc-400 mb-4">Compra fácil e segura</h3> <div class="space-y-1">
+
+              <div class="flex items-center justify-between p-4 border-b border-zinc-800 hover:bg-zinc-900 transition cursor-pointer group">
+                <div class="flex items-center gap-3">
+                  <svg class="w-5 h-5 text-[var(--theme)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                  </svg>
+                  <span class="text-sm text-zinc-300">Devolução grátis por 30 dias</span> </div>
+                <svg class="w-4 h-4 text-zinc-600 group-hover:text-white transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </div>
+
+              <div class="flex items-center justify-between p-4 border-b border-zinc-800 hover:bg-zinc-900 transition cursor-pointer group">
+                <div class="flex items-center gap-3">
+                  <svg class="w-5 h-5 text-[var(--theme)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+                  </svg>
+                  <span class="text-sm text-zinc-300">Métodos de pagamento convenientes</span> </div>
+                <svg class="w-4 h-4 text-zinc-600 group-hover:text-white transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </div>
+
+              <div class="flex items-center justify-between p-4 border-b border-zinc-800 hover:bg-zinc-900 transition cursor-pointer group">
+                <div class="flex items-center gap-3">
+                  <svg class="w-5 h-5 text-[var(--theme)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"></path>
+                  </svg>
+                  <span class="text-sm text-zinc-300">Entrega em casa ou retirada</span> </div>
+                <svg class="w-4 h-4 text-zinc-600 group-hover:text-white transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </div>
+
+            </div>
+          </div>
         </div>
+
+        <div class="lg:col-span-1">
+          <div class="bg-zinc-900 border border-zinc-800 rounded-lg p-6 sticky top-32 shadow-[0_0_20px_rgba(0,0,0,0.5)]">
+            <h2 class="text-xl font-bold uppercase tracking-wide mb-6">Resumo</h2> <div class="space-y-4 mb-6 border-b border-zinc-800 pb-6 text-sm">
+              <div class="flex justify-between text-zinc-400">
+                <span>Itens no Carrinho</span>
+                <span id="subtotalDisplay">R$ 499,98</span>
+              </div>
+              <div class="flex justify-between text-[var(--theme)]">
+                <span>Economia aplicada</span>
+                <span id="discountDisplay">-R$ 25,00</span>
+              </div>
+              <div class="flex justify-between text-zinc-400">
+                <span>Estimativa de Envio</span>
+                <span>Grátis</span>
+              </div>
+            </div>
+
+            <div class="flex justify-between items-center mb-6">
+              <span class="text-xl font-bold text-white">Total</span>
+              <span id="totalDisplay" class="text-2xl font-black text-white">R$ 474,98</span>
+            </div>
+
+            <a href="checkout.html" class="block w-full py-4 bg-[var(--theme)] text-black font-black text-center text-lg uppercase tracking-widest hover:bg-white hover:scale-[1.02] transition skew-x-[-5deg] mb-6">
+              Ir para Pagamento </a>
+
+            <div class="border-t border-zinc-800 pt-4">
+              <details class="group">
+                <summary class="flex justify-between items-center cursor-pointer text-xs font-bold text-zinc-500 uppercase tracking-widest hover:text-white transition">
+                  <span>Código de Desconto / Gift Card</span> <span class="transform group-open:rotate-90 transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                  </span>
+                </summary>
+                <div class="mt-4 flex gap-2">
+                  <input type="text" placeholder="CÓDIGO" class="flex-1 bg-black border border-zinc-700 rounded-sm px-3 py-2 text-sm text-white focus:border-[var(--theme)] focus:outline-none">
+                  <button class="px-4 py-2 bg-zinc-800 text-white text-xs font-bold rounded-sm hover:bg-[var(--theme)] hover:text-black transition">APLICAR</button>
+                </div>
+              </details>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
 
     </main>
 
-    <footer class="border-t border-[var(--theme)] bg-zinc-950 pt-16 pb-12 mt-auto">
-      <div class="w-[90%] max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-12 text-sm">
-
-        <div class="col-span-2 lg:col-span-1">
-          <a href="#" class="text-xl font-tech font-black italic text-white flex gap-1 mb-4">
-            BEYBLADE <span class="text-[var(--theme)] not-italic">X</span>
-          </a>
-          <p class="text-zinc-500 text-xs leading-relaxed mb-6">
-            Experimente a velocidade extrema e o impacto da era Gear Sports. Personalize, Batalhe e Vença.
-          </p>
-
-          <h3 class="font-bold text-white mb-4 uppercase tracking-wider text-xs">Precisa de ajuda?</h3>
-          <button
-            class="w-full md:w-auto px-6 py-3 border border-zinc-700 text-white font-bold uppercase tracking-wider hover:bg-[var(--theme)] hover:text-black hover:border-[var(--theme)] transition rounded-sm text-xs">
-            Fale Conosco
-          </button>
+    <footer class="mt-0 py-16 border-t border-[var(--theme)] bg-zinc-950">
+      <div class="w-[90%] max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+        <div class="col-span-1 md:col-span-1">
+          <a href="#" class="text-xl font-tech font-black italic text-white flex gap-1 mb-4">BEYBLADE <span class="text-[var(--theme)] not-italic">X</span></a>
+          <p class="text-zinc-500 text-xs leading-relaxed">Experimente a velocidade extrema e o impacto.</p>
         </div>
-
         <div>
-          <h3 class="font-bold text-white mb-6 uppercase tracking-wider">Suporte</h3>
-          <ul class="text-zinc-500 space-y-3">
-            <li><a href="#" class="hover:text-[var(--theme)] transition">Devoluções e Garantia</a></li>
-            <li><a href="#" class="hover:text-[var(--theme)] transition">Pagamentos</a></li>
-            <li><a href="#" class="hover:text-[var(--theme)] transition">Envio e Entrega</a></li>
-            <li><a href="#" class="hover:text-[var(--theme)] transition">Termos de Serviço</a></li>
-            <li><a href="#" class="hover:text-[var(--theme)] transition">Política de Privacidade</a></li>
+          <h3 class="font-bold text-white mb-4 uppercase text-sm tracking-wider">Loja</h3>
+          <ul class="text-zinc-500 text-sm space-y-3">
+            <li><a href="#" class="hover:text-[var(--theme)] transition">Starters</a></li>
+            <li><a href="#" class="hover:text-[var(--theme)] transition">Boosters</a></li>
           </ul>
         </div>
-
         <div>
-          <h3 class="font-bold text-white mb-6 uppercase tracking-wider">Explorar</h3>
-          <ul class="text-zinc-500 space-y-3">
-            <li><a href="#" class="hover:text-[var(--theme)] transition">Sobre Nós</a></li>
-            <li><a href="#" class="hover:text-[var(--theme)] transition">Starters & Boosters</a></li>
-            <li><a href="#" class="hover:text-[var(--theme)] transition">Arenas de Batalha</a></li>
-            <li><a href="#" class="hover:text-[var(--theme)] transition">Torneios Oficiais</a></li>
-            <li><a href="#" class="hover:text-[var(--theme)] transition">Regras do Jogo</a></li>
+          <h3 class="font-bold text-white mb-4 uppercase text-sm tracking-wider">Comunidade</h3>
+          <ul class="text-zinc-500 text-sm space-y-3">
+            <li><a href="#" class="hover:text-[var(--theme)] transition">Torneios</a></li>
+            <li><a href="#" class="hover:text-[var(--theme)] transition">Ranking</a></li>
           </ul>
         </div>
-
         <div>
-          <h3 class="font-bold text-white mb-6 uppercase tracking-wider">Gift Card</h3>
-          <ul class="text-zinc-500 space-y-3">
-            <li><a href="#" class="hover:text-[var(--theme)] transition">Comprar Gift Card</a></li>
-            <li><a href="#" class="hover:text-[var(--theme)] transition">Resgatar Código</a></li>
-            <li><a href="#" class="hover:text-[var(--theme)] transition">Consultar Saldo</a></li>
-          </ul>
+          <h3 class="font-bold text-white mb-4 uppercase text-sm tracking-wider">Fique Conectado</h3>
+          <p class="text-zinc-600 text-xs">© 2025 Beyblade X Project.</p>
         </div>
-
-        <div class="col-span-2 lg:col-span-1">
-          <h3 class="font-bold text-white mb-6 uppercase tracking-wider">Localização</h3>
-
-          <button
-            class="flex items-center gap-2 text-zinc-400 hover:text-white transition border border-zinc-800 bg-zinc-900 px-4 py-2 rounded-sm w-full mb-8 text-xs font-bold uppercase tracking-wide">
-            <img src="https://flagcdn.com/w20/br.png" class="w-5 rounded-sm" alt="Brasil">
-            <span>Brasil</span>
-            <svg class="w-4 h-4 ml-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-            </svg>
-          </button>
-
-          <h3 class="font-bold text-white mb-4 uppercase tracking-wider">Siga-nos</h3>
-          <div class="flex gap-4 text-zinc-500">
-            <a href="#" class="hover:text-[var(--theme)] transition"><svg class="w-6 h-6" fill="currentColor"
-                viewBox="0 0 24 24">
-                <path
-                  d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-              </svg></a>
-            <a href="#" class="hover:text-[var(--theme)] transition"><svg class="w-6 h-6" fill="currentColor"
-                viewBox="0 0 24 24">
-                <path
-                  d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
-              </svg></a>
-            <a href="#" class="hover:text-[var(--theme)] transition"><svg class="w-6 h-6" fill="currentColor"
-                viewBox="0 0 24 24">
-                <path
-                  d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z" />
-              </svg></a>
-          </div>
-
-          <p class="text-zinc-600 text-xs mt-8">© 2025 Beyblade X Project. Todos os direitos reservados.</p>
-        </div>
-
       </div>
     </footer>
 
@@ -324,42 +314,43 @@
 
   <script>
     function updateQty(btn, change) {
-        const input = btn.parentElement.querySelector('.qty-input');
-        let newValue = parseInt(input.value) + change;
-        if (newValue < 1) newValue = 1;
-        input.value = newValue;
-        recalculateTotal();
+      const input = btn.parentElement.querySelector('.qty-input');
+      let newValue = parseInt(input.value) + change;
+      if (newValue < 1) newValue = 1; // Impede quantidade menor que 1
+      input.value = newValue;
+      recalculateTotal();
     }
 
     function removeItem(btn) {
-        const item = btn.closest('.cart-item');
-        item.style.opacity = '0';
-        item.style.transform = 'translateX(-20px)';
-        setTimeout(() => {
-            item.remove();
-            recalculateTotal();
-        }, 300);
+      const item = btn.closest('.cart-item');
+      // Adiciona animação de saída antes de remover
+      item.style.opacity = '0';
+      item.style.transform = 'translateX(-20px)';
+      setTimeout(() => {
+        item.remove();
+        recalculateTotal();
+      }, 300);
     }
 
     function recalculateTotal() {
-        let subtotal = 0;
-        document.querySelectorAll('.cart-item').forEach(item => {
-            const price = parseFloat(item.querySelector('.product-price').dataset.price);
-            const qty = parseInt(item.querySelector('.qty-input').value);
-            subtotal += price * qty;
-        });
+      let subtotal = 0;
+      document.querySelectorAll('.cart-item').forEach(item => {
+        const price = parseFloat(item.querySelector('.product-price').dataset.price);
+        const qty = parseInt(item.querySelector('.qty-input').value);
+        subtotal += price * qty;
+      });
 
-        // Simulação simples de desconto
-        const discount = 5.00;
-        const total = subtotal - discount;
+      const discount = 25.00; // Desconto fixo simulado
+      const total = subtotal - discount;
 
-        document.getElementById('subtotalDisplay').innerText = '$' + subtotal.toFixed(2);
-        document.getElementById('totalDisplay').innerText = '$' + (total > 0 ? total : 0).toFixed(2);
+      // Atualiza os valores na tela
+      document.getElementById('subtotalDisplay').innerText = 'R$ ' + subtotal.toFixed(2).replace('.', ',');
+      document.getElementById('totalDisplay').innerText = 'R$ ' + (total > 0 ? total : 0).toFixed(2).replace('.', ',');
     }
 
-    // Inicializa o total ao carregar
-    window.onload = recalculateTotal;
+    window.onload = recalculateTotal; // Calcula ao carregar a página
   </script>
 
 </body>
+
 </html>
